@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>FestaPlay | Locação de Brinquedos de Alto Padrão</title>
 
 <style>
@@ -27,6 +27,8 @@
   --text-muted: #9ca3af;
   --nav-height: 70px;
 }
+
+html { scroll-behavior: smooth; }
 
 * {
   margin: 0;
@@ -79,7 +81,7 @@ body {
 .modal-box { background: var(--surface); border: 1px solid var(--stroke); padding: 30px; border-radius: 20px; width: 90%; max-width: 450px; max-height: 90vh; display: flex; flex-direction: column; transform: translateY(20px); transition: transform 0.3s ease; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); position: relative; }
 .modal-overlay.active .modal-box { transform: translateY(0); }
 
-.modal-close { position: absolute; top: 16px; right: 20px; background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; }
+.modal-close { position: absolute; top: 16px; right: 20px; background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; padding: 5px; }
 .modal-close:hover { color: #fff; }
 
 .modal-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; text-align: center; flex-shrink: 0; }
@@ -138,14 +140,14 @@ body {
 .card.type-combo .btn:hover { background: linear-gradient(135deg, var(--secondary), var(--purple)); color: white; border-color: transparent; }
 
 /* PANEL LATERAL */
-.panel { position: fixed; top: 0; right: -440px; width: 100%; max-width: 420px; height: 100%; background: rgba(4, 6, 17, 0.92); border-left: 1px solid var(--stroke); padding: 30px; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); backdrop-filter: blur(20px); z-index: 100; display: flex; flex-direction: column; box-shadow: -10px 0 40px rgba(0,0,0,0.5); }
+.panel { position: fixed; top: 0; right: -440px; width: 100%; max-width: 420px; height: 100%; background: rgba(4, 6, 17, 0.95); border-left: 1px solid var(--stroke); padding: 30px; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); backdrop-filter: blur(20px); z-index: 150; display: flex; flex-direction: column; box-shadow: -10px 0 40px rgba(0,0,0,0.5); }
 .panel.active { transform: translateX(-440px); }
 .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 .panel h2 { font-size: 1.35rem; font-weight: 700; }
 .panel-actions { display: flex; align-items: center; gap: 14px; }
 .clear-cart-btn { background: transparent; border: none; color: var(--text-muted); font-size: 0.8rem; cursor: pointer; text-decoration: underline; }
 .clear-cart-btn:hover { color: var(--danger); }
-.close-panel { background: transparent; border: none; color: var(--text-muted); font-size: 1.6rem; cursor: pointer; }
+.close-panel { background: transparent; border: none; color: var(--text-muted); font-size: 1.6rem; cursor: pointer; padding: 0 5px; }
 .close-panel:hover { color: #fff; }
 .items-container { flex-grow: 1; overflow-y: auto; margin-bottom: 16px; padding-right: 4px; }
 
@@ -159,17 +161,17 @@ body {
 .qty-btn { background: transparent; border: none; color: #fff; width: 28px; height: 28px; cursor: pointer; font-size: 0.9rem; font-weight: 600; }
 .qty-btn:hover { background: rgba(255, 255, 255, 0.05); }
 .qty-val { font-size: 0.85rem; font-weight: 600; padding: 0 6px; min-width: 20px; text-align: center; }
-.total-box { border-top: 1px solid var(--stroke); padding-top: 14px; margin-bottom: 16px; display: flex; justify-content: space-between; font-weight: 700; font-size: 1.2rem; }
+.total-box { border-top: 1px solid var(--stroke); padding-top: 14px; margin-bottom: 16px; display: flex; justify-content: space-between; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; }
 .total-box span:last-child { color: var(--accent); }
 
 /* INPUTS */
-.form-group { margin-bottom: 10px; position: relative; }
+.form-group { margin-bottom: 10px; position: relative; flex-shrink: 0;}
 input { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--stroke); background: rgba(255, 255, 255, 0.02); color: #fff; font-size: 0.9rem; outline: none; transition: border 0.2s; }
 input:focus { border-color: var(--primary); }
 input.invalid { border-color: var(--danger); background: rgba(239, 68, 68, 0.02); }
 
 /* BOTOES */
-.btn-primary { width: 100%; padding: 14px; border: none; border-radius: 12px; background: linear-gradient(135deg, var(--primary), var(--purple)); color: white; font-weight: 700; font-size: 0.95rem; cursor: pointer; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2); transition: all 0.2s; }
+.btn-primary { width: 100%; padding: 14px; border: none; border-radius: 12px; background: linear-gradient(135deg, var(--primary), var(--purple)); color: white; font-weight: 700; font-size: 0.95rem; cursor: pointer; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2); transition: all 0.2s; flex-shrink: 0; }
 .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3); }
 
 /* FLUTUANTE PADRÃO (DESKTOP) */
@@ -185,10 +187,8 @@ input.invalid { border-color: var(--danger); background: rgba(239, 68, 68, 0.02)
 .fade { animation: fade 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
 @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes buttonPulse { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
-.items-container::-webkit-scrollbar { width: 4px; }
-.items-container::-webkit-scrollbar-thumb { background: var(--stroke); border-radius: 4px; }
-#orders-list::-webkit-scrollbar { width: 4px; }
-#orders-list::-webkit-scrollbar-thumb { background: var(--stroke); border-radius: 4px; }
+.items-container::-webkit-scrollbar, #orders-list::-webkit-scrollbar { width: 4px; }
+.items-container::-webkit-scrollbar-thumb, #orders-list::-webkit-scrollbar-thumb { background: var(--stroke); border-radius: 4px; }
 
 /* BADGES DE STATUS */
 .status-badge { padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }
@@ -201,7 +201,7 @@ input.invalid { border-color: var(--danger); background: rgba(239, 68, 68, 0.02)
    ========================================= */
 @media (max-width: 640px) { 
   :root {
-    --nav-height: 60px; /* Reduz o tamanho da navbar superior */
+    --nav-height: 60px;
   }
 
   .nav-container { width: 95%; }
@@ -221,32 +221,25 @@ input.invalid { border-color: var(--danger); background: rgba(239, 68, 68, 0.02)
   /* Dá espaço extra no final para a barra de tarefas não sobrepor os cards */
   .grid { grid-template-columns: 1fr; gap: 16px; padding-bottom: 100px; }
   
-  /* REDUÇÃO DRÁSTICA DAS IMAGENS (Ficam como banners baixinhos) */
-  .card-img-wrapper { 
-    aspect-ratio: auto; 
-    height: 130px; /* Altura fixa para não ocupar espaço demais */
-  }
+  /* REDUÇÃO DAS IMAGENS */
+  .card-img-wrapper { aspect-ratio: auto; height: 130px; }
   
   .card-content { padding: 16px; }
   .card h3 { font-size: 1.1rem; }
   
-  .panel { max-width: 100%; right: -100%; padding: 20px; } 
+  /* PAINEL OCUPANDO 100% DA TELA COM ESPAÇAMENTO PARA ROLAGEM */
+  .panel { max-width: 100%; right: -100%; padding: 20px; padding-bottom: 30px; } 
   .panel.active { transform: translateX(-100%); } 
   
   .modal-box { width: 95%; padding: 20px; }
   .modal-title { font-size: 1.2rem; }
   
-  /* TRANSFORMA O BOTÃO CARRINHO EM UMA TASKBAR INFERIOR */
+  /* BARRA INFERIOR NO CELULAR */
   .cart-btn { 
-    bottom: 0; 
-    right: 0; 
-    left: 0; 
-    width: 100%;
-    border-radius: 0; /* Tira as bordas arredondadas para ficar grudado */
-    justify-content: center; /* Centraliza o texto */
-    padding: 16px; 
-    font-size: 1rem; 
-    box-shadow: 0 -4px 15px rgba(0,0,0,0.5); /* Sombra para cima */
+    bottom: 0; right: 0; left: 0; width: 100%;
+    border-radius: 0; justify-content: center; padding: 16px; 
+    font-size: 1rem; box-shadow: 0 -4px 15px rgba(0,0,0,0.5); 
+    z-index: 89; /* Garante que fique abaixo dos modais e do painel */
   }
   .cart-btn:hover { transform: none; }
 }
@@ -698,6 +691,7 @@ async function send() {
   
   if(!currentUser) {
     alert("Por favor, clique em 'Identificar-se' no menu superior para salvar sua reserva.");
+    window.toggleCart(); // Fecha o carrinho para focar no login
     toggleAuthModal(true);
     return;
   }
