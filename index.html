@@ -1,1 +1,764 @@
-..
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FestaPlay | Locação de Brinquedos de Alto Padrão</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg: #03050f;
+  --surface: #090c20;
+  --card: rgba(255, 255, 255, 0.02);
+  --stroke: rgba(255, 255, 255, 0.06);
+  --stroke-active: rgba(99, 102, 241, 0.4);
+  
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --secondary: #ec4899;
+  --accent: #10b981;
+  --purple: #a855f7;
+  --danger: #ef4444;
+  --warning: #fbbf24;
+  
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --nav-height: 70px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--bg);
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15), transparent 50%),
+    radial-gradient(circle at 0% 30%, rgba(236, 72, 153, 0.08), transparent 40%),
+    radial-gradient(circle at 100% 70%, rgba(16, 185, 129, 0.04), transparent 40%);
+  background-attachment: fixed;
+  color: var(--text-main);
+  min-height: 100vh;
+  padding-top: var(--nav-height);
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: var(--nav-height);
+  background: rgba(3, 5, 15, 0.7);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--stroke);
+  z-index: 90; display: flex; align-items: center;
+}
+
+.nav-container { width: 90%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+
+.logo { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.03em; background: linear-gradient(135deg, #fff 40%, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; }
+
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+
+.nav-btn { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--stroke); padding: 8px 16px; border-radius: 10px; color: #fff; font-weight: 600; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s ease; }
+.nav-btn:hover { background: rgba(255, 255, 255, 0.08); border-color: var(--primary); }
+.nav-btn.login { border-color: rgba(99, 102, 241, 0.3); color: #a5b4fc; }
+.nav-btn.orders { border-color: rgba(16, 185, 129, 0.3); color: #6ee7b7; display: none; }
+.nav-btn.logout { border-color: rgba(239, 68, 68, 0.3); color: #fca5a5; display: none; }
+
+/* MODAIS */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); z-index: 200; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+.modal-overlay.active { opacity: 1; pointer-events: all; }
+
+.modal-box { background: var(--surface); border: 1px solid var(--stroke); padding: 30px; border-radius: 20px; width: 90%; max-width: 450px; max-height: 90vh; display: flex; flex-direction: column; transform: translateY(20px); transition: transform 0.3s ease; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); position: relative; }
+.modal-overlay.active .modal-box { transform: translateY(0); }
+
+.modal-close { position: absolute; top: 16px; right: 20px; background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; }
+.modal-close:hover { color: #fff; }
+
+.modal-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; text-align: center; flex-shrink: 0; }
+.modal-subtitle { color: var(--text-muted); text-align: center; margin-bottom: 24px; font-size: 0.9rem; line-height: 1.5; flex-shrink: 0; }
+
+.success-icon { width: 60px; height: 60px; background: rgba(16, 185, 129, 0.1); color: var(--accent); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2rem; margin: 0 auto 20px; }
+
+/* HERO SECTION */
+.hero { padding: 60px 20px 40px; text-align: center; max-width: 800px; margin: 0 auto; }
+.hero h1 { font-size: 4rem; font-weight: 800; letter-spacing: -0.05em; line-height: 1.1; background: linear-gradient(135deg, #ffffff 10%, #c7d2fe 50%, #f472b6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { margin-top: 16px; font-size: 1.2rem; color: var(--text-muted); line-height: 1.5; }
+.hero-badges { display: flex; justify-content: center; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+.badge { font-size: 0.7rem; font-weight: 700; padding: 5px 12px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--stroke); border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em; }
+.badge.cyan { color: #2dd4bf; border-color: rgba(45, 212, 191, 0.15); }
+.badge.pink { color: #f472b6; border-color: rgba(244, 114, 182, 0.15); }
+.badge.gold { color: #fbbf24; border-color: rgba(251, 191, 36, 0.15); }
+
+/* CONTROLS & TABS */
+.controls-container { max-width: 600px; margin: 0 auto 40px; display: flex; flex-direction: column; gap: 16px; }
+.search-wrapper input { width: 100%; padding: 14px 18px; border-radius: 14px; border: 1px solid var(--stroke); background: rgba(255, 255, 255, 0.02); color: #fff; font-size: 0.95rem; outline: none; transition: all 0.25s ease; }
+.search-wrapper input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15); }
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; background: rgba(255, 255, 255, 0.01); padding: 4px; border-radius: 12px; border: 1px solid var(--stroke); }
+.tab-btn { flex: 1; padding: 10px; border: none; background: transparent; color: var(--text-muted); font-weight: 600; font-size: 0.85rem; cursor: pointer; border-radius: 8px; transition: all 0.2s ease; text-align: center; white-space: nowrap; }
+.tab-btn:hover { color: #fff; }
+.tab-btn.active { background: rgba(255, 255, 255, 0.06); color: #fff; }
+.tab-btn.active[data-type="combo"] { background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(168, 85, 247, 0.15)); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.2); }
+
+/* MAIN CONTENT GRID */
+.container { width: 90%; max-width: 1200px; margin: 0 auto; flex: 1; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 24px; padding-bottom: 80px; }
+
+.card { background: var(--card); border: 1px solid var(--stroke); border-radius: 20px; overflow: hidden; transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1); display: flex; flex-direction: column; position: relative; }
+.card:hover { transform: translateY(-6px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); }
+.card.type-brinquedo:hover { border-color: var(--stroke-active); }
+.card.type-combo { background: linear-gradient(180deg, rgba(255,255,255,0.01) 0%, rgba(236, 72, 153, 0.01) 100%); }
+.card.type-combo:hover { border-color: rgba(236, 72, 153, 0.35); }
+
+.card-tag { position: absolute; top: 14px; left: 14px; z-index: 2; font-size: 0.65rem; font-weight: 800; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+.card-tag.brinquedo { background: var(--primary); color: white; }
+.card-tag.combo { background: linear-gradient(135deg, var(--secondary), var(--purple)); color: white; }
+
+.card-img-wrapper { position: relative; width: 100%; aspect-ratio: 16 / 11; overflow: hidden; background: #080a14; }
+.card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.card:hover img { transform: scale(1.04); }
+
+.card-content { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+.card h3 { font-size: 1.15rem; font-weight: 700; }
+.desc { margin-top: 8px; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; flex-grow: 1; }
+.card-footer { margin-top: 20px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--stroke); padding-top: 14px; }
+.price { color: var(--accent); font-weight: 700; font-size: 1.1rem; }
+
+.btn { padding: 9px 16px; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: all 0.2s ease; }
+.card.type-brinquedo .btn { background: rgba(99, 102, 241, 0.08); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.15); }
+.card.type-brinquedo .btn:hover { background: var(--primary); color: white; border-color: transparent; }
+.card.type-combo .btn { background: rgba(236, 72, 153, 0.1); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.15); }
+.card.type-combo .btn:hover { background: linear-gradient(135deg, var(--secondary), var(--purple)); color: white; border-color: transparent; }
+
+/* PANEL LATERAL */
+.panel { position: fixed; top: 0; right: -440px; width: 100%; max-width: 420px; height: 100%; background: rgba(4, 6, 17, 0.92); border-left: 1px solid var(--stroke); padding: 30px; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); backdrop-filter: blur(20px); z-index: 100; display: flex; flex-direction: column; box-shadow: -10px 0 40px rgba(0,0,0,0.5); }
+.panel.active { transform: translateX(-440px); }
+.panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.panel h2 { font-size: 1.35rem; font-weight: 700; }
+.panel-actions { display: flex; align-items: center; gap: 14px; }
+.clear-cart-btn { background: transparent; border: none; color: var(--text-muted); font-size: 0.8rem; cursor: pointer; text-decoration: underline; }
+.clear-cart-btn:hover { color: var(--danger); }
+.close-panel { background: transparent; border: none; color: var(--text-muted); font-size: 1.6rem; cursor: pointer; }
+.close-panel:hover { color: #fff; }
+.items-container { flex-grow: 1; overflow-y: auto; margin-bottom: 16px; padding-right: 4px; }
+
+.item { background: rgba(255, 255, 255, 0.01); border: 1px solid var(--stroke); padding: 12px 14px; border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+.item-info { display: flex; flex-direction: column; gap: 1px; }
+.item-name { font-weight: 600; font-size: 0.9rem; }
+.item-price { font-size: 0.8rem; color: var(--accent); font-weight: 600; }
+.item-tag { font-size: 0.65rem; color: var(--secondary); font-weight: 700; text-transform: uppercase; }
+
+.quantity-controls { display: flex; align-items: center; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--stroke); border-radius: 8px; overflow: hidden; }
+.qty-btn { background: transparent; border: none; color: #fff; width: 28px; height: 28px; cursor: pointer; font-size: 0.9rem; font-weight: 600; }
+.qty-btn:hover { background: rgba(255, 255, 255, 0.05); }
+.qty-val { font-size: 0.85rem; font-weight: 600; padding: 0 6px; min-width: 20px; text-align: center; }
+.total-box { border-top: 1px solid var(--stroke); padding-top: 14px; margin-bottom: 16px; display: flex; justify-content: space-between; font-weight: 700; font-size: 1.2rem; }
+.total-box span:last-child { color: var(--accent); }
+
+/* INPUTS */
+.form-group { margin-bottom: 10px; position: relative; }
+input { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--stroke); background: rgba(255, 255, 255, 0.02); color: #fff; font-size: 0.9rem; outline: none; transition: border 0.2s; }
+input:focus { border-color: var(--primary); }
+input.invalid { border-color: var(--danger); background: rgba(239, 68, 68, 0.02); }
+
+/* BOTOES */
+.btn-primary { width: 100%; padding: 14px; border: none; border-radius: 12px; background: linear-gradient(135deg, var(--primary), var(--purple)); color: white; font-weight: 700; font-size: 0.95rem; cursor: pointer; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2); transition: all 0.2s; }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3); }
+
+/* FLUTUANTE PADRÃO (DESKTOP) */
+.cart-btn { position: fixed; bottom: 24px; right: 24px; background: linear-gradient(135deg, var(--primary), var(--purple)); color: white; padding: 14px 22px; border-radius: 999px; cursor: pointer; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; box-shadow: 0 8px 25px rgba(168, 85, 247, 0.25); transition: all 0.25s ease; z-index: 89; }
+.cart-btn:hover { transform: scale(1.04) translateY(-2px); }
+.cart-pulse { animation: buttonPulse 0.35s ease-out; }
+#count { background: rgba(255, 255, 255, 0.2); padding: 2px 8px; border-radius: 20px; font-size: 0.8rem; }
+
+/* RODAPÉ */
+.footer { border-top: 1px solid var(--stroke); padding: 30px 20px; text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-top: auto; }
+
+/* ANIMAÇÕES */
+.fade { animation: fade 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+@keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes buttonPulse { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
+.items-container::-webkit-scrollbar { width: 4px; }
+.items-container::-webkit-scrollbar-thumb { background: var(--stroke); border-radius: 4px; }
+#orders-list::-webkit-scrollbar { width: 4px; }
+#orders-list::-webkit-scrollbar-thumb { background: var(--stroke); border-radius: 4px; }
+
+/* BADGES DE STATUS */
+.status-badge { padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }
+.status-pendente { color: #fbbf24; background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.2); }
+.status-confirmado { color: #10b981; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.2); }
+.status-cancelado { color: #ef4444; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.2); }
+
+/* =========================================
+   MEDIA QUERIES PARA CELULAR (MOBILE)
+   ========================================= */
+@media (max-width: 640px) { 
+  :root {
+    --nav-height: 60px; /* Reduz o tamanho da navbar superior */
+  }
+
+  .nav-container { width: 95%; }
+  .logo { font-size: 1.15rem; }
+  .nav-btn { padding: 6px 10px; font-size: 0.75rem; gap: 4px; }
+  .mobile-hide { display: none; }
+  
+  .hero { padding: 40px 15px 20px; }
+  .hero h1 { font-size: 2.2rem; }
+  .hero p { font-size: 1rem; }
+  .hero-badges { gap: 6px; }
+  .badge { font-size: 0.65rem; padding: 4px 10px; }
+  
+  .controls-container { max-width: 100%; padding: 0; }
+  .tab-btn { min-width: 48%; }
+
+  /* Dá espaço extra no final para a barra de tarefas não sobrepor os cards */
+  .grid { grid-template-columns: 1fr; gap: 16px; padding-bottom: 100px; }
+  
+  /* REDUÇÃO DRÁSTICA DAS IMAGENS (Ficam como banners baixinhos) */
+  .card-img-wrapper { 
+    aspect-ratio: auto; 
+    height: 130px; /* Altura fixa para não ocupar espaço demais */
+  }
+  
+  .card-content { padding: 16px; }
+  .card h3 { font-size: 1.1rem; }
+  
+  .panel { max-width: 100%; right: -100%; padding: 20px; } 
+  .panel.active { transform: translateX(-100%); } 
+  
+  .modal-box { width: 95%; padding: 20px; }
+  .modal-title { font-size: 1.2rem; }
+  
+  /* TRANSFORMA O BOTÃO CARRINHO EM UMA TASKBAR INFERIOR */
+  .cart-btn { 
+    bottom: 0; 
+    right: 0; 
+    left: 0; 
+    width: 100%;
+    border-radius: 0; /* Tira as bordas arredondadas para ficar grudado */
+    justify-content: center; /* Centraliza o texto */
+    padding: 16px; 
+    font-size: 1rem; 
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.5); /* Sombra para cima */
+  }
+  .cart-btn:hover { transform: none; }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo" onclick="window.scrollTo({top:0, behavior:'smooth'})">FestaPlay</div>
+    
+    <div class="nav-actions">
+      <button class="nav-btn login" id="btn-login" onclick="toggleAuthModal(true)">Identificar-se</button>
+      <button class="nav-btn orders" id="btn-orders" onclick="openOrdersModal()">Meus Pedidos</button>
+      <button class="nav-btn logout" id="btn-logout" onclick="logoutUser()">Sair</button>
+      
+      <button class="nav-btn" onclick="window.toggleCart()" style="border-color: rgba(99, 102, 241, 0.3);">
+        <span class="mobile-hide">Orçamento</span>
+        <span id="nav-count" style="color:var(--accent)">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="modal-overlay" id="auth-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="toggleAuthModal(false)">&times;</button>
+    <h2 class="modal-title">Sua Identificação</h2>
+    <p class="modal-subtitle">Insira seu número de WhatsApp para fazer reservas e acompanhar o status dos seus pedidos.</p>
+    
+    <form id="auth-form" onsubmit="handleAuth(event)">
+      <div class="form-group">
+        <input type="text" id="auth-nome" placeholder="Seu nome completo" required>
+      </div>
+      <div class="form-group">
+        <input type="tel" id="auth-phone" placeholder="WhatsApp com DDD" required>
+      </div>
+      <button type="submit" class="btn-primary" id="auth-btn-submit">Acessar Conta</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="orders-modal">
+  <div class="modal-box" style="height: 80vh;">
+    <button class="modal-close" onclick="closeOrdersModal()">&times;</button>
+    <h2 class="modal-title">Meus Pedidos</h2>
+    <p class="modal-subtitle">Acompanhe o status das suas reservas.</p>
+    
+    <div id="orders-list" style="flex-grow: 1; overflow-y: auto; padding-right: 8px; display: flex; flex-direction: column; gap: 12px;">
+      </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="success-modal">
+  <div class="modal-box text-center">
+    <div class="success-icon">✓</div>
+    <h2 class="modal-title" style="margin-bottom: 10px;">Solicitação Enviada!</h2>
+    <p class="modal-subtitle">Seu orçamento foi registrado. Avaliaremos a disponibilidade e o status do pedido será atualizado em sua conta.</p>
+    
+    <div style="background: rgba(255,255,255,0.02); padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: left; font-size: 0.9rem;">
+      <p style="color: var(--text-muted); margin-bottom: 5px;">Código do Pedido:</p>
+      <p style="font-family: monospace; color: var(--primary); font-size: 1.2rem; font-weight: bold;" id="success-id">#FP-000</p>
+    </div>
+
+    <button class="btn-primary" onclick="openOrdersFromSuccess()">Acompanhar Status do Pedido</button>
+    <button style="width: 100%; margin-top: 10px; background: transparent; border: 1px solid var(--stroke); padding: 12px; border-radius: 12px; color: #fff; cursor: pointer;" onclick="closeSuccessModal()">Fechar e Voltar ao Site</button>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-badges">
+    <div class="badge cyan">⭐ Estruturas Certificadas</div>
+    <div class="badge pink">🎉 Descontos em Combos</div>
+    <div class="badge gold">🛡️ Higienização Completa</div>
+  </div>
+  <h1>FestaPlay</h1>
+  <p>Locação corporativa e residencial de brinquedos premium para festas e eventos exclusivos</p>
+</header>
+
+<main class="container">
+  <div class="controls-container">
+    <div class="search-wrapper">
+      <input id="search" oninput="window.render()" placeholder="Filtrar por nome do brinquedo ou combo..." />
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-type="all" onclick="window.filterCategory('all')">Todos os Catálogos</button>
+      <button class="tab-btn" data-type="brinquedo" onclick="window.filterCategory('brinquedo')">Brinquedos</button>
+      <button class="tab-btn" data-type="combo" onclick="window.filterCategory('combo')">💎 Combos Especiais</button>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</main>
+
+<aside class="panel" id="panel">
+  <div class="panel-header">
+    <h2>Seu Orçamento</h2>
+    <div class="panel-actions">
+      <button class="clear-cart-btn" onclick="window.clearCart()">Limpar Tudo</button>
+      <button class="close-panel" onclick="window.toggleCart()">&times;</button>
+    </div>
+  </div>
+  
+  <div class="items-container" id="items"></div>
+
+  <div class="total-box">
+    <span>Diária Estimada:</span>
+    <span id="total-price">R$ 0,00</span>
+  </div>
+
+  <div class="form-group">
+    <input id="name" placeholder="Seu nome completo" oninput="this.classList.remove('invalid')" readonly style="opacity: 0.7; cursor: not-allowed;">
+  </div>
+  <div class="form-group">
+    <input id="phone" placeholder="WhatsApp com DDD" oninput="this.classList.remove('invalid')" readonly style="opacity: 0.7; cursor: not-allowed;">
+  </div>
+  
+  <div class="form-group" style="display: flex; gap: 8px;">
+    <input id="cep" placeholder="CEP" maxlength="9" oninput="this.classList.remove('invalid'); window.maskCep(this);" style="flex: 1;">
+    <input id="number" placeholder="Nº" oninput="this.classList.remove('invalid')" style="width: 80px;">
+  </div>
+  
+  <div class="form-group">
+    <input id="address" placeholder="Endereço (Preenchido pelo CEP)" oninput="this.classList.remove('invalid')">
+  </div>
+  
+  <div class="form-group">
+    <input id="date" type="date" oninput="this.classList.remove('invalid')">
+  </div>
+
+  <button class="btn-primary" id="btn-submit">Confirmar Reserva</button>
+</aside>
+
+<div class="cart-btn" id="floating-cart" onclick="window.toggleCart()">
+  <span>🛒 Ver Pedido Completo</span>
+  <span id="count">0</span>
+</div>
+
+<footer class="footer">
+  <p>&copy; 2026 FestaPlay Locações de Equipamentos S/A. Todos os direitos reservados.</p>
+</footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDonP_YuGA49ucaTI0W0o3x6Xlav2OMmd8",
+  authDomain: "loja-de-brinquedos-fd210.firebaseapp.com",
+  projectId: "loja-de-brinquedos-fd210",
+  storageBucket: "loja-de-brinquedos-fd210.firebasestorage.app",
+  messagingSenderId: "499375490286",
+  appId: "1:499375490286:web:cee4745927942a62ccdfff",
+  measurementId: "G-BX030XJ8S1"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// -------------------------------------------------------------------
+// SISTEMA DE IDENTIFICAÇÃO LOCAL (MOCK LOGIN) E LISTAGEM DE PEDIDOS
+// -------------------------------------------------------------------
+let currentUser = null;
+
+function checkLocalAuth() {
+  const savedUser = localStorage.getItem('festaPlayUser');
+  if (savedUser) {
+    currentUser = JSON.parse(savedUser);
+    updateAuthUI();
+  }
+}
+
+function updateAuthUI() {
+  const btnLogin = document.getElementById("btn-login");
+  const btnOrders = document.getElementById("btn-orders");
+  const btnLogout = document.getElementById("btn-logout");
+  const nameInput = document.getElementById("name");
+  const phoneInput = document.getElementById("phone");
+
+  if (currentUser) {
+    btnLogin.innerHTML = `<span class="mobile-hide">Olá, </span>${currentUser.name.split(' ')[0]}`;
+    btnLogin.onclick = null; 
+    
+    btnOrders.style.display = "flex";
+    btnLogout.style.display = "flex";
+    
+    nameInput.value = currentUser.name;
+    phoneInput.value = currentUser.phone;
+  } else {
+    btnLogin.innerHTML = "Identificar-se";
+    btnLogin.onclick = () => toggleAuthModal(true);
+    
+    btnOrders.style.display = "none";
+    btnLogout.style.display = "none";
+    
+    nameInput.value = "";
+    phoneInput.value = "";
+  }
+}
+
+window.toggleAuthModal = function(show) {
+  const modal = document.getElementById("auth-modal");
+  if(show) modal.classList.add("active");
+  else modal.classList.remove("active");
+}
+
+window.handleAuth = function(e) {
+  e.preventDefault();
+  const name = document.getElementById("auth-nome").value;
+  const phone = document.getElementById("auth-phone").value;
+  
+  currentUser = { name, phone };
+  localStorage.setItem('festaPlayUser', JSON.stringify(currentUser));
+  
+  updateAuthUI();
+  toggleAuthModal(false);
+}
+
+window.logoutUser = function() {
+  currentUser = null;
+  localStorage.removeItem('festaPlayUser');
+  updateAuthUI();
+}
+
+// ------ MODAL DE MEUS PEDIDOS ------
+window.openOrdersModal = async function() {
+  document.getElementById("orders-modal").classList.add("active");
+  const listDiv = document.getElementById("orders-list");
+  listDiv.innerHTML = `<p style="text-align: center; color: var(--text-muted); margin-top: 20px;">Buscando seus pedidos...</p>`;
+
+  if(!currentUser) return;
+
+  try {
+    const q = query(collection(db, "pedidos"), where("userId", "==", currentUser.phone));
+    const querySnapshot = await getDocs(q);
+    
+    let orders = [];
+    querySnapshot.forEach((doc) => {
+      orders.push({ id: doc.id, ...doc.data() });
+    });
+
+    orders.sort((a, b) => (b.createdAt?.toMillis() || 0) - (a.createdAt?.toMillis() || 0));
+
+    if (orders.length === 0) {
+      listDiv.innerHTML = `<p style="text-align: center; color: var(--text-muted); margin-top: 20px;">Você ainda não tem reservas.</p>`;
+      return;
+    }
+
+    listDiv.innerHTML = orders.map(o => {
+      let badgeClass = "status-pendente";
+      let statusText = "Pendente";
+      
+      if(o.status === "confirmado" || o.status === "aprovado") {
+        badgeClass = "status-confirmado";
+        statusText = "Confirmado";
+      } else if (o.status === "cancelado") {
+        badgeClass = "status-cancelado";
+        statusText = "Cancelado";
+      }
+
+      const itemsHtml = o.items.map(i => `<div style="font-size: 0.85rem; color: #fff; margin-top: 4px;">• ${i.name} <span style="color: var(--text-muted)">(Qtd: ${i.quantity})</span></div>`).join('');
+
+      return `
+        <div style="border: 1px solid var(--stroke); padding: 18px; border-radius: 16px; background: rgba(255,255,255,0.01);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--stroke); padding-bottom: 12px;">
+            <div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Pedido</div>
+              <strong style="color: var(--primary);">#${o.id.substring(0,6).toUpperCase()}</strong>
+            </div>
+            <span class="status-badge ${badgeClass}">${statusText}</span>
+          </div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; display: flex; flex-direction: column; gap: 4px;">
+            <span>Data da Festa: <strong style="color: #fff;">${o.eventDate}</strong></span>
+            <span>Total: <strong style="color: var(--accent);">R$ ${o.totalPrice},00</strong></span>
+          </div>
+          <div style="background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px;">Itens Reservados:</div>
+            ${itemsHtml}
+          </div>
+        </div>`;
+    }).join('');
+  } catch(e) {
+    console.error("Erro ao buscar pedidos:", e);
+    listDiv.innerHTML = `<p style="text-align: center; color: var(--danger); margin-top: 20px;">Erro ao carregar pedidos. Tente novamente.</p>`;
+  }
+}
+
+window.closeOrdersModal = function() {
+  document.getElementById("orders-modal").classList.remove("active");
+}
+
+window.openOrdersFromSuccess = function() {
+  closeSuccessModal();
+  openOrdersModal();
+}
+
+// -------------------------------------------------------------------
+// SISTEMA DO SITE E CARRINHO
+// -------------------------------------------------------------------
+const products = [
+  {id:1, name:"Pula-Pula Premium", price:350, type:"brinquedo", img:"https://images.unsplash.com/photo-1561525140-c2a4cc68e2db?auto=format&fit=crop&w=600&h=410&q=80", desc:"Inflável de alta densidade revestido em lona náutica com redes reforçadas."},
+  {id:2, name:"Fliperama Arcade", price:500, type:"brinquedo", img:"https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&h=410&q=80", desc:"Gabinete profissional adaptado com tela HD e 2.000 clássicos."},
+  {id:3, name:"Piscina de Bolinhas", price:280, type:"brinquedo", img:"https://images.unsplash.com/photo-1515488042361-404e9250afef?auto=format&fit=crop&w=600&h=410&q=80", desc:"Estrutura acolchoada preenchida com bolinhas higienizadas."},
+  {id:4, name:"Touro Mecânico", price:900, type:"brinquedo", img:"https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=600&h=410&q=80", desc:"Equipamento de tração mecânica, circundado por colchão inflável antiqueda."},
+  {id:5, name:"Combo Kids Play", price:530, type:"combo", img:"https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=600&h=410&q=80", desc:"Pula-Pula Premium + Piscina de Bolinhas. Focado em festas infantis."},
+  {id:6, name:"Combo Gamer", price:1250, type:"combo", img:"https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=600&h=410&q=80", desc:"Touro Mecânico + Fliperama Retrô. Ideal para eventos corporativos."}
+];
+
+let cart = [];
+let currentTab = 'all';
+
+window.setupDatePicker = function() {
+  const dateInput = document.getElementById("date");
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.min = today;
+}
+
+window.maskCep = function(input) {
+  let v = input.value.replace(/\D/g, "");
+  if (v.length > 5) v = v.substring(0, 5) + "-" + v.substring(5, 8);
+  input.value = v;
+  if (v.length === 9) window.fetchCep(v.replace("-", ""));
+}
+
+window.fetchCep = async function(cep) {
+  const addressInput = document.getElementById("address");
+  addressInput.value = "Buscando...";
+  try {
+    const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+    const data = await res.json();
+    if (data.erro) { addressInput.value = ""; alert("CEP não encontrado!"); return; }
+    addressInput.value = `${data.logradouro}, ${data.bairro} - ${data.localidade}/${data.uf}`;
+    addressInput.classList.remove('invalid');
+    document.getElementById("number").focus();
+  } catch (e) { addressInput.value = ""; console.error(e); }
+}
+
+window.filterCategory = function(type) {
+  currentTab = type;
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if(btn.getAttribute('data-type') === type) btn.classList.add('active');
+  });
+  window.render();
+}
+
+window.render = function() {
+  const q = document.getElementById("search").value.toLowerCase();
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+
+  const filtered = products.filter(p => {
+    const matchesSearch = p.name.toLowerCase().includes(q);
+    const matchesTab = currentTab === 'all' || p.type === currentTab;
+    return matchesSearch && matchesTab;
+  });
+  
+  if(filtered.length === 0) {
+    grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 60px 0;">Nenhum item encontrado.</p>`;
+    return;
+  }
+
+  filtered.forEach(p => {
+    const labelTag = p.type === 'combo' ? '💎 COMBO' : 'Equipamento';
+    grid.innerHTML += `
+      <div class="card type-${p.type} fade">
+        <span class="card-tag ${p.type}">${labelTag}</span>
+        <div class="card-img-wrapper"><img src="${p.img}" alt="${p.name}" loading="lazy"></div>
+        <div class="card-content">
+          <h3>${p.name}</h3>
+          <div class="desc">${p.desc}</div>
+          <div class="card-footer">
+            <span class="price">R$ ${p.price} <small style="font-size:0.75rem; font-weight:400; color:var(--text-muted)">/diária</small></span>
+            <button class="btn" onclick="window.add(${p.id})">Adicionar</button>
+          </div>
+        </div>
+      </div>`;
+  });
+}
+
+window.add = function(id) {
+  const existingItem = cart.find(item => item.product.id === id);
+  if (existingItem) existingItem.quantity += 1;
+  else cart.push({ product: products.find(p => p.id === id), quantity: 1 });
+  window.update();
+  const floatBtn = document.getElementById("floating-cart");
+  floatBtn.classList.remove("cart-pulse"); void floatBtn.offsetWidth; floatBtn.classList.add("cart-pulse");
+  const panel = document.getElementById("panel");
+  if(!panel.classList.contains("active")) window.toggleCart();
+}
+
+window.changeQuantity = function(index, delta) {
+  cart[index].quantity += delta;
+  if(cart[index].quantity <= 0) cart.splice(index, 1);
+  window.update();
+}
+
+window.clearCart = function() { cart = []; window.update(); }
+window.toggleCart = function() { document.getElementById("panel").classList.toggle("active"); }
+
+window.update = function() {
+  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+  document.getElementById("count").innerText = totalItems;
+  document.getElementById("nav-count").innerText = totalItems;
+
+  const box = document.getElementById("items");
+  box.innerHTML = "";
+
+  if(cart.length === 0) {
+    box.innerHTML = `<p style="color: var(--text-muted); font-size: 0.9rem; text-align: center; padding: 40px 0;">Carrinho vazio.</p>`;
+    document.getElementById("total-price").innerText = "R$ 0,00";
+    return;
+  }
+
+  let totalValue = 0;
+  cart.forEach((item, index) => {
+    totalValue += item.product.price * item.quantity;
+    const badge = item.product.type === 'combo' ? `<span class="item-tag">Combo</span>` : '';
+    box.innerHTML += `
+      <div class="item fade">
+        <div class="item-info">
+          ${badge}
+          <span class="item-name">${item.product.name}</span>
+          <span class="item-price">R$ ${item.product.price},00 /un</span>
+        </div>
+        <div class="quantity-controls">
+          <button class="qty-btn" onclick="window.changeQuantity(${index}, -1)">−</button>
+          <span class="qty-val">${item.quantity}</span>
+          <button class="qty-btn" onclick="window.changeQuantity(${index}, 1)">+</button>
+        </div>
+      </div>`;
+  });
+  document.getElementById("total-price").innerText = `R$ ${totalValue},00`;
+}
+
+// -------------------------------------------------------------------
+// ENVIO DO PEDIDO
+// -------------------------------------------------------------------
+
+async function send() {
+  const nameInput = document.getElementById("name");
+  const phoneInput = document.getElementById("phone");
+  const cepInput = document.getElementById("cep");
+  const numberInput = document.getElementById("number");
+  const addressInput = document.getElementById("address");
+  const dateInput = document.getElementById("date");
+  
+  if(!currentUser) {
+    alert("Por favor, clique em 'Identificar-se' no menu superior para salvar sua reserva.");
+    toggleAuthModal(true);
+    return;
+  }
+
+  let hasError = false;
+  [nameInput, phoneInput, cepInput, numberInput, addressInput, dateInput].forEach(input => {
+    if(!input.value.trim()) { input.classList.add("invalid"); hasError = true; }
+  });
+  
+  if(cart.length === 0) { alert("Carrinho vazio."); return; }
+  if(hasError) return;
+
+  const formattedDate = dateInput.value.split('-').reverse().join('/');
+  let totalValue = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+  const fullAddress = `${addressInput.value.trim()}, Nº ${numberInput.value.trim()} - CEP: ${cepInput.value.trim()}`;
+
+  const pedidoData = {
+    userId: currentUser.phone,
+    clientName: nameInput.value.trim(),
+    phone: phoneInput.value.trim(),
+    address: fullAddress,
+    eventDate: formattedDate,
+    totalPrice: totalValue,
+    status: "pendente",
+    createdAt: serverTimestamp(),
+    items: cart.map(item => ({ name: item.product.name, quantity: item.quantity }))
+  };
+
+  try {
+    document.getElementById("btn-submit").innerText = "Processando...";
+    
+    const docRef = await addDoc(collection(db, "pedidos"), pedidoData);
+    const shortId = docRef.id.substring(0, 6).toUpperCase();
+
+    document.getElementById("success-id").innerText = `#FP-${shortId}`;
+    window.toggleCart(); 
+    document.getElementById("success-modal").classList.add("active"); 
+    
+    window.clearCart();
+    dateInput.value = "";
+    
+  } catch (error) {
+    console.error("Erro no envio:", error);
+    alert("Ocorreu um problema ao registrar seu pedido. Verifique sua conexão.");
+  } finally {
+    document.getElementById("btn-submit").innerText = "Confirmar Reserva";
+  }
+}
+
+document.getElementById("btn-submit").onclick = send;
+
+window.closeSuccessModal = function() {
+  document.getElementById("success-modal").classList.remove("active");
+}
+
+// Inicializações
+window.setupDatePicker();
+checkLocalAuth();
+window.render();
+window.update();
+</script>
+
+</body>
+</html>
