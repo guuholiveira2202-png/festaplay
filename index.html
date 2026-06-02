@@ -72,7 +72,7 @@ body {
 .nav-btn:hover { background: rgba(255, 255, 255, 0.08); border-color: var(--primary); }
 .nav-btn.login { border-color: rgba(99, 102, 241, 0.3); color: #a5b4fc; }
 .nav-btn.orders { border-color: rgba(16, 185, 129, 0.3); color: #6ee7b7; display: none; }
-.nav-btn.logout { border-color: rgba(239, 68, 68, 0.3); color: #fca5a5; display: none; }
+.nav-btn.logout { border-color: rgba(239, 68, 68, 0.3); display: none; padding: 8px 12px; }
 
 /* MODAIS */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); z-index: 200; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
@@ -179,6 +179,7 @@ input.invalid { border-color: var(--danger); background: rgba(239, 68, 68, 0.02)
 .cart-btn:hover { transform: scale(1.04) translateY(-2px); }
 .cart-pulse { animation: buttonPulse 0.35s ease-out; }
 #count { background: rgba(255, 255, 255, 0.2); padding: 2px 8px; border-radius: 20px; font-size: 0.8rem; }
+.cart-text-mobile { display: none; }
 
 /* RODAPÉ */
 .footer { border-top: 1px solid var(--stroke); padding: 30px 20px; text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-top: auto; }
@@ -200,26 +201,23 @@ input.invalid { border-color: var(--danger); background: rgba(239, 68, 68, 0.02)
    MEDIA QUERIES PARA CELULAR (MOBILE)
    ========================================= */
 @media (max-width: 640px) { 
-  :root {
-    --nav-height: 60px;
-  }
+  :root { --nav-height: 60px; }
 
   .nav-container { width: 95%; }
-  .logo { font-size: 1.15rem; }
-  .nav-btn { padding: 6px 10px; font-size: 0.75rem; gap: 4px; }
-  .mobile-hide { display: none; }
+  .logo { font-size: 1.25rem; }
   
-  .hero { padding: 40px 15px 20px; }
-  .hero h1 { font-size: 2.2rem; }
-  .hero p { font-size: 1rem; }
-  .hero-badges { gap: 6px; }
-  .badge { font-size: 0.65rem; padding: 4px 10px; }
+  /* ESCONDE OS TEXTOS E DEIXA SÓ OS ÍCONES NO CELULAR */
+  .nav-text { display: none; }
   
-  .controls-container { max-width: 100%; padding: 0; }
-  .tab-btn { min-width: 48%; }
+  /* AJUSTA O TAMANHO DOS BOTÕES PARA NÃO FICAR APERTADO */
+  .nav-actions { gap: 6px; }
+  .nav-btn { padding: 8px 10px; font-size: 1.1rem; gap: 4px; justify-content: center; }
+  
+  /* Botão de sair fica menorzinho */
+  .nav-btn.logout { padding: 8px; }
 
   /* Dá espaço extra no final para a barra de tarefas não sobrepor os cards */
-  .grid { grid-template-columns: 1fr; gap: 16px; padding-bottom: 100px; }
+  .grid { grid-template-columns: 1fr; gap: 16px; padding-bottom: 90px; }
   
   /* REDUÇÃO DAS IMAGENS */
   .card-img-wrapper { aspect-ratio: auto; height: 130px; }
@@ -234,14 +232,16 @@ input.invalid { border-color: var(--danger); background: rgba(239, 68, 68, 0.02)
   .modal-box { width: 95%; padding: 20px; }
   .modal-title { font-size: 1.2rem; }
   
-  /* BARRA INFERIOR NO CELULAR */
+  /* AJUSTE DO BOTÃO FLUTUANTE NO CELULAR */
   .cart-btn { 
-    bottom: 0; right: 0; left: 0; width: 100%;
-    border-radius: 0; justify-content: center; padding: 16px; 
-    font-size: 1rem; box-shadow: 0 -4px 15px rgba(0,0,0,0.5); 
-    z-index: 89; /* Garante que fique abaixo dos modais e do painel */
+    bottom: 20px; right: 20px; left: auto; width: auto;
+    border-radius: 999px; justify-content: center; padding: 12px 18px; 
+    font-size: 0.95rem; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4); 
+    z-index: 89; 
   }
-  .cart-btn:hover { transform: none; }
+  .cart-btn:hover { transform: scale(1.02); }
+  .cart-text-desktop { display: none; }
+  .cart-text-mobile { display: inline; }
 }
 </style>
 </head>
@@ -253,13 +253,24 @@ input.invalid { border-color: var(--danger); background: rgba(239, 68, 68, 0.02)
     <div class="logo" onclick="window.scrollTo({top:0, behavior:'smooth'})">FestaPlay</div>
     
     <div class="nav-actions">
-      <button class="nav-btn login" id="btn-login" onclick="toggleAuthModal(true)">Identificar-se</button>
-      <button class="nav-btn orders" id="btn-orders" onclick="openOrdersModal()">Meus Pedidos</button>
-      <button class="nav-btn logout" id="btn-logout" onclick="logoutUser()">Sair</button>
+      <button class="nav-btn login" id="btn-login" onclick="toggleAuthModal(true)">
+        <span class="nav-icon">👤</span>
+        <span class="nav-text">Entrar</span>
+      </button>
+      
+      <button class="nav-btn orders" id="btn-orders" onclick="openOrdersModal()">
+        <span class="nav-icon">📦</span>
+        <span class="nav-text">Pedidos</span>
+      </button>
       
       <button class="nav-btn" onclick="window.toggleCart()" style="border-color: rgba(99, 102, 241, 0.3);">
-        <span class="mobile-hide">Orçamento</span>
-        <span id="nav-count" style="color:var(--accent)">0</span>
+        <span class="nav-icon">🛒</span>
+        <span class="nav-text">Orçamento</span>
+        <span id="nav-count" style="background: rgba(16, 185, 129, 0.2); color: var(--accent); padding: 2px 6px; border-radius: 10px; font-size: 0.8rem; font-weight: 800;">0</span>
+      </button>
+
+      <button class="nav-btn logout" id="btn-logout" onclick="logoutUser()" title="Sair da conta">
+        <span class="nav-icon" style="color: #fca5a5;">✖</span>
       </button>
     </div>
   </div>
@@ -376,7 +387,8 @@ input.invalid { border-color: var(--danger); background: rgba(239, 68, 68, 0.02)
 </aside>
 
 <div class="cart-btn" id="floating-cart" onclick="window.toggleCart()">
-  <span>🛒 Ver Pedido Completo</span>
+  <span class="cart-text-desktop">🛒 Ver Pedido Completo</span>
+  <span class="cart-text-mobile">🛒 Carrinho</span>
   <span id="count">0</span>
 </div>
 
@@ -422,8 +434,12 @@ function updateAuthUI() {
   const phoneInput = document.getElementById("phone");
 
   if (currentUser) {
-    btnLogin.innerHTML = `<span class="mobile-hide">Olá, </span>${currentUser.name.split(' ')[0]}`;
+    // Pega o primeiro nome (Ex: Gustavo)
+    const firstName = currentUser.name.split(' ')[0];
+    
+    btnLogin.innerHTML = `<span class="nav-icon">👋</span><span class="nav-text">${firstName}</span>`;
     btnLogin.onclick = null; 
+    btnLogin.style.cursor = "default";
     
     btnOrders.style.display = "flex";
     btnLogout.style.display = "flex";
@@ -431,8 +447,9 @@ function updateAuthUI() {
     nameInput.value = currentUser.name;
     phoneInput.value = currentUser.phone;
   } else {
-    btnLogin.innerHTML = "Identificar-se";
+    btnLogin.innerHTML = `<span class="nav-icon">👤</span><span class="nav-text">Entrar</span>`;
     btnLogin.onclick = () => toggleAuthModal(true);
+    btnLogin.style.cursor = "pointer";
     
     btnOrders.style.display = "none";
     btnLogout.style.display = "none";
