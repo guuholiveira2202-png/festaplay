@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Painel Admin | FestaPlay</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  
+  :root { 
+    --bg: #121214; /* Fundo principal escuro */
+    --surface: #202024; /* Fundo dos cartões */
+    --surface-hover: #29292e;
+    --primary: #8b5cf6; /* Roxo moderno */
+    --primary-hover: #7c3aed;
+    --text: #e1e1e6; /* Texto principal claro */
+    --text-title: #ffffff;
+    --muted: #a8a8b3; /* Texto secundário */
+    --border: #323238; /* Bordas sutis */
+    
+    /* Cores de Status adaptadas para Dark Mode */
+    --success: #04d361;
+    --success-bg: rgba(4, 211, 97, 0.15);
+    --warning: #ffcd1e;
+    --warning-bg: rgba(255, 205, 30, 0.15);
+    --danger: #f75a68;
+    --danger-bg: rgba(247, 90, 104, 0.15);
+  }
+  
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Inter', sans-serif; 
+  }
+  
+  body { 
+    background-color: var(--bg); 
+    color: var(--text); 
+    padding: 24px; 
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* Cabeçalho */
+  .header { 
+    max-width: 1000px; 
+    margin: 0 auto 32px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    background: var(--surface); 
+    padding: 20px 24px; 
+    border-radius: 16px; 
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2); 
+  }
+  
+  .header h1 { 
+    font-size: 1.5rem; 
+    color: var(--text-title); 
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  
+  .container { 
+    max-width: 1000px; 
+    margin: 0 auto; 
+    display: grid; 
+    gap: 20px; 
+  }
+  
+  /* Cartões de Pedido */
+  .order-card { 
+    background: var(--surface); 
+    border: 1px solid var(--border); 
+    border-radius: 16px; 
+    padding: 24px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+    display: flex; 
+    flex-direction: column; 
+    gap: 16px; 
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .order-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+  
+  .order-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    border-bottom: 1px solid var(--border); 
+    padding-bottom: 16px; 
+  }
+  
+  .order-id { 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    color: var(--text-title); 
+  }
+  
+  .order-date { 
+    font-size: 0.85rem; 
+    color: var(--muted); 
+    margin-top: 4px; 
+  }
+  
+  /* Grade de Informações */
+  .info-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 16px; 
+    font-size: 0.95rem; 
+  }
+  
+  .info-group strong { 
+    display: block; 
+    color: var(--muted); 
+    font-size: 0.75rem; 
+    text-transform: uppercase; 
+    letter-spacing: 0.5px;
+    margin-bottom: 4px; 
+    font-weight: 600;
+  }
+
+  .info-group a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+
+  .info-group a:hover {
+    color: var(--primary-hover);
+  }
+  
+  /* Lista de Itens */
+  .items-list { 
+    background: #18181b; 
+    padding: 16px; 
+    border-radius: 12px; 
+    font-size: 0.9rem; 
+    border: 1px solid var(--border); 
+    line-height: 1.6;
+  }
+  
+  /* Ações / Botões */
+  .actions { 
+    display: flex; 
+    gap: 12px; 
+    margin-top: 8px; 
+    border-top: 1px solid var(--border); 
+    padding-top: 20px; 
+    justify-content: flex-end; 
+  }
+  
+  button { 
+    padding: 10px 18px; 
+    border-radius: 8px; 
+    border: none; 
+    font-weight: 600; 
+    font-size: 0.85rem; 
+    cursor: pointer; 
+    transition: all 0.2s; 
+  }
+  
+  button:active {
+    transform: scale(0.97);
+  }
+  
+  .btn-confirm { background: var(--success); color: #000; }
+  .btn-confirm:hover { background: #03b854; }
+  
+  .btn-cancel { background: var(--danger); color: #fff; }
+  .btn-cancel:hover { background: #e04a57; }
+  
+  .btn-pendente { background: var(--warning); color: #000; }
+  .btn-pendente:hover { background: #e6b81a; }
+  
+  /* Badges de Status */
+  .badge { 
+    padding: 6px 12px; 
+    border-radius: 20px; 
+    font-size: 0.75rem; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    letter-spacing: 0.5px;
+    border: 1px solid transparent;
+  }
+  
+  .badge.pendente { 
+    background: var(--warning-bg); 
+    color: var(--warning); 
+    border-color: rgba(255, 205, 30, 0.3);
+  }
+  
+  .badge.confirmado { 
+    background: var(--success-bg); 
+    color: var(--success); 
+    border-color: rgba(4, 211, 97, 0.3);
+  }
+  
+  .badge.cancelado { 
+    background: var(--danger-bg); 
+    color: var(--danger); 
+    border-color: rgba(247, 90, 104, 0.3);
+  }
+
+  /* Responsividade */
+  @media (max-width: 600px) { 
+    .actions { flex-direction: column; } 
+    button { width: 100%; padding: 12px; } 
+    .header { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Painel Administrativo</h1>
+  <span id="conn-status" style="font-size: 0.85rem; color: var(--success); font-weight: 600; display: flex; align-items: center; gap: 6px;">
+    <span style="display:inline-block; width:8px; height:8px; background:var(--success); border-radius:50%; box-shadow: 0 0 8px var(--success);"></span>
+    Carregando dados ao vivo...
+  </span>
+</div>
+
+<div class="container" id="admin-list"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore, collection, query, orderBy, onSnapshot, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+// SUAS CREDENCIAIS DO FIREBASE
+const firebaseConfig = {
+  apiKey: "AIzaSyDonP_YuGA49ucaTI0W0o3x6Xlav2OMmd8",
+  authDomain: "loja-de-brinquedos-fd210.firebaseapp.com",
+  projectId: "loja-de-brinquedos-fd210",
+  storageBucket: "loja-de-brinquedos-fd210.firebasestorage.app",
+  messagingSenderId: "499375490286",
+  appId: "1:499375490286:web:cee4745927942a62ccdfff"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const listDiv = document.getElementById("admin-list");
+
+// Busca os pedidos em TEMPO REAL (onSnapshot)
+const q = query(collection(db, "pedidos"), orderBy("createdAt", "desc"));
+
+onSnapshot(q, (snapshot) => {
+  document.getElementById("conn-status").innerHTML = `
+    <span style="display:inline-block; width:8px; height:8px; background:var(--success); border-radius:50%; box-shadow: 0 0 8px var(--success);"></span>
+    Conectado ao Vivo
+  `;
+  
+  listDiv.innerHTML = "";
+  
+  if(snapshot.empty) {
+    listDiv.innerHTML = `<p style="text-align:center; color: var(--muted); margin-top:40px; font-size: 1.1rem;">Nenhum pedido recebido ainda.</p>`;
+    return;
+  }
+
+  snapshot.forEach((docSnap) => {
+    const p = docSnap.data();
+    const id = docSnap.id;
+    const shortId = id.substring(0, 6).toUpperCase();
+    
+    // Formatar itens
+    const itemsHtml = p.items.map(i => `<span style="color:var(--text); font-weight:500;">• ${i.name}</span> <span style="color:var(--muted);">(Qtd: ${i.quantity})</span>`).join('<br>');
+
+    // Data de criação real
+    let createdStr = "Data desconhecida";
+    if(p.createdAt) {
+      createdStr = p.createdAt.toDate().toLocaleString('pt-BR');
+    }
+
+    listDiv.innerHTML += `
+      <div class="order-card">
+        <div class="order-header">
+          <div>
+            <div class="order-id">Pedido #${shortId}</div>
+            <div class="order-date">Registrado em: ${createdStr}</div>
+          </div>
+          <span class="badge ${p.status}">${p.status}</span>
+        </div>
+        
+        <div class="info-grid">
+          <div class="info-group"><strong>Cliente</strong>${p.clientName}</div>
+          <div class="info-group">
+            <strong>WhatsApp</strong>${p.phone} 
+            <a href="https://wa.me/55${p.phone.replace(/\D/g, '')}" target="_blank" style="margin-left:4px;">(Chamar)</a>
+          </div>
+          <div class="info-group"><strong>Data da Festa</strong>${p.eventDate}</div>
+          <div class="info-group"><strong>Total</strong>R$ ${p.totalPrice},00</div>
+          <div class="info-group" style="grid-column: 1 / -1;"><strong>Endereço</strong>${p.address}</div>
+        </div>
+
+        <div class="items-list">
+          <strong style="color:var(--muted); font-size:0.75rem; text-transform:uppercase; margin-bottom:8px; display:block; letter-spacing:0.5px;">Itens Solicitados</strong>
+          ${itemsHtml}
+        </div>
+
+        <div class="actions">
+          <button class="btn-pendente" onclick="window.changeStatus('${id}', 'pendente')" ${p.status === 'pendente' ? 'style="opacity:0.3; pointer-events:none;"' : ''}>Marcar Pendente</button>
+          <button class="btn-cancel" onclick="window.changeStatus('${id}', 'cancelado')" ${p.status === 'cancelado' ? 'style="opacity:0.3; pointer-events:none;"' : ''}>Cancelar</button>
+          <button class="btn-confirm" onclick="window.changeStatus('${id}', 'confirmado')" ${p.status === 'confirmado' ? 'style="opacity:0.3; pointer-events:none;"' : ''}>Confirmar Reserva</button>
+        </div>
+      </div>
+    `;
+  });
+}, (error) => {
+  document.getElementById("conn-status").innerHTML = `
+    <span style="display:inline-block; width:8px; height:8px; background:var(--danger); border-radius:50%; box-shadow: 0 0 8px var(--danger);"></span>
+    <span style="color: var(--danger)">Erro de Conexão</span>
+  `;
+  console.error("Erro ao escutar dados:", error);
+});
+
+// Função que atualiza o banco de dados
+window.changeStatus = async (docId, newStatus) => {
+  if(!confirm(`Tem certeza que deseja marcar este pedido como ${newStatus.toUpperCase()}? O cliente verá isso no site dele.`)) return;
+  
+  try {
+    const orderRef = doc(db, "pedidos", docId);
+    await updateDoc(orderRef, { status: newStatus });
+  } catch(e) {
+    alert("Erro ao atualizar o status. Verifique as permissões do Firebase.");
+    console.error(e);
+  }
+}
+</script>
+
+</body>
+</html>
