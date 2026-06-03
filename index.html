@@ -442,9 +442,15 @@ input:disabled, input[readonly] { opacity: 0.7; cursor: not-allowed; background:
         <input id="address" placeholder="Endereço (Preenchido pelo CEP)" oninput="this.classList.remove('invalid')">
       </div>
       
-      <div class="form-group">
-        <span class="form-section-title">Agende sua data</span>
-        <input id="date" type="date" oninput="this.classList.remove('invalid')">
+      <div class="form-group" style="display: flex; gap: 12px;">
+        <div style="flex: 1;">
+          <span class="form-section-title">Data</span>
+          <input id="date" type="date" oninput="this.classList.remove('invalid')">
+        </div>
+        <div style="flex: 1;">
+          <span class="form-section-title">Horário</span>
+          <input id="time" type="time" oninput="this.classList.remove('invalid')">
+        </div>
       </div>
 
       <div class="form-group">
@@ -456,7 +462,6 @@ input:disabled, input[readonly] { opacity: 0.7; cursor: not-allowed; background:
           <option value="Dinheiro">Dinheiro (no local)</option>
         </select>
       </div>
-
       <button class="btn-primary" id="btn-submit">Confirmar Reserva</button>
     </div>
   </div>
@@ -470,8 +475,6 @@ input:disabled, input[readonly] { opacity: 0.7; cursor: not-allowed; background:
   <span class="cart-text-mobile">Carrinho</span>
   <span id="count">0</span>
 </div>
-
-
 <section class="trust-section">
   <div class="trust-item">
     <div class="trust-icon">
@@ -495,7 +498,6 @@ input:disabled, input[readonly] { opacity: 0.7; cursor: not-allowed; background:
     <p>Nossa equipe faz tudo por você.</p>
   </div>
 </section>
-
 <footer class="footer">
   <p>&copy; 2026 FestaPlay Locações de Equipamentos Premium. Todos os direitos reservados.</p>
 </footer>
@@ -645,6 +647,7 @@ window.openOrdersModal = async function() {
 
       const itemsHtml = o.items.map(i => `<div style="font-size: 0.95rem; color: var(--text-muted); margin-top: 8px; display: flex; justify-content: space-between;"><span>• ${i.name}</span> <strong style="color:#fff">x${i.quantity}</strong></div>`).join('');
       const orderTotal = o.totalPrice ? parseFloat(o.totalPrice).toFixed(2).replace('.', ',') : "0,00";
+      const orderTime = o.eventTime ? `às ${o.eventTime}` : '';
 
       return `
         <div style="border: 1px solid var(--stroke); padding: 24px; border-radius: 20px; background: rgba(30, 41, 59, 0.5); box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
@@ -656,7 +659,7 @@ window.openOrdersModal = async function() {
             <span class="status-badge ${badgeClass}">${statusText}</span>
           </div>
           <div style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px;">
-            <span style="display: flex; justify-content: space-between;">Data do Evento: <strong style="color: #fff;">${o.eventDate}</strong></span>
+            <span style="display: flex; justify-content: space-between;">Data do Evento: <strong style="color: #fff;">${o.eventDate} ${orderTime}</strong></span>
             <span style="display: flex; justify-content: space-between; align-items: center;">Valor Total: <strong style="color: var(--primary); font-size: 1.2rem;">R$ ${orderTotal}</strong></span>
             <span style="display: flex; justify-content: space-between;">Pagamento: <strong style="color: #fff;">${o.paymentMethod || 'Não informado'}</strong></span>
           </div>
@@ -862,6 +865,7 @@ async function send() {
   const numberInput = document.getElementById("number");
   const addressInput = document.getElementById("address");
   const dateInput = document.getElementById("date");
+  const timeInput = document.getElementById("time");
   const paymentInput = document.getElementById("payment");
   
   if(!currentUser) {
@@ -871,7 +875,7 @@ async function send() {
   }
 
   let hasError = false;
-  [nameInput, phoneInput, cepInput, numberInput, addressInput, dateInput, paymentInput].forEach(input => {
+  [nameInput, phoneInput, cepInput, numberInput, addressInput, dateInput, timeInput, paymentInput].forEach(input => {
     if(!input.value.trim()) { input.classList.add("invalid"); hasError = true; }
   });
   
@@ -895,6 +899,7 @@ async function send() {
     phone: phoneInput.value.trim(),
     address: fullAddress,
     eventDate: formattedDate,
+    eventTime: timeInput.value,
     totalPrice: finalPrice,
     paymentMethod: paymentInput.value,
     status: "pendente",
@@ -916,6 +921,7 @@ async function send() {
     
     window.clearCart();
     dateInput.value = "";
+    timeInput.value = "";
     paymentInput.value = "";
     
   } catch (error) {

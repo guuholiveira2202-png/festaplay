@@ -8,15 +8,15 @@
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
   
   :root { 
-    --bg: #121214; /* Fundo principal escuro */
-    --surface: #202024; /* Fundo dos cartões */
+    --bg: #121214; 
+    --surface: #202024; 
     --surface-hover: #29292e;
-    --primary: #8b5cf6; /* Roxo moderno */
+    --primary: #8b5cf6; 
     --primary-hover: #7c3aed;
-    --text: #e1e1e6; /* Texto principal claro */
+    --text: #e1e1e6; 
     --text-title: #ffffff;
-    --muted: #a8a8b3; /* Texto secundário */
-    --border: #323238; /* Bordas sutis */
+    --muted: #a8a8b3; 
+    --border: #323238; 
     
     /* Cores de Status adaptadas para Dark Mode */
     --success: #04d361;
@@ -154,6 +154,7 @@
     border-top: 1px solid var(--border); 
     padding-top: 20px; 
     justify-content: flex-end; 
+    flex-wrap: wrap; /* Adicionado para evitar quebra em telas menores */
   }
   
   button { 
@@ -173,11 +174,15 @@
   .btn-confirm { background: var(--success); color: #000; }
   .btn-confirm:hover { background: #03b854; }
   
-  .btn-cancel { background: var(--danger); color: #fff; }
-  .btn-cancel:hover { background: #e04a57; }
+  .btn-cancel { background: var(--warning); color: #000; }
+  .btn-cancel:hover { background: #e6b81a; }
   
-  .btn-pendente { background: var(--warning); color: #000; }
-  .btn-pendente:hover { background: #e6b81a; }
+  .btn-pendente { background: var(--surface-hover); color: var(--text); border: 1px solid var(--border); }
+  .btn-pendente:hover { background: var(--border); }
+
+  /* Novo botão de apagar */
+  .btn-delete { background: transparent; color: var(--danger); border: 1px solid var(--danger); }
+  .btn-delete:hover { background: var(--danger-bg); }
   
   /* Badges de Status */
   .badge { 
@@ -230,9 +235,9 @@
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, collection, query, orderBy, onSnapshot, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+// Adicionado deleteDoc à importação
+import { getFirestore, collection, query, orderBy, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-// SUAS CREDENCIAIS DO FIREBASE
 const firebaseConfig = {
   apiKey: "AIzaSyDonP_YuGA49ucaTI0W0o3x6Xlav2OMmd8",
   authDomain: "loja-de-brinquedos-fd210.firebaseapp.com",
@@ -247,7 +252,6 @@ const db = getFirestore(app);
 
 const listDiv = document.getElementById("admin-list");
 
-// Busca os pedidos em TEMPO REAL (onSnapshot)
 const q = query(collection(db, "pedidos"), orderBy("createdAt", "desc"));
 
 onSnapshot(q, (snapshot) => {
@@ -268,10 +272,8 @@ onSnapshot(q, (snapshot) => {
     const id = docSnap.id;
     const shortId = id.substring(0, 6).toUpperCase();
     
-    // Formatar itens
     const itemsHtml = p.items.map(i => `<span style="color:var(--text); font-weight:500;">• ${i.name}</span> <span style="color:var(--muted);">(Qtd: ${i.quantity})</span>`).join('<br>');
 
-    // Data de criação real
     let createdStr = "Data desconhecida";
     if(p.createdAt) {
       createdStr = p.createdAt.toDate().toLocaleString('pt-BR');
@@ -294,6 +296,10 @@ onSnapshot(q, (snapshot) => {
             <a href="https://wa.me/55${p.phone.replace(/\D/g, '')}" target="_blank" style="margin-left:4px;">(Chamar)</a>
           </div>
           <div class="info-group"><strong>Data da Festa</strong>${p.eventDate}</div>
+          
+          <div class="info-group"><strong>Horário</strong>${p.eventTime || 'Não informado'}</div>
+          <div class="info-group"><strong>Forma de Pagto.</strong>${p.paymentMethod || 'Não informada'}</div>
+          
           <div class="info-group"><strong>Total</strong>R$ ${p.totalPrice},00</div>
           <div class="info-group" style="grid-column: 1 / -1;"><strong>Endereço</strong>${p.address}</div>
         </div>
@@ -304,7 +310,8 @@ onSnapshot(q, (snapshot) => {
         </div>
 
         <div class="actions">
-          <button class="btn-pendente" onclick="window.changeStatus('${id}', 'pendente')" ${p.status === 'pendente' ? 'style="opacity:0.3; pointer-events:none;"' : ''}>Marcar Pendente</button>
+          <button class="btn-delete" onclick="window.deleteOrder('${id}')">Apagar Pedido</button>
+          <button class="btn-pendente" onclick="window.changeStatus('${id}', 'pendente')" ${p.status === 'pendente' ? 'style="opacity:0.3; pointer-events:none;"' : ''}>Pendente</button>
           <button class="btn-cancel" onclick="window.changeStatus('${id}', 'cancelado')" ${p.status === 'cancelado' ? 'style="opacity:0.3; pointer-events:none;"' : ''}>Cancelar</button>
           <button class="btn-confirm" onclick="window.changeStatus('${id}', 'confirmado')" ${p.status === 'confirmado' ? 'style="opacity:0.3; pointer-events:none;"' : ''}>Confirmar Reserva</button>
         </div>
@@ -319,15 +326,27 @@ onSnapshot(q, (snapshot) => {
   console.error("Erro ao escutar dados:", error);
 });
 
-// Função que atualiza o banco de dados
 window.changeStatus = async (docId, newStatus) => {
-  if(!confirm(`Tem certeza que deseja marcar este pedido como ${newStatus.toUpperCase()}? O cliente verá isso no site dele.`)) return;
+  if(!confirm(`Tem certeza que deseja marcar este pedido como ${newStatus.toUpperCase()}?`)) return;
   
   try {
     const orderRef = doc(db, "pedidos", docId);
     await updateDoc(orderRef, { status: newStatus });
   } catch(e) {
     alert("Erro ao atualizar o status. Verifique as permissões do Firebase.");
+    console.error(e);
+  }
+}
+
+// Nova função para apagar o pedido
+window.deleteOrder = async (docId) => {
+  if(!confirm(`Tem certeza absoluta que deseja APAGAR este pedido permanentemente? Essa ação não pode ser desfeita.`)) return;
+  
+  try {
+    const orderRef = doc(db, "pedidos", docId);
+    await deleteDoc(orderRef);
+  } catch(e) {
+    alert("Erro ao apagar o pedido. Verifique as permissões do Firebase (regras do Firestore).");
     console.error(e);
   }
 }
