@@ -80,11 +80,10 @@ body {
 .nav-btn.orders { border-color: rgba(16, 185, 129, 0.3); color: #6ee7b7; display: none; }
 .nav-btn.logout { border-color: rgba(239, 68, 68, 0.3); display: none; padding: 8px 12px; }
 
-/* AJUSTE PARA OS ÍCONES SVG */
 .nav-icon { display: flex; align-items: center; justify-content: center; }
 .nav-icon svg { width: 18px; height: 18px; }
 
-/* MODAIS COM DESIGN MELHORADO (GLASSMORPHISM) */
+/* MODAIS (GLASSMORPHISM) */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px); z-index: 200; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
 .modal-overlay.active { opacity: 1; pointer-events: all; }
 
@@ -118,15 +117,31 @@ body {
 .badge.pink { color: #f472b6; border-color: rgba(244, 114, 182, 0.15); }
 .badge.gold { color: #fbbf24; border-color: rgba(251, 191, 36, 0.15); }
 
-/* CONTROLS & TABS */
-.controls-container { max-width: 600px; margin: 0 auto 40px; display: flex; flex-direction: column; gap: 16px; }
-.search-wrapper input { width: 100%; padding: 14px 18px; border-radius: 14px; border: 1px solid var(--stroke); background: rgba(255, 255, 255, 0.02); color: #fff; font-size: 0.95rem; outline: none; transition: all 0.25s ease; }
-.search-wrapper input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15); background: rgba(255, 255, 255, 0.05); }
-.tabs { display: flex; flex-wrap: wrap; gap: 6px; background: rgba(255, 255, 255, 0.01); padding: 4px; border-radius: 12px; border: 1px solid var(--stroke); }
-.tab-btn { flex: 1; padding: 10px; border: none; background: transparent; color: var(--text-muted); font-weight: 600; font-size: 0.85rem; cursor: pointer; border-radius: 8px; transition: all 0.2s ease; text-align: center; white-space: nowrap; }
-.tab-btn:hover { color: #fff; }
-.tab-btn.active { background: rgba(255, 255, 255, 0.06); color: #fff; }
-.tab-btn.active[data-type="combo"] { background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(168, 85, 247, 0.15)); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.2); }
+/* CONTROLS & TABS (ATUALIZADO) */
+.controls-container { max-width: 700px; margin: 0 auto 40px; display: flex; flex-direction: column; gap: 20px; }
+.search-wrapper input { width: 100%; padding: 16px 20px; border-radius: 16px; border: 1px solid var(--stroke); background: rgba(255, 255, 255, 0.02); color: #fff; font-size: 1rem; outline: none; transition: all 0.25s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+.search-wrapper input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15), 0 4px 20px rgba(0,0,0,0.4); background: rgba(255, 255, 255, 0.05); }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; background: rgba(255, 255, 255, 0.02); padding: 8px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5); }
+.tab-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 16px; border: 1px solid transparent; background: transparent; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; cursor: pointer; border-radius: 12px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); text-align: center; white-space: nowrap; }
+.tab-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.04); }
+
+/* Estado Ativo: Todos / Brinquedos */
+.tab-btn.active { 
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover)); 
+  color: #fff; 
+  border: 1px solid rgba(255,255,255,0.1); 
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Estado Ativo: Combos Especiais */
+.tab-btn.active[data-type="combo"] { 
+  background: linear-gradient(135deg, var(--secondary), var(--purple)); 
+  color: #fff; 
+  border: 1px solid rgba(236, 72, 153, 0.2);
+  box-shadow: 0 8px 20px rgba(236, 72, 153, 0.4);
+}
 
 /* MAIN CONTENT GRID */
 .container { width: 90%; max-width: 1200px; margin: 0 auto; flex: 1; }
@@ -158,7 +173,7 @@ body {
 .card.type-combo .btn { background: rgba(236, 72, 153, 0.1); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.15); }
 .card.type-combo .btn:hover { background: linear-gradient(135deg, var(--secondary), var(--purple)); color: white; border-color: transparent; }
 
-/* PAINEL LATERAL (CARRINHO) COM DESIGN MELHORADO */
+/* PAINEL LATERAL (CARRINHO) */
 .panel { 
   position: fixed; top: 0; right: -460px; width: 100%; max-width: 440px; height: 100%; 
   background: rgba(4, 6, 17, 0.85); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
@@ -191,13 +206,12 @@ body {
 .total-box { border-top: 1px solid var(--stroke); padding-top: 14px; margin-bottom: 16px; display: flex; justify-content: space-between; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; }
 .total-box span:last-child { color: var(--accent); }
 
-/* INPUTS */
+/* INPUTS E BOTÕES */
 .form-group { margin-bottom: 10px; position: relative; flex-shrink: 0;}
 input { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--stroke); background: rgba(0, 0, 0, 0.2); color: #fff; font-size: 0.9rem; outline: none; transition: border 0.2s; }
 input:focus { border-color: var(--primary); background: rgba(255, 255, 255, 0.03); }
 input.invalid { border-color: var(--danger); background: rgba(239, 68, 68, 0.05); }
 
-/* BOTOES */
 .btn-primary { width: 100%; padding: 14px; border: none; border-radius: 12px; background: linear-gradient(135deg, var(--primary), var(--purple)); color: white; font-weight: 700; font-size: 0.95rem; cursor: pointer; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); transition: all 0.2s; flex-shrink: 0; }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4); }
 
@@ -208,10 +222,8 @@ input.invalid { border-color: var(--danger); background: rgba(239, 68, 68, 0.05)
 #count { background: rgba(255, 255, 255, 0.25); padding: 2px 8px; border-radius: 20px; font-size: 0.8rem; }
 .cart-text-mobile { display: none; }
 
-/* RODAPÉ */
+/* RODAPÉ E ANIMAÇÕES */
 .footer { border-top: 1px solid var(--stroke); padding: 30px 20px; text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-top: auto; }
-
-/* ANIMAÇÕES */
 .fade { animation: fade 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
 @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes buttonPulse { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
@@ -222,9 +234,7 @@ input.invalid { border-color: var(--danger); background: rgba(239, 68, 68, 0.05)
 .status-confirmado { color: #10b981; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.2); }
 .status-cancelado { color: #ef4444; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.2); }
 
-/* =========================================
-   MEDIA QUERIES PARA CELULAR (MOBILE)
-   ========================================= */
+/* MEDIA QUERIES PARA CELULAR (MOBILE) */
 @media (max-width: 640px) { 
   :root { --nav-height: 60px; }
 
@@ -235,6 +245,9 @@ input.invalid { border-color: var(--danger); background: rgba(239, 68, 68, 0.05)
   .nav-actions { gap: 6px; }
   .nav-btn { padding: 8px 10px; font-size: 1.1rem; gap: 4px; justify-content: center; }
   .nav-btn.logout { padding: 8px; }
+
+  /* Abas mobile em 100% */
+  .tab-btn { padding: 12px 10px; font-size: 0.85rem; flex: 1 1 100%; }
 
   .grid { grid-template-columns: 1fr; gap: 16px; padding-bottom: 90px; }
   .card-img-wrapper { aspect-ratio: auto; height: 130px; }
@@ -366,9 +379,18 @@ input.invalid { border-color: var(--danger); background: rgba(239, 68, 68, 0.05)
     </div>
 
     <div class="tabs">
-      <button class="tab-btn active" data-type="all" onclick="window.filterCategory('all')">Todos os Catálogos</button>
-      <button class="tab-btn" data-type="brinquedo" onclick="window.filterCategory('brinquedo')">Brinquedos</button>
-      <button class="tab-btn" data-type="combo" onclick="window.filterCategory('combo')">💎 Combos Especiais</button>
+      <button class="tab-btn active" data-type="all" onclick="window.filterCategory('all')">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        Todos os Catálogos
+      </button>
+      <button class="tab-btn" data-type="brinquedo" onclick="window.filterCategory('brinquedo')">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+        Brinquedos
+      </button>
+      <button class="tab-btn" data-type="combo" onclick="window.filterCategory('combo')">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        Combos Especiais
+      </button>
     </div>
   </div>
 
@@ -461,7 +483,7 @@ function manageBodyScroll() {
 }
 
 // -------------------------------------------------------------------
-// SISTEMA DE IDENTIFICAÇÃO LOCAL (MOCK LOGIN) E LISTAGEM DE PEDIDOS
+// SISTEMA DE IDENTIFICAÇÃO LOCAL E LISTAGEM DE PEDIDOS
 // -------------------------------------------------------------------
 let currentUser = null;
 
