@@ -182,7 +182,7 @@ body {
 /* SEÇÕES DO CARRINHO */
 .panel-scroll-content { flex-grow: 1; overflow-y: auto; padding-right: 4px; display: flex; flex-direction: column; }
 .items-container { flex-grow: 1; }
-#cart-checkout-section { display: none; } /* Oculto inicialmente */
+#cart-checkout-section { display: none; }
 
 .item { background: rgba(30, 41, 59, 0.5); border: 1px solid var(--stroke); padding: 18px; border-radius: 16px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
 .item:hover { border-color: rgba(255,255,255,0.2); box-shadow: 0 8px 20px rgba(0,0,0,0.3); background: rgba(30, 41, 59, 0.8); }
@@ -202,16 +202,28 @@ body {
 /* INPUTS E BOTÕES REFINADOS */
 .form-group { margin-bottom: 16px; position: relative; flex-shrink: 0;}
 .form-section-title { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: block; }
-input { width: 100%; padding: 16px 20px; border-radius: 14px; border: 1px solid var(--stroke); background: rgba(2, 6, 23, 0.5); color: #fff; font-size: 1rem; font-weight: 500; outline: none; transition: all 0.3s ease; }
-input:focus { border-color: var(--primary); background: rgba(15, 23, 42, 0.8); box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15); }
+
+input, select.form-select { 
+  width: 100%; padding: 16px 20px; border-radius: 14px; border: 1px solid var(--stroke); 
+  background: rgba(2, 6, 23, 0.5); color: #fff; font-size: 1rem; font-weight: 500; 
+  outline: none; transition: all 0.3s ease; 
+}
+select.form-select {
+  appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 16px center;
+}
+select.form-select option { background: var(--bg); color: #fff; }
+
+input:focus, select.form-select:focus { border-color: var(--primary); background: rgba(15, 23, 42, 0.8); box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15); }
 input::placeholder { color: #64748b; font-weight: 400; }
-input.invalid { border-color: var(--danger); background: rgba(239, 68, 68, 0.05); box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1); }
+input.invalid, select.form-select.invalid { border-color: var(--danger); background: rgba(239, 68, 68, 0.05); box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1); }
 input:disabled, input[readonly] { opacity: 0.7; cursor: not-allowed; background: rgba(2, 6, 23, 0.8); border-style: dashed; }
 
 .btn-primary { width: 100%; padding: 18px; border: none; border-radius: 14px; background: linear-gradient(135deg, var(--primary), #818cf8); color: white; font-weight: 800; font-size: 1.05rem; letter-spacing: 0.02em; cursor: pointer; transition: all 0.3s ease; flex-shrink: 0; box-shadow: var(--primary-glow); text-align: center; }
 .btn-primary:hover { background: linear-gradient(135deg, var(--primary-hover), var(--primary)); transform: translateY(-2px); box-shadow: 0 10px 25px rgba(99, 102, 241, 0.6); }
 
-/* NOVO ESTILO: BOTÃO SECUNDÁRIO PARA VOLTAR AO CATÁLOGO */
+/* BOTÃO SECUNDÁRIO */
 .btn-secondary { width: 100%; padding: 18px; border: 1px solid var(--stroke); border-radius: 14px; background: rgba(255, 255, 255, 0.05); color: var(--text-muted); font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; margin-top: 12px; text-align: center; backdrop-filter: blur(4px); }
 .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.3); color: #fff; }
 
@@ -404,7 +416,8 @@ input:disabled, input[readonly] { opacity: 0.7; cursor: not-allowed; background:
         <span class="total-box-value" id="total-price">R$ 0,00</span>
       </div>
       
-      <button class="btn-primary" id="btn-continue-checkout" onclick="window.switchToCheckout()" style="margin-bottom: 20px;">Avançar para Agendamento</button>
+      <button class="btn-primary" id="btn-continue-checkout" onclick="window.switchToCheckout()">Avançar para Agendamento</button>
+      <button class="btn-secondary" id="btn-continue-reserving" onclick="window.continueReserving()" style="margin-bottom: 20px;">Continuar Reservando</button>
     </div>
 
     <div id="cart-checkout-section" class="fade">
@@ -434,9 +447,17 @@ input:disabled, input[readonly] { opacity: 0.7; cursor: not-allowed; background:
         <input id="date" type="date" oninput="this.classList.remove('invalid')">
       </div>
 
+      <div class="form-group">
+        <span class="form-section-title">Forma de Pagamento</span>
+        <select id="payment" class="form-select" onchange="this.classList.remove('invalid')">
+          <option value="" disabled selected>Selecione uma opção...</option>
+          <option value="Pix">Pix (5% de desconto)</option>
+          <option value="Cartão de Crédito">Cartão de Crédito (até 3x no local)</option>
+          <option value="Dinheiro">Dinheiro (no local)</option>
+        </select>
+      </div>
+
       <button class="btn-primary" id="btn-submit">Confirmar Reserva</button>
-      
-      <button class="btn-secondary" onclick="window.continueReserving()">Continuar Reservando</button>
     </div>
   </div>
 </aside>
@@ -497,11 +518,11 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const products = [
-  { id: 1, name: "Pula-Pula Premium", price: 350, type: "brinquedo", desc: "Estrutura reforçada de 3x3m com rede de proteção de alta segurança. Higienizado após cada uso.", img: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=600" },
+  { id: 1, name: "Pula-Pula Premium", price: 350, type: "brinquedo", desc: "Estrutura reforçada de 3x3m com rede de proteção de alta segurança. Higienizado após cada uso.", img: "https://scontent.xx.fbcdn.net/v/t1.15752-9/716189897_2057036084883933_8956294320075476507_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=9f807c&_nc_ohc=TlsfB9VcIQgQ7kNvwELgem8&_nc_oc=Adqm0GKJUmGrkO-xNT2tvOphoQkTzHwLIaqfx2TladzfPQJKZ0wyHZgd_6b-dvycv9K604EXDoo9rzSbwi0L8gff&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.xx&oh=03_Q7cD5gGolG0bwmGbNnOm4Vm7PwCbOAncab5DK5vEfnn4GJEG-g&oe=6A47FBF7" },
   { id: 2, name: "Fliperama Arcade", price: 500, type: "brinquedo", desc: "Máquina arcade moderna com mais de 1000 jogos retrô clássicos e tela HD.", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=600" },
-  { id: 3, name: "Piscina de Bolinhas", price: 280, type: "brinquedo", desc: "Piscina gigante de 2x2m contendo mais de 3000 bolinhas antialérgicas e macias.", img: "https://images.unsplash.com/photo-1545642412-ea793f7c46a6?auto=format&fit=crop&q=80&w=600" },
-  { id: 4, name: "Touro Mecânico", price: 900, type: "brinquedo", desc: "O clássico das festas! Acompanha colchão inflável de amortecimento e operador treinado.", img: "https://images.unsplash.com/photo-1517409249764-7fc430c51b9e?auto=format&fit=crop&q=80&w=600" },
-  { id: 5, name: "Combo Kids Play", price: 530, type: "combo", desc: "A diversão completa: Pula-Pula + Piscina de bolinhas, ideal para até 15 crianças.", img: "https://images.unsplash.com/photo-1628148906969-58b7309990de?auto=format&fit=crop&q=80&w=600" },
+  { id: 3, name: "Piscina de Bolinhas", price: 280, type: "brinquedo", desc: "Piscina gigante de 2x2m contendo mais de 3000 bolinhas antialérgicas e macias.", img: "https://scontent.xx.fbcdn.net/v/t1.15752-9/712409002_1941345143241381_3493804539244207591_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=104&ccb=1-7&_nc_sid=9f807c&_nc_ohc=7Y6hGxVopTcQ7kNvwFGlmaZ&_nc_oc=Ado1bRl17NuZuDCDu8z-kfyKjFhOXunK_hJLuZys_Ja6YzLP42GYEFlgIVvKZhrobgDbnzg8NaMSCLp7R_0L1IyR&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.xx&oh=03_Q7cD5gF_Th5oTmlfmhaGEYva7LtBIH6SIHvwkWooYj4rZIQ2nQ&oe=6A47FA4F" },
+  { id: 4, name: "Touro Mecânico", price: 900, type: "brinquedo", desc: "O clássico das festas! Acompanha colchão inflável de amortecimento e operador treinado.", img: "https://scontent.xx.fbcdn.net/v/t1.15752-9/504151498_1046093783843478_5467765605138162408_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=104&ccb=1-7&_nc_sid=9f807c&_nc_ohc=fJa2ttjtdHUQ7kNvwEzIwkX&_nc_oc=Adox0MWLzPYJIfBLWh5ZZoAQPVUaDCkJVpCJK6cVMj_x4QClk_8XWZ39wvEPsICbngVo9BEqWBigdbcvgMfxgteD&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.xx&oh=03_Q7cD5gEmVWN31YOct97euPMs3H0eJJd38Sl4JFW3Fjy5AonXMw&oe=6A47E158" },
+  { id: 5, name: "Combo Kids Play", price: 530, type: "combo", desc: "A diversão completa: Pula-Pula + Piscina de bolinhas, ideal para até 15 crianças.", img: "https://scontent.xx.fbcdn.net/v/t1.15752-9/714570527_1911784456191900_8590917909523383816_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=104&ccb=1-7&_nc_sid=9f807c&_nc_ohc=6_3iaLQVdyMQ7kNvwGqsMST&_nc_oc=AdrllQlafz8tJ7TCcJRfgywPuBRKmZaG8iA3UL8hWRVAK-ei421gUx_i5He4d-l1TtLtfrQBq8zECAQdjVX-Sk-d&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.xx&oh=03_Q7cD5gFQ3QQUNxrLGg-Jw12uCb-5YntZUErS0FUS-04fIRQwwQ&oe=6A47EC3F" },
   { id: 6, name: "Combo Gamer", price: 1250, type: "combo", desc: "O pacote definitivo: 2 Fliperamas + Óculos VR + Kit de Iluminação Neon para a festa.", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=600" }
 ];
 
@@ -623,6 +644,7 @@ window.openOrdersModal = async function() {
       }
 
       const itemsHtml = o.items.map(i => `<div style="font-size: 0.95rem; color: var(--text-muted); margin-top: 8px; display: flex; justify-content: space-between;"><span>• ${i.name}</span> <strong style="color:#fff">x${i.quantity}</strong></div>`).join('');
+      const orderTotal = o.totalPrice ? parseFloat(o.totalPrice).toFixed(2).replace('.', ',') : "0,00";
 
       return `
         <div style="border: 1px solid var(--stroke); padding: 24px; border-radius: 20px; background: rgba(30, 41, 59, 0.5); box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
@@ -635,7 +657,8 @@ window.openOrdersModal = async function() {
           </div>
           <div style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px;">
             <span style="display: flex; justify-content: space-between;">Data do Evento: <strong style="color: #fff;">${o.eventDate}</strong></span>
-            <span style="display: flex; justify-content: space-between; align-items: center;">Valor Total: <strong style="color: var(--primary); font-size: 1.2rem;">R$ ${o.totalPrice},00</strong></span>
+            <span style="display: flex; justify-content: space-between; align-items: center;">Valor Total: <strong style="color: var(--primary); font-size: 1.2rem;">R$ ${orderTotal}</strong></span>
+            <span style="display: flex; justify-content: space-between;">Pagamento: <strong style="color: #fff;">${o.paymentMethod || 'Não informado'}</strong></span>
           </div>
           <div style="background: rgba(2, 6, 23, 0.4); padding: 20px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05);">
             <div style="font-size: 0.85rem; color: #fff; margin-bottom: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;">Itens do Pedido</div>
@@ -781,11 +804,10 @@ window.switchToItems = function() {
   document.getElementById("cart-items-section").style.display = "block";
 }
 
-// NOVA FUNÇÃO: Voltar ao grid de itens a partir da tela de checkout
+// Voltar ao grid de itens
 window.continueReserving = function() {
   window.toggleCart(); // Fecha a janela do carrinho
   window.switchToItems(); // Retorna o modal do carrinho para a visão inicial
-  // Opcional: Rola a tela até o topo da área de produtos
   document.querySelector('.controls-container').scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -798,6 +820,7 @@ window.update = function() {
   box.innerHTML = "";
 
   const continueBtn = document.getElementById("btn-continue-checkout");
+  const continueReservingBtn = document.getElementById("btn-continue-reserving");
 
   if(cart.length === 0) {
     box.innerHTML = `<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 260px; color: var(--text-muted); opacity: 0.7;">
@@ -806,10 +829,12 @@ window.update = function() {
     </div>`;
     document.getElementById("total-price").innerText = "R$ 0,00";
     if (continueBtn) continueBtn.style.display = "none";
+    if (continueReservingBtn) continueReservingBtn.style.display = "none";
     return;
   }
 
   if (continueBtn) continueBtn.style.display = "block";
+  if (continueReservingBtn) continueReservingBtn.style.display = "block";
 
   let totalValue = 0;
   cart.forEach((item, index) => {
@@ -837,6 +862,7 @@ async function send() {
   const numberInput = document.getElementById("number");
   const addressInput = document.getElementById("address");
   const dateInput = document.getElementById("date");
+  const paymentInput = document.getElementById("payment");
   
   if(!currentUser) {
     window.toggleCart(); 
@@ -845,7 +871,7 @@ async function send() {
   }
 
   let hasError = false;
-  [nameInput, phoneInput, cepInput, numberInput, addressInput, dateInput].forEach(input => {
+  [nameInput, phoneInput, cepInput, numberInput, addressInput, dateInput, paymentInput].forEach(input => {
     if(!input.value.trim()) { input.classList.add("invalid"); hasError = true; }
   });
   
@@ -854,6 +880,13 @@ async function send() {
 
   const formattedDate = dateInput.value.split('-').reverse().join('/');
   let totalValue = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+  
+  // Lógica de Desconto para Pix
+  let finalPrice = totalValue;
+  if(paymentInput.value === "Pix") {
+    finalPrice = totalValue * 0.95; // 5% de desconto
+  }
+
   const fullAddress = `${addressInput.value.trim()}, Nº ${numberInput.value.trim()} - CEP: ${cepInput.value.trim()}`;
 
   const pedidoData = {
@@ -862,7 +895,8 @@ async function send() {
     phone: phoneInput.value.trim(),
     address: fullAddress,
     eventDate: formattedDate,
-    totalPrice: totalValue,
+    totalPrice: finalPrice,
+    paymentMethod: paymentInput.value,
     status: "pendente",
     createdAt: serverTimestamp(),
     items: cart.map(item => ({ name: item.product.name, quantity: item.quantity }))
@@ -882,6 +916,7 @@ async function send() {
     
     window.clearCart();
     dateInput.value = "";
+    paymentInput.value = "";
     
   } catch (error) {
     console.error("Erro no envio:", error);
