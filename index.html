@@ -345,8 +345,8 @@ input:disabled, input[readonly] { opacity: 0.7; cursor: not-allowed; background:
       <p style="font-family: monospace; color: var(--primary); font-size: 1.8rem; font-weight: 800; letter-spacing: 0.05em; text-shadow: var(--primary-glow);" id="success-id">#FP-000</p>
     </div>
 
-    <button class="btn-primary" onclick="openOrdersFromSuccess()">Acompanhar Status</button>
-    <button style="width: 100%; margin-top: 16px; background: transparent; border: 1px solid var(--stroke); padding: 16px; border-radius: 14px; color: var(--text-muted); cursor: pointer; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#fff'; this.style.borderColor='rgba(255,255,255,0.4)'; this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.color='var(--text-muted)'; this.style.borderColor='var(--stroke)'; this.style.background='transparent'" onclick="closeSuccessModal()">Voltar ao Site</button>
+    <button class="btn-primary" onclick="window.openOrdersFromSuccess()">Acompanhar Status</button>
+    <button style="width: 100%; margin-top: 16px; background: transparent; border: 1px solid var(--stroke); padding: 16px; border-radius: 14px; color: var(--text-muted); cursor: pointer; font-weight: 700; transition: 0.3s;" onmouseover="this.style.color='#fff'; this.style.borderColor='rgba(255,255,255,0.4)'; this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.color='var(--text-muted)'; this.style.borderColor='var(--stroke)'; this.style.background='transparent'" onclick="window.closeSuccessModal()">Voltar ao Site</button>
   </div>
 </div>
 
@@ -624,9 +624,10 @@ window.closeOrdersModal = function() {
   manageBodyScroll();
 }
 
+/* CORREÇÃO AQUI: Passando a chamar as funções no escopo global (window) */
 window.openOrdersFromSuccess = function() {
-  closeSuccessModal();
-  openOrdersModal();
+  window.closeSuccessModal();
+  window.openOrdersModal();
 }
 
 window.setupDatePicker = function() {
@@ -826,7 +827,7 @@ async function send() {
     
   } catch (error) {
     console.error("Erro no envio:", error);
-    alert("Ocorreu um problema ao registrar seu pedido. Verifique sua conexão.");
+    alert("Ocorreu um problem ao registrar seu pedido. Verifique sua conexão.");
   } finally {
     document.getElementById("btn-submit").innerText = "Confirmar Reserva";
     document.getElementById("btn-submit").disabled = false;
@@ -834,6 +835,11 @@ async function send() {
 }
 
 document.getElementById("btn-submit").onclick = send;
+
+window.closeSuccessModal = function() {
+  document.getElementById("success-modal").classList.remove("active");
+  manageBodyScroll();
+}
 
 // Inicializações
 window.setupDatePicker();
