@@ -93,7 +93,7 @@
         .hero-media img { width: 100%; max-width: 500px; border-radius: var(--radius-xl); border: 10px solid #ffffff; box-shadow: var(--shadow-md); object-fit: cover; aspect-ratio: 4/5; animation: float 6s ease-in-out infinite; }
 
         /* =========================
-           BENTO GRID SELECTION
+           BENTO GRID SELECTION & HEADERS
         ========================= */
         .section-padding { padding: 100px 8%; }
         .center-header { text-align: center; margin-bottom: 60px; }
@@ -284,19 +284,23 @@
             .filter-btn { padding: 10px 16px; font-size: 14px; flex-grow: 1; text-align: center;}
             
             .grid-holder.mode-slider { padding: 10px 5% 30px; gap: 16px; }
-            /* Card ocupa quase a tela toda, mas deixa um pedaço do próximo visível */
             .grid-holder.mode-slider .product-card { flex: 0 0 85%; } 
             .grid-holder.mode-grid { padding: 0 5%; grid-template-columns: 1fr; gap: 24px;}
             
             .card-img { height: 220px; }
             .card-info { padding: 20px 16px; }
-            .card-actions { grid-template-columns: 1fr; gap: 8px; } /* Botões em coluna */
+            .card-actions { grid-template-columns: 1fr; gap: 8px; } 
             
             /* Formulário Mobile */
-            .form-card { padding: 30px 20px; border-radius: 20px; }
-            .toy-checkbox span { padding: 12px 16px; font-size: 15px;}
-            .total-box { padding: 20px; flex-direction: column; gap: 12px; text-align: center;}
-            .total-value { font-size: 32px; }
+            .form-card { padding: 30px 16px; border-radius: 20px; gap: 24px; border: none; box-shadow: none; background: transparent;} 
+            .field label { font-size: 16px; }
+            
+            /* Checkboxes de Brinquedos em Coluna no Mobile */
+            .toy-selection-grid { flex-direction: column; gap: 12px; } 
+            .toy-checkbox span { padding: 18px 20px; font-size: 16px;} 
+            
+            .total-box { padding: 24px 20px; flex-direction: column; gap: 16px; text-align: center;}
+            .total-value { font-size: 36px; }
             
             /* Modais Mobile */
             .modal-overlay { padding: 16px; }
@@ -313,18 +317,18 @@
 
             /* Footer Mobile */
             .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center;}
-            footer { padding: 60px 5% 100px; } /* Espaço extra embaixo para o botão do whats */
+            footer { padding: 60px 5% 100px; } 
         }
     </style>
 </head>
 <body>
 
-    <a href="https://wa.me/5511975448113" class="whatsapp-widget" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+    <a href="https://wa.me/5511930862733" class="whatsapp-widget" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
 
     <div class="promo-bar"><i class="fa-solid fa-gift"></i> Alugue 2 e ganhe <span>Frete Grátis</span> na região!</div>
 
     <header id="header">
-        <a href="#" class="logo"><i class="fa-solid fa-face-smile-wink"></i> Val<span>Brinquedos</span></a>
+        <a href="#" class="logo"><i class="fa-solid fa-face-smile-wink"></i> Festa<span>Play</span></a>
         <div class="menu-trigger" id="menu-trigger"><i class="fa-solid fa-bars"></i></div>
         <nav class="nav-links" id="nav-links">
             <a href="#inicio">Início</a>
@@ -345,33 +349,6 @@
         </div>
         <div class="hero-media">
             <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=600&auto=format&fit=crop" alt="Crianças brincando em festa">
-        </div>
-    </section>
-
-    <section class="section-padding" id="diferenciais">
-        <div class="center-header">
-            <span class="tag">Por que nós?</span>
-            <h2>Tranquilidade para os pais, alegria para os filhos!</h2>
-        </div>
-        
-        <div class="bento-grid">
-            <div class="bento-item wide">
-                <div class="bento-icon icon-blue"><i class="fa-solid fa-shield-cat"></i></div>
-                <div>
-                    <h3>100% Seguros & Limpos</h3>
-                    <p>Limpamos e desinfetamos cada brinquedo. Suas crianças brincam em um ambiente totalmente livre de riscos e bactérias.</p>
-                </div>
-            </div>
-            <div class="bento-item">
-                <div class="bento-icon icon-orange"><i class="fa-solid fa-truck-fast"></i></div>
-                <h3>Montagem Rápida</h3>
-                <p>Nossa equipe chega cedo, monta tudo e deixa pronto antes do primeiro convidado chegar.</p>
-            </div>
-            <div class="bento-item">
-                <div class="bento-icon icon-pink"><i class="fa-solid fa-palette"></i></div>
-                <h3>Cores e Novidades</h3>
-                <p>Nossa frota é nova e colorida. Esqueça aqueles brinquedos desbotados e cheios de remendos!</p>
-            </div>
         </div>
     </section>
 
@@ -450,6 +427,33 @@
 
         <div class="load-more-box">
             <button class="btn-sec" id="btn-load-more" style="width: 85%; max-width: 300px;">Ver Mais Brinquedos</button>
+        </div>
+    </section>
+
+    <section class="section-padding" id="diferenciais">
+        <div class="center-header">
+            <span class="tag">Por que nós?</span>
+            <h2>Tranquilidade para os pais, alegria para os filhos!</h2>
+        </div>
+        
+        <div class="bento-grid">
+            <div class="bento-item wide">
+                <div class="bento-icon icon-blue"><i class="fa-solid fa-shield-cat"></i></div>
+                <div>
+                    <h3>100% Seguros & Limpos</h3>
+                    <p>Limpamos e desinfetamos cada brinquedo. Suas crianças brincam em um ambiente totalmente livre de riscos e bactérias.</p>
+                </div>
+            </div>
+            <div class="bento-item">
+                <div class="bento-icon icon-orange"><i class="fa-solid fa-truck-fast"></i></div>
+                <h3>Montagem Rápida</h3>
+                <p>Nossa equipe chega cedo, monta tudo e deixa pronto antes do primeiro convidado chegar.</p>
+            </div>
+            <div class="bento-item">
+                <div class="bento-icon icon-pink"><i class="fa-solid fa-palette"></i></div>
+                <h3>Cores e Novidades</h3>
+                <p>Nossa frota é nova e colorida. Esqueça aqueles brinquedos desbotados e cheios de remendos!</p>
+            </div>
         </div>
     </section>
 
@@ -586,17 +590,17 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <a href="#" class="logo" style="color:#fff; justify-content: center;"><i class="fa-solid fa-face-smile-wink"></i> Val<span>Brinquedos</span></a>
+                <a href="#" class="logo" style="color:#fff; justify-content: center;"><i class="fa-solid fa-face-smile-wink"></i> Festa<span>play</span></a>
                 <p style="margin-top: 16px; line-height: 1.6;">Alegria e segurança para sua festa com infraestrutura de alto padrão e brinquedos super coloridos.</p>
             </div>
             <div class="footer-col">
                 <h3>Atendimento</h3>
-                <p style="color:var(--accent); margin-bottom:8px; font-weight:900; font-size: 20px;">(11) 97544-8113</p>
-                <p>contato@valbrinquedos.com.br</p>
+                <p style="color:var(--accent); margin-bottom:8px; font-weight:900; font-size: 20px;">(11) 93086-2733</p>
+                <p>guuholiveira2202@gmail.com</p>
             </div>
         </div>
         <div style="text-align: center; border-top: 2px solid #1e293b; padding-top: 24px; font-weight: 600; font-size: 14px;">
-            <p>Copyright © 2026 Val Brinquedos. Todos os direitos reservados.</p>
+            <p>Copyright © 2026 festa play. Todos os direitos reservados.</p>
         </div>
     </footer>
 
@@ -618,7 +622,6 @@
         
         menuTrigger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            // Troca o ícone de hambúrguer para X
             if(navLinks.classList.contains('active')) {
                 menuTrigger.innerHTML = '<i class="fa-solid fa-xmark"></i>';
             } else {
@@ -626,7 +629,6 @@
             }
         });
 
-        // Fechar menu ao clicar em um link no mobile
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
@@ -634,7 +636,6 @@
             });
         });
 
-        // Efeito de sombra no header ao dar scroll
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => { header.classList.toggle('compact', window.scrollY > 40); });
 
@@ -715,7 +716,7 @@
             selecionarEIrParaReserva(currentModalToy);
         });
 
-        // Lógica de Área de Cliente simplificada do seu script
+        // Lógica de Área de Cliente simplificada
         let currentUser = JSON.parse(localStorage.getItem('valCliente')) || null;
         let unsubscribeOrders = null; 
         function limparNumero(num) { return num.replace(/\D/g, ""); }
@@ -724,7 +725,7 @@
         const modalCliente = document.getElementById('modal-cliente');
         
         btnUserArea.addEventListener('click', () => {
-            navLinks.classList.remove('active'); // Fecha menu mobile se aberto
+            navLinks.classList.remove('active');
             menuTrigger.innerHTML = '<i class="fa-solid fa-bars"></i>';
             atualizarInterfaceCliente();
             modalCliente.classList.add('active');
