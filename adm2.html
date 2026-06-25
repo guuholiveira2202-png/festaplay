@@ -1,356 +1,385 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Painel Admin | FestaPlay</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-  
-  :root { 
-    --bg: #121214; 
-    --surface: #202024; 
-    --surface-hover: #29292e;
-    --primary: #8b5cf6; 
-    --primary-hover: #7c3aed;
-    --text: #e1e1e6; 
-    --text-title: #ffffff;
-    --muted: #a8a8b3; 
-    --border: #323238; 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin | Val Brinquedos</title>
     
-    /* Cores de Status adaptadas para Dark Mode */
-    --success: #04d361;
-    --success-bg: rgba(4, 211, 97, 0.15);
-    --warning: #ffcd1e;
-    --warning-bg: rgba(255, 205, 30, 0.15);
-    --danger: #f75a68;
-    --danger-bg: rgba(247, 90, 104, 0.15);
-  }
-  
-  * { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-    font-family: 'Inter', sans-serif; 
-  }
-  
-  body { 
-    background-color: var(--bg); 
-    color: var(--text); 
-    padding: 24px; 
-    -webkit-font-smoothing: antialiased;
-  }
-  
-  /* Cabeçalho */
-  .header { 
-    max-width: 1000px; 
-    margin: 0 auto 32px; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    background: var(--surface); 
-    padding: 20px 24px; 
-    border-radius: 16px; 
-    border: 1px solid var(--border);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2); 
-  }
-  
-  .header h1 { 
-    font-size: 1.5rem; 
-    color: var(--text-title); 
-    font-weight: 700;
-    letter-spacing: -0.5px;
-  }
-  
-  .container { 
-    max-width: 1000px; 
-    margin: 0 auto; 
-    display: grid; 
-    gap: 20px; 
-  }
-  
-  /* Cartões de Pedido */
-  .order-card { 
-    background: var(--surface); 
-    border: 1px solid var(--border); 
-    border-radius: 16px; 
-    padding: 24px; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
-    display: flex; 
-    flex-direction: column; 
-    gap: 16px; 
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .order-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-  }
-  
-  .order-header { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: flex-start; 
-    border-bottom: 1px solid var(--border); 
-    padding-bottom: 16px; 
-  }
-  
-  .order-id { 
-    font-size: 1.25rem; 
-    font-weight: 700; 
-    color: var(--text-title); 
-  }
-  
-  .order-date { 
-    font-size: 0.85rem; 
-    color: var(--muted); 
-    margin-top: 4px; 
-  }
-  
-  /* Grade de Informações */
-  .info-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-    gap: 16px; 
-    font-size: 0.95rem; 
-  }
-  
-  .info-group strong { 
-    display: block; 
-    color: var(--muted); 
-    font-size: 0.75rem; 
-    text-transform: uppercase; 
-    letter-spacing: 0.5px;
-    margin-bottom: 4px; 
-    font-weight: 600;
-  }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  .info-group a {
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.2s;
-  }
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
 
-  .info-group a:hover {
-    color: var(--primary-hover);
-  }
-  
-  /* Lista de Itens */
-  .items-list { 
-    background: #18181b; 
-    padding: 16px; 
-    border-radius: 12px; 
-    font-size: 0.9rem; 
-    border: 1px solid var(--border); 
-    line-height: 1.6;
-  }
-  
-  /* Ações / Botões */
-  .actions { 
-    display: flex; 
-    gap: 12px; 
-    margin-top: 8px; 
-    border-top: 1px solid var(--border); 
-    padding-top: 20px; 
-    justify-content: flex-end; 
-    flex-wrap: wrap; /* Adicionado para evitar quebra em telas menores */
-  }
-  
-  button { 
-    padding: 10px 18px; 
-    border-radius: 8px; 
-    border: none; 
-    font-weight: 600; 
-    font-size: 0.85rem; 
-    cursor: pointer; 
-    transition: all 0.2s; 
-  }
-  
-  button:active {
-    transform: scale(0.97);
-  }
-  
-  .btn-confirm { background: var(--success); color: #000; }
-  .btn-confirm:hover { background: #03b854; }
-  
-  .btn-cancel { background: var(--warning); color: #000; }
-  .btn-cancel:hover { background: #e6b81a; }
-  
-  .btn-pendente { background: var(--surface-hover); color: var(--text); border: 1px solid var(--border); }
-  .btn-pendente:hover { background: var(--border); }
+        :root {
+            --bg-admin: #09090b;
+            --surface-admin: #18181b;
+            --surface-card: #27272a;
+            --border-admin: rgba(255, 255, 255, 0.08);
+            --text-light: #f4f4f5;
+            --text-muted: #a1a1aa;
+            --primary: #6366f1;
+            
+            /* Status Colors */
+            --status-pending-bg: rgba(245, 158, 11, 0.15);
+            --status-pending-text: #fbbf24;
+            --status-done-bg: rgba(16, 185, 129, 0.15);
+            --status-done-text: #34d399;
+            --status-cancel-bg: rgba(239, 68, 68, 0.15);
+            --status-cancel-text: #f87171;
+            
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-  /* Novo botão de apagar */
-  .btn-delete { background: transparent; color: var(--danger); border: 1px solid var(--danger); }
-  .btn-delete:hover { background: var(--danger-bg); }
-  
-  /* Badges de Status */
-  .badge { 
-    padding: 6px 12px; 
-    border-radius: 20px; 
-    font-size: 0.75rem; 
-    font-weight: 700; 
-    text-transform: uppercase; 
-    letter-spacing: 0.5px;
-    border: 1px solid transparent;
-  }
-  
-  .badge.pendente { 
-    background: var(--warning-bg); 
-    color: var(--warning); 
-    border-color: rgba(255, 205, 30, 0.3);
-  }
-  
-  .badge.confirmado { 
-    background: var(--success-bg); 
-    color: var(--success); 
-    border-color: rgba(4, 211, 97, 0.3);
-  }
-  
-  .badge.cancelado { 
-    background: var(--danger-bg); 
-    color: var(--danger); 
-    border-color: rgba(247, 90, 104, 0.3);
-  }
+        body {
+            background-color: var(--bg-admin);
+            color: var(--text-light);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-  /* Responsividade */
-  @media (max-width: 600px) { 
-    .actions { flex-direction: column; } 
-    button { width: 100%; padding: 12px; } 
-    .header { flex-direction: column; gap: 12px; text-align: center; }
-  }
-</style>
+        /* SIDEBAR NAVIGATION */
+        aside {
+            width: 280px;
+            background-color: var(--surface-admin);
+            border-right: 1px solid var(--border-admin);
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .brand {
+            font-size: 20px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+        }
+        .brand span { color: #f43f5e; }
+
+        .menu-nav {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-grow: 1;
+        }
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14.5px;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+        }
+        .nav-item.active, .nav-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+
+        /* MAIN CONTENT HOLDER */
+        main {
+            margin-left: 280px;
+            flex-grow: 1;
+            padding: 40px 4%;
+            max-width: 1400px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        header h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+        header p { color: var(--text-muted); font-size: 14px; margin-top: 4px; }
+
+        /* METRICS GRID */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .metric-card {
+            background: var(--surface-admin);
+            border: 1px solid var(--border-admin);
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .metric-info h3 { font-size: 13px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px; }
+        .metric-info p { font-size: 32px; font-weight: 800; margin-top: 8px; color: #fff; }
+        .metric-icon {
+            width: 48px; height: 48px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; color: var(--primary);
+        }
+
+        /* ORDERS CONTAINER */
+        .section-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .order-card {
+            background: var(--surface-admin);
+            border: 1px solid var(--border-admin);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1.2fr 1fr 1fr;
+            align-items: center;
+            gap: 20px;
+            transition: var(--transition);
+        }
+        .order-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            background: #1e1e22;
+        }
+
+        .client-info h4 { font-size: 16px; font-weight: 700; color: #fff; }
+        .client-info p { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+        .order-details p { font-size: 14px; color: var(--text-light); }
+        .order-details span { font-size: 12px; color: var(--text-muted); display: block; margin-top: 2px; }
+
+        .items-list { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
+
+        /* STATUS BADGE & SELECTOR */
+        .status-box select {
+            background: var(--surface-card);
+            color: #fff;
+            border: 1px solid var(--border-admin);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* ACTION BUTTONS */
+        .actions-box { text-align: right; }
+        .btn-action-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #10b981;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+        .btn-action-whatsapp:hover { background: #0ca673; transform: translateY(-1px); }
+
+        /* LOADING AND EMPTY STATES */
+        .empty-state {
+            text-align: center; padding: 60px; color: var(--text-muted);
+            border: 2px dashed var(--border-admin); border-radius: var(--radius-lg);
+        }
+
+        @media (max-width: 1100px) {
+            .order-card { grid-template-columns: 1fr; gap: 16px; padding: 20px; }
+            .actions-box { text-align: left; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            aside { display: none; }
+            main { margin-left: 0; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>Painel Administrativo</h1>
-  <span id="conn-status" style="font-size: 0.85rem; color: var(--success); font-weight: 600; display: flex; align-items: center; gap: 6px;">
-    <span style="display:inline-block; width:8px; height:8px; background:var(--success); border-radius:50%; box-shadow: 0 0 8px var(--success);"></span>
-    Carregando dados ao vivo...
-  </span>
-</div>
-
-<div class="container" id="admin-list"></div>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-// Adicionado deleteDoc à importação
-import { getFirestore, collection, query, orderBy, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDonP_YuGA49ucaTI0W0o3x6Xlav2OMmd8",
-  authDomain: "loja-de-brinquedos-fd210.firebaseapp.com",
-  projectId: "loja-de-brinquedos-fd210",
-  storageBucket: "loja-de-brinquedos-fd210.firebasestorage.app",
-  messagingSenderId: "499375490286",
-  appId: "1:499375490286:web:cee4745927942a62ccdfff"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-const listDiv = document.getElementById("admin-list");
-
-const q = query(collection(db, "pedidos"), orderBy("createdAt", "desc"));
-
-onSnapshot(q, (snapshot) => {
-  document.getElementById("conn-status").innerHTML = `
-    <span style="display:inline-block; width:8px; height:8px; background:var(--success); border-radius:50%; box-shadow: 0 0 8px var(--success);"></span>
-    Conectado ao Vivo
-  `;
-  
-  listDiv.innerHTML = "";
-  
-  if(snapshot.empty) {
-    listDiv.innerHTML = `<p style="text-align:center; color: var(--muted); margin-top:40px; font-size: 1.1rem;">Nenhum pedido recebido ainda.</p>`;
-    return;
-  }
-
-  snapshot.forEach((docSnap) => {
-    const p = docSnap.data();
-    const id = docSnap.id;
-    const shortId = id.substring(0, 6).toUpperCase();
-    
-    const itemsHtml = p.items.map(i => `<span style="color:var(--text); font-weight:500;">• ${i.name}</span> <span style="color:var(--muted);">(Qtd: ${i.quantity})</span>`).join('<br>');
-
-    let createdStr = "Data desconhecida";
-    if(p.createdAt) {
-      createdStr = p.createdAt.toDate().toLocaleString('pt-BR');
-    }
-
-    listDiv.innerHTML += `
-      <div class="order-card">
-        <div class="order-header">
-          <div>
-            <div class="order-id">Pedido #${shortId}</div>
-            <div class="order-date">Registrado em: ${createdStr}</div>
-          </div>
-          <span class="badge ${p.status}">${p.status}</span>
+    <aside>
+        <div class="top-nav">
+            <div class="brand"><i class="fa-solid fa-cubes"></i> Val<span>Hub</span></div>
+            <nav class="menu-nav">
+                <a href="#" class="nav-item active"><i class="fa-solid fa-house-chimney"></i> Pedidos Recentes</a>
+                <a href="#config" class="nav-item"><i class="fa-solid fa-gear"></i> Configurações</a>
+            </nav>
         </div>
+        <div class="user-profile" style="font-size: 12px; color: var(--text-muted);">
+            Logado como Administrador
+        </div>
+    </aside>
+
+    <main>
+        <header>
+            <div>
+                <h1>Painel de Pedidos</h1>
+                <p>Gerenciamento e monitoramento de leads em tempo real.</p>
+            </div>
+        </header>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-info">
+                    <h3>Total Geral</h3>
+                    <p id="metric-total">0</p>
+                </div>
+                <div class="metric-icon"><i class="fa-solid fa-list-check"></i></div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-info">
+                    <h3>Pendentes</h3>
+                    <p id="metric-pending" style="color: var(--status-pending-text);">0</p>
+                </div>
+                <div class="metric-icon"><i class="fa-solid fa-clock"></i></div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-info">
+                    <h3>Atendidos</h3>
+                    <p id="metric-done" style="color: var(--status-done-text);">0</p>
+                </div>
+                <div class="metric-icon"><i class="fa-solid fa-circle-check"></i></div>
+            </div>
+        </div>
+
+        <h2 class="section-title"><i class="fa-solid fa-bolt"></i> Fluxo de Pedidos Ativos</h2>
+
+        <div class="orders-list" id="orders-container">
+            <div class="empty-state">Aguardando conexão segura com o banco de dados...</div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, onSnapshot, query, orderBy, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Sua configuração do Firebase SDK fornecida
+        const firebaseConfig = {
+            apiKey: "AIzaSyDonP_YuGA49ucaTI0W0o3x6Xlav2OMmd8",
+            authDomain: "loja-de-brinquedos-fd210.firebaseapp.com",
+            projectId: "loja-de-brinquedos-fd210",
+            storageBucket: "loja-de-brinquedos-fd210.firebasestorage.app",
+            messagingSenderId: "499375490286",
+            appId: "1:499375490286:web:cee4745927942a62ccdfff",
+            measurementId: "G-BX030XJ8S1"
+        };
+
+        // Inicializando o Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const container = document.getElementById('orders-container');
+
+        // Escuta ativa (Real-time Snapshot) dos dados gravados na coleção "pedidos"
+        const q = query(collection(db, "pedidos"), orderBy("createdAt", "desc"));
         
-        <div class="info-grid">
-          <div class="info-group"><strong>Cliente</strong>${p.clientName}</div>
-          <div class="info-group">
-            <strong>WhatsApp</strong>${p.phone} 
-            <a href="https://wa.me/55${p.phone.replace(/\D/g, '')}" target="_blank" style="margin-left:4px;">(Chamar)</a>
-          </div>
-          <div class="info-group"><strong>Data da Festa</strong>${p.eventDate}</div>
-          
-          <div class="info-group"><strong>Horário</strong>${p.eventTime || 'Não informado'}</div>
-          <div class="info-group"><strong>Forma de Pagto.</strong>${p.paymentMethod || 'Não informada'}</div>
-          
-          <div class="info-group"><strong>Total</strong>R$ ${p.totalPrice},00</div>
-          <div class="info-group" style="grid-column: 1 / -1;"><strong>Endereço</strong>${p.address}</div>
-        </div>
+        onSnapshot(q, (snapshot) => {
+            if (snapshot.empty) {
+                container.innerHTML = `<div class="empty-state"><i class="fa-regular fa-folder-open" style='font-size:32px;margin-bottom:10px;display:block;'></i> Nenhum pedido registrado no banco de dados até o momento.</div>`;
+                updateMetrics([], 0, 0);
+                return;
+            }
 
-        <div class="items-list">
-          <strong style="color:var(--muted); font-size:0.75rem; text-transform:uppercase; margin-bottom:8px; display:block; letter-spacing:0.5px;">Itens Solicitados</strong>
-          ${itemsHtml}
-        </div>
+            container.innerHTML = "";
+            let total = 0, pendentes = 0, concluidos = 0;
 
-        <div class="actions">
-          <button class="btn-delete" onclick="window.deleteOrder('${id}')">Apagar Pedido</button>
-          <button class="btn-pendente" onclick="window.changeStatus('${id}', 'pendente')" ${p.status === 'pendente' ? 'style="opacity:0.3; pointer-events:none;"' : ''}>Pendente</button>
-          <button class="btn-cancel" onclick="window.changeStatus('${id}', 'cancelado')" ${p.status === 'cancelado' ? 'style="opacity:0.3; pointer-events:none;"' : ''}>Cancelar</button>
-          <button class="btn-confirm" onclick="window.changeStatus('${id}', 'confirmado')" ${p.status === 'confirmado' ? 'style="opacity:0.3; pointer-events:none;"' : ''}>Confirmar Reserva</button>
-        </div>
-      </div>
-    `;
-  });
-}, (error) => {
-  document.getElementById("conn-status").innerHTML = `
-    <span style="display:inline-block; width:8px; height:8px; background:var(--danger); border-radius:50%; box-shadow: 0 0 8px var(--danger);"></span>
-    <span style="color: var(--danger)">Erro de Conexão</span>
-  `;
-  console.error("Erro ao escutar dados:", error);
-});
+            snapshot.forEach((docSnap) => {
+                const item = docSnap.data();
+                const id = docSnap.id;
+                total++;
 
-window.changeStatus = async (docId, newStatus) => {
-  if(!confirm(`Tem certeza que deseja marcar este pedido como ${newStatus.toUpperCase()}?`)) return;
-  
-  try {
-    const orderRef = doc(db, "pedidos", docId);
-    await updateDoc(orderRef, { status: newStatus });
-  } catch(e) {
-    alert("Erro ao atualizar o status. Verifique as permissões do Firebase.");
-    console.error(e);
-  }
-}
+                if(item.status === 'Pendente' || !item.status) pendentes++;
+                if(item.status === 'Atendido') concluidos++;
 
-// Nova função para apagar o pedido
-window.deleteOrder = async (docId) => {
-  if(!confirm(`Tem certeza absoluta que deseja APAGAR este pedido permanentemente? Essa ação não pode ser desfeita.`)) return;
-  
-  try {
-    const orderRef = doc(db, "pedidos", docId);
-    await deleteDoc(orderRef);
-  } catch(e) {
-    alert("Erro ao apagar o pedido. Verifique as permissões do Firebase (regras do Firestore).");
-    console.error(e);
-  }
-}
-</script>
+                // Tratamento da data de criação
+                let dataCriacao = "Data Indisponível";
+                if(item.createdAt && item.createdAt.toDate) {
+                    dataCriacao = item.createdAt.toDate().toLocaleString('pt-BR');
+                }
 
+                // Criação do elemento visual do pedido
+                const card = document.createElement('div');
+                card.className = 'order-card';
+                card.innerHTML = `
+                    <div class="client-info">
+                        <h4>${item.nome || 'Cliente Sem Nome'}</h4>
+                        <p><i class="fa-solid fa-location-dot"></i> ${item.localidade || 'Não informada'}</p>
+                    </div>
+                    <div class="order-details">
+                        <p><i class="fa-regular fa-calendar"></i> ${item.dataEvento || 'Pendente'}</p>
+                        <span>Recebido em: ${dataCriacao}</span>
+                    </div>
+                    <div class="items-list">
+                        <strong>Pedido/Interesse:</strong><br>
+                        ${item.brinquedos || 'Interesse direto via botão do catálogo.'}
+                    </div>
+                    <div class="status-box">
+                        <select onchange="window.updateOrderStatus('${id}', this.value)">
+                            <option value="Pendente" ${item.status === 'Pendente' ? 'selected' : ''}>⏳ Pendente</option>
+                            <option value="Atendido" ${item.status === 'Atendido' ? 'selected' : ''}>✅ Atendido</option>
+                            <option value="Cancelado" ${item.status === 'Cancelado' ? 'selected' : ''}>❌ Cancelado</option>
+                        </select>
+                    </div>
+                    <div class="actions-box">
+                        <a href="https://wa.me/${limparNumero(item.whatsapp)}?text=${encodeURIComponent('Olá ' + item.nome + ', sou da Val Brinquedos! Recebi seu contato sobre os brinquedos.')}" target="_blank" class="btn-action-whatsapp">
+                            <i class="fa-brands fa-whatsapp"></i> Chamar Cliente
+                        </a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            updateMetrics(total, pendentes, concluidos);
+        });
+
+        // Função para atualizar os cards de métricas no topo do painel
+        function updateMetrics(t, p, c) {
+            document.getElementById('metric-total').innerText = t;
+            document.getElementById('metric-pending').innerText = p;
+            document.getElementById('metric-done').innerText = c;
+        }
+
+        // Função global para atualizar o status do pedido direto no Firebase
+        window.updateOrderStatus = async function(id, novoStatus) {
+            try {
+                const docRef = doc(db, "pedidos", id);
+                await updateDoc(docRef, { status: novoStatus });
+            } catch (error) {
+                console.error("Erro ao atualizar status: ", error);
+                alert("Falha ao salvar modificação de status.");
+            }
+        };
+
+        // Função auxiliar para sanitizar o número do WhatsApp recebido
+        function limparNumero(num) {
+            if(!num) return "";
+            let limpo = num.replace(/\D/g, "");
+            if(limpo.length === 11 && !limpo.startsWith("55")) {
+                limpo = "55" + limpo;
+            }
+            return limpo;
+        }
+    </script>
 </body>
 </html>
