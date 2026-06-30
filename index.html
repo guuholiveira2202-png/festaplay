@@ -2,807 +2,1405 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Val Brinquedos | Locação Premium de Infláveis</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oxe — Aluguel de Brinquedos Gigantes</title>
     <style>
-        /* =========================
-           PALETA DE CORES E BASE (DESIGN PREMIUM)
-        ========================= */
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-
         :root {
             /* Cores Modernizadas */
-            --primary: #0ea5e9; 
-            --primary-dark: #0284c7;
-            --primary-gradient: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+            --bg-escuro: #070B14; 
+            --bg-card-escuro: #111827;
+            --laranja-primario: #FF6B00;
+            --laranja-secundario: #FF3D00;
+            --laranja-gradiente: linear-gradient(135deg, var(--laranja-primario), var(--laranja-secundario));
+            --laranja-claro: #FFF0E6;
+            --branco: #FFFFFF;
+            --cinza-fundo: #F8FAFC; 
+            --cinza-borda: #E2E8F0; 
+            --texto-escuro: #0F172A; 
+            --texto-claro: #64748B; 
             
-            --accent: #f59e0b; 
-            --accent-gradient: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
-            
-            --pink: #ec4899; 
-            --green: #10b981; 
-            --purple: #8b5cf6;
-            --whatsapp: #25D366;
-            
-            /* Fundos e Textos Suaves */
-            --bg-global: #f8fafc; 
-            --surface: #ffffff; 
-            --surface-secondary: #f1f5f9;
-            
-            --border: #e2e8f0; 
-            --border-light: rgba(226, 232, 240, 0.6);
-            
-            --text-main: #0f172a; 
-            --text-body: #475569; 
-            --text-muted: #94a3b8;
-            
-            /* Bordas e Sombras Modernas */
-            --radius-full: 9999px; 
-            --radius-xl: 32px; 
-            --radius-lg: 24px; 
-            --radius-md: 16px;
-            
-            --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.06); 
-            --shadow-hover: 0 20px 40px -10px rgba(14, 165, 233, 0.15); 
-            --shadow-glow: 0 10px 30px -5px rgba(14, 165, 233, 0.3);
-            --shadow-accent: 0 10px 30px -5px rgba(245, 158, 11, 0.3);
-            
-            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Layout & Sombras Avançadas */
+            --raio-borda: 20px;
+            --raio-botao: 50px;
+            --sombra-suave: 0 10px 40px -10px rgba(0,0,0,0.06);
+            --sombra-hover: 0 20px 40px -10px rgba(0,0,0,0.12);
+            --sombra-glow: 0 0 40px -10px rgba(255, 107, 0, 0.4);
+            --sombra-botao: 0 8px 25px -5px rgba(255, 107, 0, 0.4);
+            --transicao: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        body { font-family: 'Nunito', sans-serif; background-color: var(--bg-global); color: var(--text-body); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-        h1, h2, h3, .logo { font-family: 'Fredoka', sans-serif; letter-spacing: -0.02em; }
-
-        ::-webkit-scrollbar { width: 8px; height: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg-global); }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 20px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
-
-        /* Múltiplas Telas (SPA) */
-        .view-section { display: none; opacity: 0; animation: fadeIn 0.5s ease forwards; }
-        .view-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* =========================
-           TOP PROMO BAR E HEADER
-        ========================= */
-        .promo-bar { background: var(--text-main); color: #ffffff; text-align: center; padding: 10px 20px; font-size: 14px; font-weight: 700; position: relative; z-index: 1002; letter-spacing: 0.5px;}
-        .promo-bar span { color: var(--accent); font-weight: 900;}
-
-        header { position: sticky; top: 0; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-light); padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; transition: var(--transition-smooth); box-shadow: 0 4px 20px -10px rgba(0,0,0,0.05); }
-        .logo { text-decoration: none; font-size: 28px; font-weight: 700; color: var(--primary-dark); display: flex; align-items: center; gap: 8px; }
-        .logo i { color: var(--accent); font-size: 32px; transform: rotate(-10deg); transition: var(--transition-smooth); }
-        .logo:hover i { transform: rotate(10deg) scale(1.1); }
-        .logo span { color: var(--pink); }
-
-        .nav-links { display: flex; gap: 32px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text-body); font-weight: 700; font-size: 16px; transition: var(--transition-smooth); cursor: pointer; position: relative;}
-        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--primary); transition: var(--transition-smooth); border-radius: 2px;}
-        .nav-links a:hover { color: var(--primary); }
-        .nav-links a:hover::after { width: 100%; }
-        
-        #btn-user-area { color: var(--purple); font-weight: 800; display: flex; align-items: center; gap: 8px; cursor: pointer; border:none; background:none; font-size: 16px; font-family: 'Nunito', sans-serif; transition: var(--transition-smooth);}
-        #btn-user-area:hover { transform: translateY(-2px); color: var(--text-main);}
-
-        .btn-header { background: var(--accent-gradient); color: #ffffff !important; padding: 12px 28px; border-radius: var(--radius-full); font-weight: 800 !important; border: none; cursor: pointer; font-family: 'Nunito', sans-serif; box-shadow: var(--shadow-accent); transition: var(--transition-smooth); }
-        .btn-header:hover { transform: translateY(-2px); box-shadow: 0 15px 25px rgba(245, 158, 11, 0.4); }
-        .menu-trigger { display: none; font-size: 24px; cursor: pointer; color: var(--text-main); }
-
-        /* =========================
-           HERO SECTION
-        ========================= */
-        .hero { padding: 100px 8% 120px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; position: relative; overflow: hidden;}
-        /* Decoração de fundo sutil */
-        .hero::before { content: ''; position: absolute; top: -20%; right: -10%; width: 600px; height: 600px; background: var(--primary); border-radius: 50%; filter: blur(150px); opacity: 0.1; z-index: -1; }
-        .hero::after { content: ''; position: absolute; bottom: -20%; left: -10%; width: 400px; height: 400px; background: var(--pink); border-radius: 50%; filter: blur(150px); opacity: 0.08; z-index: -1; }
-
-        .hero-content .badge { display: inline-flex; align-items: center; gap: 8px; background: var(--surface); color: var(--primary-dark); padding: 8px 16px; border-radius: var(--radius-full); font-size: 14px; font-weight: 800; margin-bottom: 24px; box-shadow: var(--shadow-soft); border: 1px solid var(--border-light); }
-        .hero-content h1 { font-size: 60px; color: var(--text-main); font-weight: 700; line-height: 1.15; margin-bottom: 20px; }
-        .hero-content h1 span { background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;}
-        .hero-content p { font-size: 18px; color: var(--text-body); line-height: 1.7; margin-bottom: 40px; font-weight: 500; max-width: 90%;}
-        
-        .btn-main { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--primary-gradient); color: #ffffff; text-decoration: none; padding: 18px 40px; border-radius: var(--radius-full); font-weight: 800; font-size: 18px; border: none; cursor: pointer; box-shadow: var(--shadow-glow); transition: var(--transition-smooth); font-family: 'Nunito', sans-serif;}
-        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(14, 165, 233, 0.4); }
-
-        .hero-media { position: relative; }
-        .hero-media img { width: 100%; max-width: 550px; border-radius: var(--radius-xl); box-shadow: var(--shadow-soft); object-fit: cover; aspect-ratio: 4/5; animation: float 6s ease-in-out infinite; border: 8px solid var(--surface);}
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
-
-        /* =========================
-           CATÁLOGO DE PRODUTOS
-        ========================= */
-        .section-padding { padding: 80px 8%; }
-        .center-header { text-align: center; margin-bottom: 50px; }
-        .center-header .tag { color: var(--primary-dark); font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 12px; font-family: 'Nunito', sans-serif;}
-        .center-header h2 { font-size: 40px; color: var(--text-main); font-weight: 700; }
-
-        .catalog-section { background-color: var(--surface); border-radius: 40px; margin: 0 4%; box-shadow: var(--shadow-soft); padding-bottom: 80px; position: relative; z-index: 2;}
-        .filter-container { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 50px; }
-        .filter-btn { background: var(--bg-global); border: 1px solid var(--border); color: var(--text-body); padding: 12px 28px; border-radius: var(--radius-full); font-size: 16px; font-weight: 700; cursor: pointer; transition: var(--transition-smooth); font-family: 'Nunito', sans-serif;}
-        .filter-btn:hover { border-color: var(--primary); color: var(--primary); background: var(--surface);}
-        .filter-btn.active { background: var(--primary-gradient); border-color: transparent; color: #ffffff; box-shadow: var(--shadow-glow);}
-
-        .grid-holder { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 0 40px; }
-        .product-card { background: var(--surface); border-radius: var(--radius-xl); overflow: hidden; transition: var(--transition-smooth); display: flex; flex-direction: column; position: relative; box-shadow: var(--shadow-soft); border: 1px solid var(--border-light);}
-        .product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); border-color: var(--border); }
-        .product-card.hidden { display: none !important; }
-
-        .card-tag { position: absolute; top: 16px; left: 16px; background: var(--accent); color: #fff; padding: 6px 16px; border-radius: var(--radius-full); font-size: 12px; font-weight: 800; z-index: 2; text-transform: uppercase; letter-spacing: 1px; box-shadow: var(--shadow-accent); font-family: 'Nunito', sans-serif; backdrop-filter: blur(4px);}
-        .card-img { width: 100%; height: 240px; overflow: hidden; background: var(--bg-global); position: relative;}
-        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .product-card:hover .card-img img { transform: scale(1.08); }
-
-        .card-info { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; z-index: 2; background: #fff;}
-        .card-info h3 { font-size: 22px; color: var(--text-main); margin-bottom: 6px; }
-        .product-price { font-size: 26px; font-weight: 900; color: var(--green); margin-bottom: 12px; font-family: 'Nunito', sans-serif;}
-        .card-info p { font-size: 15px; font-weight: 500; line-height: 1.6; margin-bottom: 24px; flex-grow: 1; color: var(--text-body); font-family: 'Nunito', sans-serif;}
-
-        .card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .btn-rent { background: var(--primary-gradient); color: #ffffff; border: none; padding: 14px; border-radius: var(--radius-md); font-weight: 800; font-size: 15px; cursor: pointer; transition: var(--transition-smooth); font-family: 'Nunito', sans-serif;}
-        .btn-rent:hover { box-shadow: var(--shadow-glow); transform: translateY(-2px);}
-        .btn-details { background: var(--surface-secondary); color: var(--text-main); border: none; padding: 14px; border-radius: var(--radius-md); font-weight: 800; font-size: 15px; cursor: pointer; transition: var(--transition-smooth); text-align: center; font-family: 'Nunito', sans-serif;}
-        .btn-details:hover { background: var(--border); }
-
-        /* =========================
-           NOVAS SEÇÕES (Vídeo, Promo, Depoimentos, Stats, Social)
-        ========================= */
-        .video-wrapper { max-width: 900px; margin: 0 auto; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-soft); position: relative; background: #000; border: 1px solid var(--border-light);}
-        .video-wrapper video { width: 100%; display: block; border-radius: calc(var(--radius-xl) - 1px); }
-        
-        .promo-banner { width: 100%; max-width: 1000px; margin: 0 auto; display: block; border-radius: var(--radius-xl); box-shadow: var(--shadow-soft); transition: var(--transition-smooth); cursor: pointer; object-fit: cover; border: 1px solid var(--border-light);}
-        .promo-banner:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
-
-        .testimonials-slider { display: flex; overflow-x: auto; gap: 24px; padding: 20px 20px 40px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; /* Firefox */ }
-        .testimonials-slider::-webkit-scrollbar { display: none; /* Chrome/Safari/Edge */ }
-        .testimonial-card { min-width: 320px; max-width: 360px; scroll-snap-align: center; background: var(--surface); padding: 32px; border-radius: var(--radius-xl); box-shadow: var(--shadow-soft); border: 1px solid var(--border-light); display: flex; flex-direction: column; gap: 16px; position: relative;}
-        /* Ícone de aspas decorativo */
-        .testimonial-card::before { content: '\f10d'; font-family: 'FontAwesome'; position: absolute; top: 24px; right: 24px; font-size: 40px; color: var(--bg-global); z-index: 0; }
-        .testimonial-stars { color: #fbbf24; font-size: 16px; position: relative; z-index: 1;}
-        .testimonial-text { font-size: 16px; font-weight: 500; line-height: 1.6; color: var(--text-body); font-style: italic; flex-grow: 1; position: relative; z-index: 1;}
-        .testimonial-author { display: flex; align-items: center; gap: 16px; margin-top: 10px; position: relative; z-index: 1;}
-        .testimonial-author img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--surface-secondary); }
-        .testimonial-author strong { color: var(--text-main); font-size: 16px; font-weight: 800;}
-
-        .stats-section { background: var(--primary-gradient); color: #fff; border-radius: 40px; margin: 60px 4%; padding: 80px 5%; text-align: center; position: relative; overflow: hidden; box-shadow: var(--shadow-hover);}
-        .stats-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml;utf8,<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="2" fill="rgba(255,255,255,0.05)"/></svg>'); z-index: 0; }
-        .stats-section h2 { position: relative; z-index: 1; font-size: 36px;}
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 50px; position: relative; z-index: 1;}
-        .stat-item { background: rgba(255,255,255,0.1); padding: 32px 20px; border-radius: var(--radius-lg); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); transition: var(--transition-smooth);}
-        .stat-item:hover { background: rgba(255,255,255,0.15); transform: translateY(-5px);}
-        .stat-number { font-size: 56px; font-weight: 900; margin-bottom: 8px; font-family: 'Fredoka', sans-serif; line-height: 1; color: #fff;}
-        .stat-text { font-size: 16px; font-weight: 700; color: #e0f2fe; text-transform: uppercase; letter-spacing: 1px;}
-
-        .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 0 5%; max-width: 1200px; margin: 0 auto;}
-        .social-img-box { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 1/1; cursor: pointer; box-shadow: var(--shadow-soft);}
-        .social-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .social-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(14, 165, 233, 0.9), rgba(14, 165, 233, 0.4)); display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.4s ease; color: #fff; font-size: 40px;}
-        .social-img-box:hover img { transform: scale(1.1); }
-        .social-img-box:hover .social-overlay { opacity: 1; }
-
-        /* =========================
-           TELA DE CHECKOUT (DEDICADA)
-        ========================= */
-        .checkout-wrapper { max-width: 1100px; margin: 60px auto 100px; padding: 0 5%; display: grid; grid-template-columns: 1.3fr 0.9fr; gap: 40px; align-items: start;}
-        
-        .checkout-header { text-align: left; margin-bottom: 30px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;}
-        .btn-back { background: var(--surface); border: 1px solid var(--border); color: var(--text-main); padding: 10px 20px; border-radius: var(--radius-full); font-weight: 700; font-size: 15px; cursor: pointer; transition: var(--transition-smooth); font-family: 'Nunito', sans-serif; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--shadow-soft);}
-        .btn-back:hover { border-color: var(--text-muted); background: var(--surface-secondary);}
-
-        .checkout-box { background: var(--surface); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-soft); border: 1px solid var(--border-light); }
-        .checkout-box h2 { font-size: 28px; color: var(--text-main); margin-bottom: 8px; }
-        .checkout-box p.subtitle { font-size: 15px; color: var(--text-body); font-weight: 500; margin-bottom: 30px; }
-
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .field { display: flex; flex-direction: column; gap: 8px; }
-        .field.full { grid-column: 1 / 3; }
-        .field label { font-size: 14px; font-weight: 800; color: var(--text-main); font-family: 'Nunito', sans-serif;}
-        .form-grid input { width: 100%; border: 1px solid var(--border); padding: 14px 18px; border-radius: var(--radius-md); font-size: 16px; font-weight: 600; outline: none; background: var(--surface-secondary); color: var(--text-main); transition: var(--transition-smooth); font-family: 'Nunito', sans-serif;}
-        .form-grid input:focus { border-color: var(--primary); background: var(--surface); box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);}
-        .form-grid input:read-only { opacity: 0.7; cursor: not-allowed; border-style: dashed;}
-
-        /* Coluna de Resumo (Direita) */
-        .summary-box { position: sticky; top: 100px; background: var(--surface); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-soft); border: 1px solid var(--border-light); }
-        .summary-box h3 { font-size: 20px; color: var(--text-main); margin-bottom: 24px; display: flex; align-items: center; gap: 10px;}
-        
-        .toy-selection-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px;}
-        .toy-checkbox { cursor: pointer; user-select: none; }
-        .toy-checkbox input { display: none; }
-        .toy-checkbox span { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 18px; border: 1px solid var(--border); border-radius: var(--radius-md); font-size: 15px; font-weight: 700; transition: var(--transition-smooth); background: var(--surface-secondary); color: var(--text-body); font-family: 'Nunito', sans-serif;}
-        .toy-checkbox span:hover { border-color: var(--primary); background: var(--surface);}
-        .toy-checkbox input:checked + span { background: var(--primary-gradient); color: #ffffff; border-color: transparent; box-shadow: var(--shadow-glow); }
-        .toy-price-tag { background: rgba(0,0,0,0.05); color: inherit; padding: 4px 10px; border-radius: 12px; font-size: 13px; font-weight: 800;}
-        .toy-checkbox input:checked + span .toy-price-tag { background: rgba(255,255,255,0.2); color: #fff; }
-
-        .total-wrapper { background: #f0fdf4; border: 1px dashed #6ee7b7; padding: 24px; border-radius: var(--radius-lg); text-align: center; margin-bottom: 24px;}
-        .line-item { display: flex; justify-content: space-between; margin-bottom: 12px; color: var(--text-body); font-weight: 700; font-size: 15px;}
-        .total-wrapper h4 { font-size: 16px; color: var(--green); margin: 16px 0 8px; font-weight: 800;}
-        .total-value { font-size: 40px; font-weight: 900; color: var(--green); font-family: 'Fredoka', sans-serif; line-height: 1;}
-
-        /* =========================
-           MODAIS GLOBAIS
-        ========================= */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(8px); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: var(--transition-smooth); padding: 20px;}
-        .modal-overlay.active { opacity: 1; pointer-events: auto; }
-        .modal-body { background: var(--surface); width: 100%; max-width: 500px; border-radius: var(--radius-xl); overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); transform: scale(0.95) translateY(20px); transition: var(--transition-smooth); position: relative; max-height: 90vh; display: flex; flex-direction: column; }
-        .modal-overlay.active .modal-body { transform: scale(1) translateY(0); }
-        .modal-close { position: absolute; top: 16px; right: 16px; font-size: 24px; color: var(--text-main); cursor: pointer; z-index: 10; font-weight: 900; transition: var(--transition-smooth); background: rgba(255,255,255,0.9); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-soft);}
-        .modal-close:hover { background: var(--surface); transform: rotate(90deg); }
-        
-        .modal-img { width: 100%; height: 260px; object-fit: cover; }
-        .modal-content { padding: 40px; overflow-y: auto; }
-        .modal-content h2 { font-size: 28px; color: var(--text-main); margin-bottom: 12px; }
-        
-        .pix-container { padding: 50px 40px; text-align: center; overflow-y: auto; background: var(--surface); border-top: 6px solid var(--green);}
-        .pix-icon { font-size: 48px; color: var(--green); margin-bottom: 20px;}
-        .qr-code-box { background: var(--surface-secondary); padding: 20px; border-radius: var(--radius-xl); display: inline-block; margin-bottom: 30px; border: 2px dashed #cbd5e1;}
-        .qr-code-box img { width: 200px; height: 200px; border-radius: 12px; }
-        .pix-copy-box { display: flex; gap: 8px; background: var(--bg-global); border: 1px solid var(--border); padding: 6px; border-radius: var(--radius-full); align-items: center;}
-        .pix-copy-box input { flex-grow: 1; border: none; background: transparent; font-size: 14px; font-weight: 700; color: var(--text-muted); padding: 0 16px; outline: none;}
-        .btn-copy { background: var(--text-main); color: #fff; border: none; padding: 12px 24px; border-radius: var(--radius-full); font-weight: 800; cursor: pointer; transition: var(--transition-smooth);}
-        .btn-copy:hover { background: var(--primary-dark); }
-
-        .client-box { padding: 40px; overflow-y: auto;}
-        .client-header { text-align: center; margin-bottom: 30px; }
-        .orders-list { display: flex; flex-direction: column; gap: 16px; }
-        .order-item { background: var(--surface-secondary); border: 1px solid var(--border); padding: 20px; border-radius: var(--radius-lg); box-shadow: var(--shadow-soft);}
-        .status-badge { padding: 6px 14px; border-radius: var(--radius-full); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;}
-        
-        /* FOOTER MODERNIZADO */
-        footer { background: #0f172a; color: #94a3b8; padding: 80px 8% 40px; font-family: 'Nunito', sans-serif; border-top: 1px solid #1e293b;}
-        .footer-content { display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
-        .footer-socials { display: flex; gap: 16px; }
-        .footer-socials a { color: #fff; background: rgba(255,255,255,0.05); width: 48px; height: 48px; display: flex; justify-content: center; align-items: center; border-radius: 50%; font-size: 20px; transition: var(--transition-smooth); text-decoration: none;}
-        .footer-socials a:hover { background: var(--primary); transform: translateY(-5px); box-shadow: var(--shadow-glow);}
-        
-        .whatsapp-widget { position: fixed; bottom: 24px; right: 24px; background: var(--whatsapp); color: #ffffff; width: 64px; height: 64px; border-radius: var(--radius-full); display: flex; justify-content: center; align-items: center; font-size: 36px; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4); z-index: 999; transition: var(--transition-smooth);}
-        .whatsapp-widget:hover { transform: scale(1.1); }
-
-        /* =========================
-           MOBILE RESPONSIVO
-        ========================= */
-        @media (max-width: 1024px) {
-            .checkout-wrapper { grid-template-columns: 1fr; gap: 30px; margin: 20px auto 60px;}
-            .summary-box { position: static; }
-            .hero { grid-template-columns: 1fr; text-align: center; padding-top: 60px;}
-            .hero-content p { max-width: 100%; margin: 0 auto 30px;}
-            .hero-media { order: -1; }
-            .nav-links { display: flex; position: absolute; top: 100%; left: 0; width: 100%; background: var(--surface); flex-direction: column; padding: 0; box-shadow: var(--shadow-soft); max-height: 0; overflow: hidden; opacity: 0; transition: all 0.4s ease;}
-            .nav-links.active { max-height: 400px; opacity: 1; padding: 20px 0;}
-            .menu-trigger { display: block; }
-            .catalog-section { margin: 0; border-radius: 0; box-shadow: none; padding-bottom: 40px;}
+        /* --- SCROLLBAR PERSONALIZADA --- */
+        ::-webkit-scrollbar {
+            width: 10px;
         }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-escuro);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--laranja-primario);
+        }
+
+        /* --- SELEÇÃO DE TEXTO --- */
+        ::selection {
+            background-color: var(--laranja-primario);
+            color: var(--branco);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--cinza-fundo);
+            color: var(--texto-escuro);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* FOCO DE ACESSIBILIDADE */
+        :focus-visible {
+            outline: 3px solid var(--laranja-primario);
+            outline-offset: 3px;
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            background: rgba(7, 11, 20, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            transition: var(--transicao);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-svg {
+            width: 44px;
+            height: 44px;
+            fill: url(#orange-gradient);
+            transition: var(--transicao);
+            filter: drop-shadow(0 4px 6px rgba(255, 107, 0, 0.2));
+        }
+
+        .logo-area:hover .logo-svg {
+            transform: scale(1.1) rotate(-10deg);
+            filter: drop-shadow(0 6px 12px rgba(255, 107, 0, 0.4));
+        }
+
+        .brand-name {
+            color: var(--branco);
+            font-size: clamp(1.4rem, 2vw, 1.6rem);
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .brand-name span {
+            color: var(--laranja-primario);
+        }
+
+        .menu-links {
+            display: flex;
+            gap: 36px;
+            align-items: center;
+        }
+
+        .menu-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: var(--transicao);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .menu-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--laranja-gradiente);
+            transition: var(--transicao);
+            border-radius: 2px;
+        }
+
+        .menu-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-links a:hover {
+            color: var(--branco);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 28px;
+            height: 2px;
+            background-color: var(--branco);
+            transition: var(--transicao);
+            border-radius: 2px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background-color: var(--bg-escuro);
+            background-image: 
+                radial-gradient(circle at 20% 0%, rgba(255, 107, 0, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(255, 61, 0, 0.1) 0%, transparent 40%),
+                linear-gradient(180deg, transparent 0%, rgba(7, 11, 20, 1) 100%);
+            color: var(--branco);
+            padding: clamp(160px, 20vh, 220px) 24px clamp(80px, 10vh, 120px) 24px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: var(--cinza-fundo);
+            clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 100%);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 span {
+            background: var(--laranja-gradiente);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            color: #94A3B8;
+            max-width: 650px;
+            margin: 0 auto 48px auto;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            background: var(--laranja-gradiente);
+            color: var(--branco);
+            padding: 18px 48px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            border: none;
+            border-radius: var(--raio-botao);
+            cursor: pointer;
+            transition: var(--transicao);
+            box-shadow: var(--sombra-botao);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+            transform: skewX(-20deg);
+            transition: 0.5s;
+        }
+
+        .cta-btn:hover::before {
+            left: 150%;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 35px -5px rgba(255, 107, 0, 0.6);
+        }
+
+        /* --- COMPONENTES GERAIS --- */
+        section {
+            padding: clamp(60px, 10vw, 120px) 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: clamp(40px, 6vw, 64px);
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+            color: var(--texto-escuro);
+        }
+
+        .section-header h2 span {
+            background: var(--laranja-gradiente);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-header p {
+            color: var(--texto-claro);
+            font-size: clamp(1rem, 1.5vw, 1.15rem);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* --- FILTROS E CATÁLOGO --- */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: transparent;
+            color: var(--texto-claro);
+            border: 2px solid var(--cinza-borda);
+            padding: 12px 28px;
+            border-radius: var(--raio-botao);
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transicao);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--texto-escuro);
+            color: var(--branco);
+            border-color: var(--texto-escuro);
+            box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.3);
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .catalog-card {
+            background-color: var(--branco);
+            border-radius: var(--raio-borda);
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: var(--transicao);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+        }
+
+        .catalog-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--raio-borda);
+            box-shadow: var(--sombra-suave);
+            transition: var(--transicao);
+            z-index: -1;
+        }
+
+        .catalog-card:hover::after {
+            box-shadow: var(--sombra-glow);
+            opacity: 1;
+        }
+
+        .catalog-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 107, 0, 0.3);
+        }
+
+        .card-visual {
+            height: 240px;
+            background: radial-gradient(circle at top right, var(--bg-card-escuro), var(--bg-escuro));
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .card-visual::before {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: var(--laranja-primario);
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.15;
+            transition: var(--transicao);
+        }
+
+        .catalog-card:hover .card-visual::before {
+            opacity: 0.3;
+            transform: scale(1.2);
+        }
+
+        .card-visual svg {
+            width: 80px;
+            height: 80px;
+            fill: url(#orange-gradient);
+            transition: var(--transicao);
+            z-index: 2;
+        }
+
+        .catalog-card:hover .card-visual svg {
+            transform: scale(1.15) translateY(-5px);
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: var(--branco);
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 30px;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255,255,255,0.15);
+            z-index: 2;
+        }
+
+        .card-body {
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-body h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--texto-escuro);
+            letter-spacing: -0.5px;
+        }
+
+        .card-desc {
+            color: var(--texto-claro);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .card-specs {
+            background-color: var(--cinza-fundo);
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .spec-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            border-bottom: 1px dashed var(--cinza-borda);
+            padding-bottom: 8px;
+        }
+
+        .spec-line:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: var(--texto-claro);
+        }
+
+        .spec-val {
+            font-weight: 700;
+            color: var(--texto-escuro);
+        }
+
+        .card-btn {
+            background-color: transparent;
+            color: var(--texto-escuro);
+            width: 100%;
+            padding: 16px;
+            border: 2px solid var(--cinza-borda);
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transicao);
+            text-align: center;
+        }
+
+        .catalog-card:hover .card-btn {
+            background: var(--laranja-gradiente);
+            color: var(--branco);
+            border-color: transparent;
+            box-shadow: var(--sombra-botao);
+        }
+
+        /* --- PASSO A PASSO --- */
+        .steps-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .step-card {
+            background-color: var(--branco);
+            padding: 40px 32px;
+            border-radius: var(--raio-borda);
+            text-align: center;
+            box-shadow: var(--sombra-suave);
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: var(--transicao);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--bg-escuro);
+            transition: var(--transicao);
+        }
+
+        .step-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .step-card:hover::before {
+            background: var(--laranja-gradiente);
+        }
+
+        .step-num {
+            width: 56px;
+            height: 56px;
+            background: var(--cinza-fundo);
+            color: var(--bg-escuro);
+            font-size: 20px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 24px auto;
+            transition: var(--transicao);
+            border: 1px solid var(--cinza-borda);
+        }
+
+        .step-card:hover .step-num {
+            background: var(--laranja-claro);
+            color: var(--laranja-primario);
+            border-color: var(--laranja-primario);
+            transform: scale(1.1);
+        }
+
+        .step-card h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .step-card p {
+            color: var(--texto-claro);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* --- OS ACORDOS --- */
+        .agreements-banner {
+            background: var(--bg-escuro);
+            color: var(--branco);
+            border-radius: var(--raio-borda);
+            padding: clamp(40px, 8vw, 80px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+        }
+
+        .agreements-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background: var(--laranja-gradiente);
+        }
+
+        .agreements-banner h2 {
+            font-size: clamp(2rem, 3.5vw, 2.5rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .agreements-banner > p {
+            font-size: clamp(1rem, 1.5vw, 1.15rem);
+            margin-bottom: 48px;
+            color: #94A3B8;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+        .split-agreements {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        .agreement-column {
+            background: var(--bg-card-escuro);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .agreement-column h3 {
+            color: var(--branco);
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .rule-list {
+            list-style: none;
+        }
+
+        .rule-list li {
+            margin-bottom: 16px;
+            padding-left: 32px;
+            position: relative;
+            font-size: 0.95rem;
+            color: #E2E8F0;
+            line-height: 1.5;
+        }
+
+        .rule-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--laranja-primario);
+            font-weight: 900;
+            background: rgba(255, 107, 0, 0.1);
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 12px;
+        }
+
+        .rule-list.strict li::before {
+            content: '✕';
+            color: #EF4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        /* --- FAQ / DUVIDAS --- */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--branco);
+            margin-bottom: 16px;
+            border-radius: 16px;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: var(--sombra-suave);
+            overflow: hidden;
+            transition: var(--transicao);
+        }
+
+        .faq-trigger {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--texto-escuro);
+            cursor: pointer;
+            padding: 24px;
+            transition: var(--transicao);
+        }
+
+        .faq-trigger:hover {
+            color: var(--laranja-primario);
+        }
+
+        .faq-trigger span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--cinza-fundo);
+            transition: var(--transicao);
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
+            color: var(--texto-claro);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .faq-content p {
+            padding: 0 24px 24px 24px;
+        }
+
+        .faq-item.active {
+            border-color: rgba(255, 107, 0, 0.3);
+            box-shadow: var(--sombra-glow);
+        }
+
+        .faq-item.active .faq-content {
+            max-height: 500px;
+            transition: max-height 0.6s ease-in-out;
+        }
+
+        .faq-item.active .faq-trigger span {
+            transform: rotate(45deg);
+            background: var(--laranja-claro);
+            color: var(--laranja-primario);
+        }
+
+        /* --- MODAL DE AGENDAMENTO --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(7, 11, 20, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-window {
+            background-color: var(--branco);
+            width: 100%;
+            max-width: 480px;
+            border-radius: var(--raio-borda);
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            transform: translateY(40px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-overlay.active .modal-window {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-header {
+            background: var(--bg-escuro);
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            color: var(--branco);
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        .close-modal {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: var(--branco);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: var(--transicao);
+        }
+
+        .close-modal:hover {
+            background: var(--laranja-primario);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--texto-escuro);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--cinza-borda);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: var(--transicao);
+            outline: none;
+            background: var(--cinza-fundo);
+            color: var(--texto-escuro);
+        }
+
+        .form-control:focus {
+            border-color: var(--laranja-primario);
+            background: var(--branco);
+            box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.1);
+        }
+
+        .checkbox-lock {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-top: 16px;
+            background: rgba(255, 107, 0, 0.05);
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 107, 0, 0.1);
+        }
+
+        .checkbox-lock input {
+            margin-top: 2px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--laranja-primario);
+            cursor: pointer;
+        }
+
+        .checkbox-lock label {
+            font-size: 0.85rem;
+            color: var(--texto-escuro);
+            font-weight: 600;
+            margin-bottom: 0;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            background: var(--laranja-gradiente);
+            color: var(--branco);
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transicao);
+            margin-top: 10px;
+            box-shadow: var(--sombra-botao);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px -5px rgba(255, 107, 0, 0.4);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--bg-escuro);
+            color: var(--branco);
+            padding: 80px 24px 30px 24px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand h4 {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--branco);
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
+        .footer-brand h4 span {
+            color: var(--laranja-primario);
+        }
+
+        .footer-brand p {
+            color: #94A3B8;
+            font-size: 0.95rem;
+            max-width: 320px;
+            line-height: 1.7;
+        }
+
+        .footer-links h5 {
+            color: var(--branco);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 14px;
+        }
+
+        .footer-links ul li a {
+            color: #94A3B8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transicao);
+            display: inline-block;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--laranja-primario);
+            transform: translateX(5px);
+        }
+
+        .bottom-bar {
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #64748B;
+        }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 992px) {
+            .split-agreements {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
         @media (max-width: 768px) {
-            header { padding: 12px 5%; }
-            .section-padding { padding: 60px 5%; }
-            .stats-section { padding: 60px 5%; border-radius: 24px; margin: 40px 0;}
-            .grid-holder { padding: 0; grid-template-columns: 1fr; gap: 24px;}
-            .form-grid { grid-template-columns: 1fr; gap: 16px;}
-            .field.full { grid-column: auto; }
-            .checkout-box, .summary-box { padding: 24px; border-radius: 24px;}
-            .promo-banner { border-radius: 16px; border-width: 1px;}
-            .hero-content h1 { font-size: 42px; }
+            .menu-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(7, 11, 20, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 32px;
+                gap: 24px;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+            }
+
+            .menu-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <a href="https://wa.me/5511975448113" class="whatsapp-widget" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+    <svg width="0" height="0" style="position: absolute;">
+        <defs>
+            <linearGradient id="orange-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FF6B00" />
+                <stop offset="100%" stop-color="#FF3D00" />
+            </linearGradient>
+        </defs>
+    </svg>
 
-    <div class="promo-bar"><i class="fa-solid fa-gift"></i> Alugue 2 e ganhe <span>Frete Grátis</span> na região!</div>
-    <header id="header">
-        <a href="#" class="logo" id="logo-header"><i class="fa-solid fa-face-smile-wink"></i> Val<span>Brinquedos</span></a>
-        <div class="menu-trigger" id="menu-trigger"><i class="fa-solid fa-bars"></i></div>
-        <nav class="nav-links" id="nav-links">
-            <a class="link-to-home" href="#inicio">Início</a>
-            <a class="link-to-home" href="#catalogo">Catálogo</a>
-            <button id="btn-user-area"><i class="fa-regular fa-user"></i> Meus Pedidos</button>
-            <button id="btn-header-reservar" class="btn-header">Fazer Reserva</button>
-        </nav>
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo-area">
+                <svg class="logo-svg" viewBox="0 0 100 100">
+                    <path d="M10,65 C30,65 35,55 50,55 C65,55 70,65 90,65 C98,65 100,70 90,72 C75,75 25,75 10,72 C0,70 2,65 10,65 Z" />
+                    <path d="M32,56 C30,40 38,20 50,20 C62,20 70,40 68,56 C58,54 42,54 32,56 Z" />
+                    <text x="50" y="44" font-family="'Inter',Impact,sans-serif" font-weight="900" font-size="12" fill="#0B0F19" text-anchor="middle">OXE</text>
+                </svg>
+                <div class="brand-name">OXE<span>.</span></div>
+            </a>
+            <nav class="menu-links" id="menuLinks">
+                <a href="#inicio">Início</a>
+                <a href="#balaio">Catálogo</a>
+                <a href="#avexe">Como Funciona</a>
+                <a href="#acordos">Segurança</a>
+                <a href="#duvidas">Dúvidas</a>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </header>
 
-    <div id="view-home" class="view-section active">
-        <section class="hero" id="inicio">
-            <div class="hero-content">
-                <div class="badge"><i class="fa-solid fa-star" style="color:var(--accent);"></i> Diversão Garantida</div>
-                <h1>A festa perfeita começa com os <span>Melhores Brinquedos</span></h1>
-                <p>Infláveis incríveis, cores vibrantes e segurança total para as crianças. Você escolhe, nós montamos e a alegria toma conta!</p>
-                <div class="btn-group"><a href="#catalogo" class="btn-main">Escolher Brinquedos <i class="fa-solid fa-arrow-down"></i></a></div>
-            </div>
-            <div class="hero-media"><img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=600&auto=format&fit=crop" alt="Crianças brincando"></div>
-        </section>
+    <section class="hero" id="inicio">
+        <h1>Festa sem brinquedo do <span>Oxe</span> não tem graça!</h1>
+        <p>Alugue os melhores e maiores brinquedos infláveis e camas elásticas da região. Levamos a estrutura completa, montada e checada. Pontualidade arretada para o seu evento.</p>
+        <a href="#balaio" class="cta-btn">
+            Espiar Nosso Balaio
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </section>
 
-        <section class="section-padding catalog-section" id="catalogo">
-            <div class="center-header">
-                <span class="tag">Nosso Catálogo</span>
-                <h2>Escolha a diversão</h2>
-            </div>
-            <div class="filter-container">
-                <button class="filter-btn active" data-filter="all">Todos</button>
-                <button class="filter-btn" data-filter="inflaveis">Infláveis</button>
-                <button class="filter-btn" data-filter="aquaticos">Aquáticos</button>
-            </div>
-            <div class="grid-holder" id="catalog-grid">
-                <div class="product-card" data-cat="aquaticos">
-                    <span class="card-tag">Mais Vendido</span>
-                    <div class="card-img"><img src="https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?q=80&w=600&auto=format&fit=crop" alt="Futebol de Sabão"></div>
-                    <div class="card-info">
-                        <h3>Futebol de Sabão</h3>
-                        <div class="product-price">R$ 350,00</div>
-                        <p>A maior atração para os dias quentes. Lona super escorregadia e muita espuma.</p>
-                        <div class="card-actions">
-                            <button class="btn-rent" data-toy="Futebol de Sabão">Quero esse!</button>
-                            <button class="btn-details" data-title="Futebol de Sabão" data-size="10m x 5m" data-age="Livre" data-power="110v" data-img="https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?q=80&w=600&auto=format&fit=crop">Detalhes</button>
-                        </div>
+    <section id="balaio">
+        <div class="section-header">
+            <h2>Nosso <span>Balaio</span> de Gigantes</h2>
+            <p>Escolha o brinquedo perfeito para o tamanho da sua festa e a energia da meninada.</p>
+        </div>
+
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="todos">Todos os Gigantes</button>
+            <button class="filter-btn" data-filter="pular">Pra Pular até Suar</button>
+            <button class="filter-btn" data-filter="agua">Pra Refrescar o Calor</button>
+        </div>
+
+        <div class="catalog-grid" id="catalogGrid">
+            <div class="catalog-card" data-category="pular">
+                <div class="card-visual">
+                    <svg viewBox="0 0 24 24"><path d="M19 4H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-2 14H7v-2h10v2zm0-4H7v-2h10v2zm0-4H7V8h10v2z"/></svg>
+                    <div class="card-badge">O Mais Alugado</div>
+                </div>
+                <div class="card-body">
+                    <h3>Tobogã Rei do Cangaço</h3>
+                    <p class="card-desc">Um escorregador inflável gigante que é a sensação de qualquer evento. Subiu, escorregou, a alegria é garantida!</p>
+                    <div class="card-specs">
+                        <div class="spec-line"><span class="spec-label">Espaço:</span><span class="spec-val">6,0m x 4,0m x 5,0m</span></div>
+                        <div class="spec-line"><span class="spec-label">Energia:</span><span class="spec-val">1 Tomada 220V</span></div>
+                        <div class="spec-line"><span class="spec-label">Supervisão:</span><span class="spec-val">Exige Adulto</span></div>
                     </div>
+                    <button class="card-btn" onclick="openBooking('Tobogã Rei do Cangaço')">Alugar Equipamento</button>
                 </div>
-                <div class="product-card" data-cat="inflaveis">
-                    <span class="card-tag" style="background: var(--purple);">Aventura</span>
-                    <div class="card-img"><img src="https://images.unsplash.com/photo-1572291419986-53d40636f3ef?q=80&w=600&auto=format&fit=crop" alt="Touro Mecânico"></div>
-                    <div class="card-info">
-                        <h3>Touro Mecânico</h3>
-                        <div class="product-price">R$ 450,00</div>
-                        <p>Desafie seus convidados! Controle de velocidade ajustável para todas as idades.</p>
-                        <div class="card-actions">
-                            <button class="btn-rent" data-toy="Touro Mecânico">Quero esse!</button>
-                            <button class="btn-details" data-title="Touro Mecânico" data-size="5m x 5m" data-age="Acima de 5 anos" data-power="220v" data-img="https://images.unsplash.com/photo-1572291419986-53d40636f3ef?q=80&w=600&auto=format&fit=crop">Detalhes</button>
-                        </div>
+            </div>
+
+            <div class="catalog-card" data-category="agua">
+                <div class="card-visual">
+                    <svg viewBox="0 0 24 24"><path d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm1 14h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+                    <div class="card-badge">Sucesso no Calor</div>
+                </div>
+                <div class="card-body">
+                    <h3>Futebol de Sabão Arrasta-Pé</h3>
+                    <p class="card-desc">Perfeito para os dias quentes! Quadra inflável com lona ultra deslizante para os times jogarem e escorregarem muito.</p>
+                    <div class="card-specs">
+                        <div class="spec-line"><span class="spec-label">Espaço:</span><span class="spec-val">8,0m x 4,0m</span></div>
+                        <div class="spec-line"><span class="spec-label">Energia:</span><span class="spec-val">Tomada 220V + Água</span></div>
+                        <div class="spec-line"><span class="spec-label">Supervisão:</span><span class="spec-val">Exige Adulto</span></div>
                     </div>
+                    <button class="card-btn" onclick="openBooking('Futebol de Sabão Arrasta-Pé')">Alugar Equipamento</button>
                 </div>
-                <div class="product-card" data-cat="inflaveis">
-                    <span class="card-tag" style="background: var(--pink);">Novo</span>
-                    <div class="card-img"><img src="https://images.unsplash.com/photo-1561542320-9a18cd340469?q=80&w=600&auto=format&fit=crop" alt="Castelo Inflável"></div>
-                    <div class="card-info">
-                        <h3>Castelo Multiplay</h3>
-                        <div class="product-price">R$ 220,00</div>
-                        <p>Mini-escorregador, piscina de bolinhas e pula-pula integrados em um só.</p>
-                        <div class="card-actions">
-                            <button class="btn-rent" data-toy="Castelo Multiplay">Quero esse!</button>
-                            <button class="btn-details" data-title="Castelo Multiplay" data-size="4m x 3m" data-age="2 a 8 anos" data-power="110v" data-img="https://images.unsplash.com/photo-1561542320-9a18cd340469?q=80&w=600&auto=format&fit=crop">Detalhes</button>
-                        </div>
+            </div>
+
+            <div class="catalog-card" data-category="pular">
+                <div class="card-visual">
+                    <svg viewBox="0 0 24 24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/></svg>
+                    <div class="card-badge">Clássico</div>
+                </div>
+                <div class="card-body">
+                    <h3>Pula-Pula Mandacaru</h3>
+                    <p class="card-desc">Cama elástica tradicional de grande porte. Molas protegidas por espuma espessa e rede de proteção alta e resistente.</p>
+                    <div class="card-specs">
+                        <div class="spec-line"><span class="spec-label">Espaço:</span><span class="spec-val">4,30m de Diâmetro</span></div>
+                        <div class="spec-line"><span class="spec-label">Energia:</span><span class="spec-val">Não requer</span></div>
+                        <div class="spec-line"><span class="spec-label">Supervisão:</span><span class="spec-val">Exige Adulto</span></div>
                     </div>
+                    <button class="card-btn" onclick="openBooking('Pula-Pula Mandacaru')">Alugar Equipamento</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main style="background: var(--branco);">
+        <section id="avexe">
+            <div class="section-header">
+                <h2>Se Avexe Não, <span>Como Aluga?</span></h2>
+                <p>Processo simples, transparente e sem burocracia para garantir a festa.</p>
+            </div>
+            <div class="steps-wrapper">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h3>Escolha o Gigante</h3>
+                    <p>Olhe as dimensões no nosso balaio e veja qual cabe certinho no seu espaço.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h3>Mande o Grito</h3>
+                    <p>Clique em alugar para abrir o formulário. O sistema prepara tudo para o WhatsApp.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h3>Nós Montamos</h3>
+                    <p>Chegamos cedo no dia do evento, limpamos, fixamos e testamos a estrutura toda.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">4</div>
+                    <h3>Buscamos Depois</h3>
+                    <p>Ao final do prazo acordado, nossa equipe passa para recolher tudo de forma rápida.</p>
                 </div>
             </div>
         </section>
+    </main>
 
-        <section class="section-padding">
-            <div class="center-header">
-                <span class="tag">Bem-vindo</span>
-                <h2>Conheça a nossa magia</h2>
-                <p style="font-size: 16px; margin-top: 10px; font-weight: 500;">Assista um pouco da diversão que levamos até você!</p>
-            </div>
-            <div class="video-wrapper">
-                <video width="100%" controls poster="https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=900&auto=format&fit=crop">
-                    <source src="https://www.w3schools.com/html/mov_bb.mp4" type="video/mp4">
-                    Seu navegador não suporta a tag de vídeo.
-                </video>
-            </div>
-        </section>
-
-        <section class="section-padding" style="padding-top: 0; text-align: center; padding-left: 5%; padding-right: 5%;">
-             <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=1000&auto=format&fit=crop" alt="Promoções Especiais" class="promo-banner">
-        </section>
-
-        <section class="section-padding" style="background: transparent;">
-            <div class="center-header">
-                <span class="tag">Depoimentos</span>
-                <h2>O que os clientes dizem</h2>
-                <p style="font-size: 15px; margin-top: 10px; font-weight: 600; color: var(--primary);">&larr; Arraste para o lado para ler mais &rarr;</p>
-            </div>
-            <div class="testimonials-slider">
-                <div class="testimonial-card">
-                    <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                    <p class="testimonial-text">"Os brinquedos são maravilhosos! Chegaram no horário combinado, tudo super limpo e a equipe de montagem foi muito atenciosa. As crianças amaram o futebol de sabão!"</p>
-                    <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Foto">
-                        <div><strong>Mariana Silva</strong><br><span style="font-size: 13px; color: var(--text-muted);">Mãe do Pedro (7 anos)</span></div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                    <p class="testimonial-text">"Aluguei o Touro Mecânico para o aniversário do meu marido e foi a melhor escolha. Rendemos muitas risadas. Recomendo muito o trabalho da Val Brinquedos!"</p>
-                    <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Foto">
-                        <div><strong>Carla Mendes</strong><br><span style="font-size: 13px; color: var(--text-muted);">Cliente Recorrente</span></div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                    <p class="testimonial-text">"Super profissionais! O castelinho inflável parecia novo, as cores super vivas e muito seguro para os bebês da festa."</p>
-                    <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto">
-                        <div><strong>Roberto Carlos</strong><br><span style="font-size: 13px; color: var(--text-muted);">Pai da Julia</span></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="stats-section" id="animated-stats-section">
-            <h2>Por que escolher a Val Brinquedos?</h2>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number" data-target="850" data-plus="+">0</div>
-                    <div class="stat-text">Festas Realizadas</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="100" data-plus="%">0</div>
-                    <div class="stat-text">Segurança e Limpeza</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="15" data-plus="">0</div>
-                    <div class="stat-text">Opções de Brinquedos</div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section-padding">
-            <div class="center-header">
-                <span class="tag">@valbrinquedos</span>
-                <h2>Siga a gente no Instagram</h2>
-                <p style="font-size: 16px; margin-top: 10px; font-weight: 500;">Fique por dentro das novidades e bastidores das festas!</p>
-            </div>
-            <div class="social-grid">
-                <div class="social-img-box">
-                    <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=400&auto=format&fit=crop" alt="Festa">
-                    <div class="social-overlay"><i class="fa-brands fa-instagram"></i></div>
-                </div>
-                <div class="social-img-box">
-                    <img src="https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?q=80&w=400&auto=format&fit=crop" alt="Futebol Sabão">
-                    <div class="social-overlay"><i class="fa-brands fa-instagram"></i></div>
-                </div>
-                <div class="social-img-box">
-                    <img src="https://images.unsplash.com/photo-1572291419986-53d40636f3ef?q=80&w=400&auto=format&fit=crop" alt="Touro">
-                    <div class="social-overlay"><i class="fa-brands fa-instagram"></i></div>
-                </div>
-                <div class="social-img-box">
-                    <img src="https://images.unsplash.com/photo-1561542320-9a18cd340469?q=80&w=400&auto=format&fit=crop" alt="Castelo">
-                    <div class="social-overlay"><i class="fa-brands fa-instagram"></i></div>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            <div class="footer-content">
-                <div class="logo" style="color: #fff;"><i class="fa-solid fa-face-smile-wink"></i> Val<span style="color:var(--pink)">Brinquedos</span></div>
-                <p style="max-width: 400px; line-height: 1.6;">Levando alegria, diversão e segurança para a sua festa. Atendemos Jundiaí e região.</p>
-                <div class="footer-socials">
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-                </div>
-                <p style="font-size: 14px; margin-top: 10px; color: #64748b;">Copyright © 2026 Val Brinquedos. Todos os direitos reservados.</p>
-            </div>
-        </footer>
-    </div>
-
-
-    <div id="view-checkout" class="view-section">
-        <div class="checkout-wrapper">
+    <section id="acordos">
+        <div class="agreements-banner">
+            <h2>Nossos Acordos de Segurança</h2>
+            <p>Trabalhamos exclusivamente com a <strong>locação dos equipamentos e estruturas</strong>. Para manter o preço justo e a diversão segura, dividimos os compromissos com clareza:</p>
             
-            <div>
-                <div class="checkout-header">
-                    <button class="btn-back" id="btn-voltar"><i class="fa-solid fa-arrow-left"></i> Voltar para a loja</button>
-                    <div style="font-size: 15px; font-weight: 800; color: var(--text-muted); background: var(--surface); padding: 8px 16px; border-radius: var(--radius-full); border: 1px solid var(--border-light);"><i class="fa-solid fa-lock" style="color:var(--green);"></i> Ambiente Seguro</div>
+            <div class="split-agreements">
+                <div class="agreement-column">
+                    <h3>O que o Oxe Garante</h3>
+                    <ul class="rule-list">
+                        <li>Equipamentos limpos e higienizados na entrega.</li>
+                        <li>Motores elétricos novos, revisados e potentes.</li>
+                        <li>Montagem profissional com ancoragens firmes.</li>
+                        <li>Pontualidade: brinquedo pronto antes da festa.</li>
+                    </ul>
                 </div>
-
-                <div class="checkout-box">
-                    <h2>Dados da Reserva</h2>
-                    <p class="subtitle">Insira o CEP para calcular a taxa de entrega da sua festa.</p>
-                    <form id="lead-form" class="form-grid">
-                        <div class="field"><label>Nome do Responsável</label><input type="text" id="form-nome" placeholder="Ex: Ana Costa" required></div>
-                        <div class="field"><label>WhatsApp</label><input type="tel" id="form-whats" placeholder="11999999999" required></div>
-                        <div class="field"><label>Data da Festa</label><input type="date" id="form-data" required></div>
-                        <div class="field"><label>CEP do Local (Calcula Frete)</label><input type="tel" id="form-cep" placeholder="00000-000" maxlength="9" required></div>
-                        <div class="field full"><label>Endereço de Entrega (Complete com o Número)</label><input type="text" id="form-local" placeholder="Digite o CEP primeiro..." readonly required></div>
-                    </form>
+                <div class="agreement-column">
+                    <h3>Sua Responsabilidade</h3>
+                    <ul class="rule-list strict">
+                        <li>Fornecer um adulto responsável para monitorar o brinquedo constantemente. Não enviamos monitores.</li>
+                        <li>Terreno plano, limpo e livre de objetos cortantes.</li>
+                        <li>Ponto de tomada estável a menos de 10 metros.</li>
+                        <li>Proibir entrada com calçados, alimentos ou bebidas.</li>
+                    </ul>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="summary-box">
-                <h3><i class="fa-solid fa-box-open" style="color:var(--primary);"></i> Seu Pedido</h3>
-                
-                <div class="toy-selection-list" id="toy-checkboxes">
-                    <label class="toy-checkbox"><input type="checkbox" value="Futebol de Sabão" data-price="350"><span>Futebol de Sabão <span class="toy-price-tag">R$350</span></span></label>
-                    <label class="toy-checkbox"><input type="checkbox" value="Touro Mecânico" data-price="450"><span>Touro Mecânico <span class="toy-price-tag">R$450</span></span></label>
-                    <label class="toy-checkbox"><input type="checkbox" value="Castelo Multiplay" data-price="220"><span>Castelo Multiplay <span class="toy-price-tag">R$220</span></span></label>
+    <section id="duvidas">
+        <div class="section-header">
+            <h2>Bora <span>Resolver</span> as Dúvidas?</h2>
+            <p>Respostas diretas para as perguntas mais comuns antes de fechar o negócio.</p>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-trigger">Vocês enviam monitor junto com o brinquedo? <span>+</span></button>
+                <div class="faq-content">
+                    <p>Não. Nosso modelo de negócio é focado estritamente na locação e montagem das estruturas físicas, o que permite entregar os melhores brinquedos por um valor mais em conta. A supervisão fica sob responsabilidade total dos pais ou organizadores durante a festa.</p>
                 </div>
-
-                <div class="total-wrapper">
-                    <div class="line-item"><span>Subtotal:</span> <span id="display-subtotal">R$ 0,00</span></div>
-                    <div class="line-item"><span>Frete:</span> <span id="display-frete">R$ 0,00</span></div>
-                    <hr style="border:none; border-top: 1px dashed #cbd5e1; margin: 16px 0;">
-                    
-                    <h4>Valor Total da Reserva</h4>
-                    <div class="total-value" id="display-total">R$ 0,00</div>
-                    <p style="font-size:13px; color:var(--text-body); font-weight:700; margin-top:12px;" id="frete-aviso">*Insira o CEP para calcular a entrega</p>
-                </div>
-
-                <button type="button" id="btn-finalizar-checkout" class="btn-main" style="width: 100%; padding: 20px; font-size: 18px; border-radius: var(--radius-md);">
-                    Confirmar e Pagar Via PIX <i class="fa-brands fa-pix" style="margin-left: 8px;"></i>
-                </button>
             </div>
+            <div class="faq-item">
+                <button class="faq-trigger">O que acontece se chover no dia do evento? <span>+</span></button>
+                <div class="faq-content">
+                    <p>Em caso de chuva pesada, os motores dos infláveis devem ser desligados da tomada imediatamente por segurança elétrica. Assim que a chuva passar, limpa-se o acúmulo de água e pode religar. Para camas elásticas, deve-se pausar o uso enquanto a lona estiver molhada para evitar escorregões.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-trigger">Qual o tempo de duração padrão da locação? <span>+</span></button>
+                <div class="faq-content">
+                    <p>Nosso padrão de locação atende o período completo do seu evento (geralmente entre 4 a 6 horas). Combinamos o horário de montagem para que tudo esteja pronto antes do primeiro convidado chegar, e recolhemos após o término.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h4>OXE<span>.</span></h4>
+                <p>Locação de brinquedos e estruturas gigantes para festas e eventos. Levando alegria e energia com a alma e o respeito do Nordeste.</p>
+            </div>
+            <div class="footer-links">
+                <h5>Navegação</h5>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#balaio">Catálogo</a></li>
+                    <li><a href="#avexe">Como Funciona</a></li>
+                    <li><a href="#acordos">Segurança</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h5>Contatos</h5>
+                <ul>
+                    <li><a href="#">📞 (81) 99999-9999</a></li>
+                    <li><a href="#">📍 Região Metropolitana</a></li>
+                    <li><a href="#">✉️ oi@oxebrinquedos.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom-bar">
+            <p>&copy; 2026 OXE Brinquedos Gigantes. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Reserva de Equipamento</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <form class="modal-body" id="bookingForm">
+                <div class="form-group">
+                    <label for="toyName">Brinquedo Selecionado</label>
+                    <input type="text" id="toyName" class="form-control" readonly style="font-weight: 800; color: var(--laranja-primario);">
+                </div>
+                <div class="form-group">
+                    <label for="clientName">Seu Nome Completo</label>
+                    <input type="text" id="clientName" class="form-control" placeholder="Ex: Maria da Silva" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventDate">Data do Evento</label>
+                    <input type="date" id="eventDate" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventLocation">Cidade / Bairro da Festa</label>
+                    <input type="text" id="eventLocation" class="form-control" placeholder="Ex: Boa Viagem, Recife" required>
+                </div>
+                <div class="checkbox-lock">
+                    <input type="checkbox" id="agreeTerms" required>
+                    <label for="agreeTerms">Estou ciente de que o Oxe realiza apenas a locação do equipamento e que a supervisão das crianças será de minha total responsabilidade.</label>
+                </div>
+                <button type="submit" class="btn-submit">Enviar Pedido pro Zap</button>
+            </form>
         </div>
     </div>
 
+    <script>
+        // Hamburger Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const menuLinks = document.getElementById('menuLinks');
 
-    <div class="modal-overlay" id="modal-produto">
-        <div class="modal-body">
-            <span class="modal-close" id="close-produto"><i class="fa-solid fa-xmark"></i></span>
-            <img src="" alt="" class="modal-img" id="modal-img">
-            <div class="modal-content">
-                <h2 id="modal-title">Nome</h2>
-                <div style="display:flex; gap:20px; margin: 16px 0 24px; font-weight:700; color:var(--text-body); font-size: 15px;">
-                    <div><i class="fa-solid fa-vector-square" style="color:var(--primary);"></i> <span id="spec-size"></span></div>
-                    <div><i class="fa-solid fa-bolt" style="color:var(--accent);"></i> <span id="spec-power"></span></div>
-                </div>
-                <button class="btn-main" id="modal-action-rent" style="width: 100%;">Quero Alugar Este</button>
-            </div>
-        </div>
-    </div>
+        menuToggle.addEventListener('click', () => {
+            menuLinks.classList.toggle('active');
+            const spans = menuToggle.querySelectorAll('span');
+            spans[0].style.transform = menuLinks.classList.contains('active') ? 'rotate(45deg) translate(6px, 6px)' : 'none';
+            spans[1].style.opacity = menuLinks.classList.contains('active') ? '0' : '1';
+            spans[2].style.transform = menuLinks.classList.contains('active') ? 'rotate(-45deg) translate(5px, -5px)' : 'none';
+        });
 
-    <div class="modal-overlay" id="modal-pagamento">
-        <div class="modal-body pix-container">
-            <span class="modal-close" id="close-pagamento"><i class="fa-solid fa-xmark"></i></span>
-            <i class="fa-brands fa-pix pix-icon"></i>
-            <h2>Pagamento da Reserva</h2>
-            <p style="margin-bottom:24px; font-size: 15px;">Utilize o QR Code ou copie o código PIX para garantir sua data. <br> Total: <strong id="pix-valor" style="color:var(--text-main); font-size: 18px;">R$ 0,00</strong>.</p>
-            <div class="qr-code-box"><img id="pix-qr-img" src="" alt="QR Code PIX"></div>
-            <div class="pix-copy-box">
-                <input type="text" id="pix-payload-input" readonly>
-                <button class="btn-copy" id="btn-copy-pix"><i class="fa-regular fa-copy"></i> Copiar</button>
-            </div>
-        </div>
-    </div>
-    
-    <div class="modal-overlay" id="modal-cliente">
-        <div class="modal-body client-box">
-            <span class="modal-close" id="close-cliente"><i class="fa-solid fa-xmark"></i></span>
-            <div id="view-login">
-                <div class="client-header"><h2>Meus Pedidos</h2><p style="font-size: 15px; margin-top: 8px;">Acompanhe o status da sua festa.</p></div>
-                <form id="login-form" style="display: flex; flex-direction: column; gap: 16px;">
-                    <input type="text" id="login-nome" placeholder="Seu Nome" required style="padding: 16px; border: 1px solid var(--border); border-radius: 12px; font-weight:600; font-family: 'Nunito', sans-serif; background: var(--surface-secondary); outline:none;">
-                    <input type="tel" id="login-whats" placeholder="WhatsApp" required style="padding: 16px; border: 1px solid var(--border); border-radius: 12px; font-weight:600; font-family: 'Nunito', sans-serif; background: var(--surface-secondary); outline:none;">
-                    <button type="submit" class="btn-main" style="margin-top: 8px;">Entrar</button>
-                </form>
-            </div>
-            <div id="view-pedidos" style="display: none;">
-                <div class="client-header"><h2>Agendamentos</h2></div>
-                <div class="orders-list" id="client-orders-list"></div>
-                <button id="btn-logout" style="margin-top:24px; color:var(--pink); background:none; border:none; width:100%; font-weight:800; cursor:pointer; font-size: 16px;">Sair da conta</button>
-            </div>
-        </div>
-    </div>
+        // Fechar menu ao clicar em algum link (Mobile)
+        document.querySelectorAll('.menu-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuLinks.classList.remove('active');
+                const spans = menuToggle.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            });
+        });
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        // Catalog Categories Filter Logic
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const catalogCards = document.querySelectorAll('.catalog-card');
 
-        const firebaseConfig = { apiKey: "AIzaSyDonP_YuGA49ucaTI0W0o3x6Xlav2OMmd8", authDomain: "loja-de-brinquedos-fd210.firebaseapp.com", projectId: "loja-de-brinquedos-fd210" };
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // NAVEGAÇÃO SPA
-        const viewHome = document.getElementById('view-home'); const viewCheckout = document.getElementById('view-checkout');
-        function abrirCheckout() { viewHome.classList.remove('active'); viewCheckout.classList.add('active'); window.scrollTo(0, 0); }
-        function fecharCheckout() { viewCheckout.classList.remove('active'); viewHome.classList.add('active'); window.scrollTo(0, 0); }
-        document.getElementById('btn-header-reservar').addEventListener('click', abrirCheckout);
-        document.getElementById('btn-voltar').addEventListener('click', fecharCheckout);
-        document.getElementById('logo-header').addEventListener('click', (e) => { e.preventDefault(); fecharCheckout(); });
-        document.querySelectorAll('.link-to-home').forEach(link => { link.addEventListener('click', fecharCheckout); });
-
-        // Menu e Filtros
-        const menuTrigger = document.getElementById('menu-trigger'); const navLinks = document.getElementById('nav-links');
-        menuTrigger.addEventListener('click', () => { navLinks.classList.toggle('active'); });
-        document.querySelectorAll('.nav-links a, .nav-links button').forEach(l => l.addEventListener('click', () => navLinks.classList.remove('active')));
-        const filterBtns = document.querySelectorAll('.filter-btn'); const productCards = document.querySelectorAll('.product-card');
-        filterBtns.forEach(btn => {
+        filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active')); btn.classList.add('active');
-                const cat = btn.getAttribute('data-filter');
-                productCards.forEach(card => { card.classList.remove('hidden'); if (cat !== 'all' && card.getAttribute('data-cat') !== cat) card.classList.add('hidden'); });
-            });
-        });
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
 
-        // CALCULADORA DE CHECKOUT COM LÓGICA DE FRETE E PROMOÇÃO
-        const checkboxes = document.querySelectorAll('.toy-checkbox input');
-        const freteAviso = document.getElementById('frete-aviso');
-        let subTotal = 0; let valorFreteBase = 0; let valorTotal = 0;
+                const filterValue = btn.getAttribute('data-filter');
 
-        function calcularTotal() {
-            subTotal = 0; let qtdSelecionados = 0;
-            checkboxes.forEach(cb => { if(cb.checked) { subTotal += parseFloat(cb.getAttribute('data-price')); qtdSelecionados++; } });
-
-            let freteAplicado = valorFreteBase;
-            if (qtdSelecionados >= 2 && valorFreteBase > 0) {
-                freteAplicado = 0; freteAviso.innerHTML = '<i class="fa-solid fa-gift"></i> Oba! Você ganhou Frete Grátis!'; freteAviso.style.color = "var(--pink)";
-            } else if (valorFreteBase > 0) {
-                freteAviso.innerText = "*Taxa de entrega baseada no seu CEP."; freteAviso.style.color = "var(--text-body)";
-            } else if (qtdSelecionados > 0 && valorFreteBase === 0 && document.getElementById('form-cep').value.length === 9) {
-                freteAviso.innerText = "*Sua região tem Frete Grátis!"; freteAviso.style.color = "var(--green)";
-            } else {
-                freteAviso.innerText = "*Insira o CEP para calcular a entrega"; freteAviso.style.color = "var(--text-body)";
-            }
-
-            valorTotal = subTotal + freteAplicado;
-            document.getElementById('display-subtotal').innerText = `R$ ${subTotal.toFixed(2).replace('.', ',')}`;
-            document.getElementById('display-frete').innerText = freteAplicado === 0 && subTotal > 0 ? "Grátis" : `R$ ${freteAplicado.toFixed(2).replace('.', ',')}`;
-            document.getElementById('display-total').innerText = `R$ ${valorTotal.toFixed(2).replace('.', ',')}`;
-        }
-        checkboxes.forEach(cb => cb.addEventListener('change', calcularTotal));
-
-        function selecionarEIrParaReserva(nomeBrinquedo) {
-            checkboxes.forEach(cb => { if(cb.value === nomeBrinquedo) cb.checked = true; });
-            calcularTotal(); abrirCheckout(); setTimeout(() => document.getElementById('form-nome').focus(), 300);
-        }
-        document.querySelectorAll('.btn-rent').forEach(btn => { btn.addEventListener('click', () => selecionarEIrParaReserva(btn.getAttribute('data-toy'))); });
-
-        // VIA CEP COM REGRAS DE FRETE MOCKADAS
-        const cepInput = document.getElementById('form-cep'); const localInput = document.getElementById('form-local');
-        cepInput.addEventListener('input', async (e) => {
-            let val = e.target.value.replace(/\D/g, '');
-            if (val.length > 5) val = val.substring(0, 5) + '-' + val.substring(5, 8);
-            e.target.value = val;
-            
-            if (val.replace(/\D/g, '').length === 8) {
-                localInput.value = "Buscando endereço...";
-                try {
-                    let req = await fetch(`https://viacep.com.br/ws/${val.replace(/\D/g, '')}/json/`);
-                    let res = await req.json();
-                    if(!res.erro) {
-                        localInput.value = `${res.logradouro}, ${res.bairro} - ${res.localidade}/${res.uf}, Nº: `;
-                        localInput.removeAttribute('readonly'); localInput.focus();
-                        
-                        const cidade = res.localidade.toLowerCase();
-                        if (cidade === "jundiaí" || cidade === "jundiai") { valorFreteBase = 0; }
-                        else if (["várzea paulista", "campo limpo paulista", "itupeva"].includes(cidade)) { valorFreteBase = 30.00; }
-                        else { valorFreteBase = 60.00; }
-                        calcularTotal();
-                    } else { localInput.value = ""; valorFreteBase = 0; freteAviso.innerText = "*CEP não encontrado."; calcularTotal(); }
-                } catch(err) { localInput.value = ""; valorFreteBase = 0; freteAviso.innerText = "*Erro ao buscar CEP."; calcularTotal(); }
-            } else { valorFreteBase = 0; calcularTotal(); }
-        });
-
-        // MODAIS GLOBAIS
-        const modalProduto = document.getElementById('modal-produto'); let currentModalToy = "";
-        document.querySelectorAll('.btn-details').forEach(btn => {
-            btn.addEventListener('click', () => {
-                currentModalToy = btn.getAttribute('data-title');
-                document.getElementById('modal-title').innerText = currentModalToy;
-                document.getElementById('modal-img').src = btn.getAttribute('data-img');
-                document.getElementById('spec-size').innerText = btn.getAttribute('data-size');
-                document.getElementById('spec-power').innerText = btn.getAttribute('data-power');
-                modalProduto.classList.add('active');
-            });
-        });
-        document.getElementById('close-produto').addEventListener('click', () => modalProduto.classList.remove('active'));
-        document.getElementById('modal-action-rent').addEventListener('click', () => { modalProduto.classList.remove('active'); selecionarEIrParaReserva(currentModalToy); });
-
-        // ÁREA DO CLIENTE
-        let currentUser = JSON.parse(localStorage.getItem('valCliente')) || null;
-        const btnUserArea = document.getElementById('btn-user-area');
-        const modalCliente = document.getElementById('modal-cliente');
-        
-        btnUserArea.addEventListener('click', () => { atualizarInterfaceCliente(); modalCliente.classList.add('active'); });
-        document.getElementById('close-cliente').addEventListener('click', () => modalCliente.classList.remove('active'));
-
-        document.getElementById('login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            currentUser = { nome: document.getElementById('login-nome').value, whats: document.getElementById('login-whats').value.replace(/\D/g, "") };
-            localStorage.setItem('valCliente', JSON.stringify(currentUser));
-            atualizarInterfaceCliente();
-        });
-
-        document.getElementById('btn-logout').addEventListener('click', () => {
-            currentUser = null; localStorage.removeItem('valCliente'); atualizarInterfaceCliente();
-        });
-
-        function atualizarInterfaceCliente() {
-            if (currentUser) {
-                btnUserArea.innerHTML = `<i class="fa-solid fa-face-smile-wink"></i> Olá, ${currentUser.nome.split(' ')[0]}`;
-                document.getElementById('view-login').style.display = 'none'; document.getElementById('view-pedidos').style.display = 'block';
-                buscarPedidos();
-            } else {
-                btnUserArea.innerHTML = `<i class="fa-regular fa-user"></i> Meus Pedidos`;
-                document.getElementById('view-login').style.display = 'block'; document.getElementById('view-pedidos').style.display = 'none';
-            }
-        }
-
-        function buscarPedidos() {
-            const list = document.getElementById('client-orders-list'); list.innerHTML = 'Buscando...';
-            onSnapshot(query(collection(db, "pedidos"), where("whatsapp", "==", currentUser.whats)), (snap) => {
-                list.innerHTML = '';
-                if(snap.empty) { list.innerHTML = '<p>Nenhuma festa agendada.</p>'; return; }
-                let arr = []; snap.forEach(d => arr.push(d.data()));
-                arr.forEach(item => {
-                    let st = item.status === "Aguardando PIX" ? "background:#e0f2fe; color:#0284c7; border: 1px solid #bae6fd;" : "background:#d1fae5; color:#059669; border: 1px solid #a7f3d0;";
-                    list.innerHTML += `<div class="order-item"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;"><strong style="color:var(--text-main); font-size:16px;">${item.dataEvento}</strong><span class="status-badge" style="${st}">${item.status}</span></div><p style="font-size:14px; color:var(--text-muted); font-weight:600;">${item.brinquedos}</p></div>`;
-                });
-            });
-        }
-        atualizarInterfaceCliente();
-
-        // SUBMISSÃO DO PEDIDO (FIREBASE + PIX)
-        const modalPagamento = document.getElementById('modal-pagamento');
-        document.getElementById('btn-finalizar-checkout').addEventListener('click', async () => {
-            const form = document.getElementById('lead-form');
-            if(!form.checkValidity()) { form.reportValidity(); return; }
-            if(subTotal === 0) { alert("Selecione ao menos um brinquedo no resumo do pedido!"); return; }
-
-            const btnSub = document.getElementById('btn-finalizar-checkout');
-            btnSub.innerHTML = 'Gerando PIX <i class="fa-solid fa-spinner fa-spin"></i>'; btnSub.disabled = true;
-
-            const bSelecionados = Array.from(document.querySelectorAll('.toy-checkbox input:checked')).map(cb => cb.value).join(', ');
-            const n = document.getElementById('form-nome').value;
-            const w = document.getElementById('form-whats').value.replace(/\D/g, "");
-            const d = document.getElementById('form-data').value.split('-').reverse().join('/');
-            const freteCobrado = valorTotal - subTotal; 
-
-            try {
-                await addDoc(collection(db, "pedidos"), {
-                    nome: n, whatsapp: w, dataEvento: d, localidade: document.getElementById('form-local').value,
-                    brinquedos: bSelecionados, subtotal: subTotal, frete: freteCobrado, valorTotal: valorTotal, 
-                    status: "Aguardando PIX", createdAt: serverTimestamp()
-                });
-                
-                currentUser = { nome: n, whats: w }; localStorage.setItem('valCliente', JSON.stringify(currentUser));
-                atualizarInterfaceCliente();
-
-                const pixPayload = `00020126580014br.gov.bcb.pix011111975448113520400005303986540${valorTotal.toFixed(2)}5802BR5914Val Brinquedos6007Jundiai62070503***6304`;
-                document.getElementById('pix-valor').innerText = `R$ ${valorTotal.toFixed(2).replace('.', ',')}`;
-                document.getElementById('pix-payload-input').value = pixPayload;
-                document.getElementById('pix-qr-img').src = `https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=${encodeURIComponent(pixPayload)}`;
-
-                form.reset(); checkboxes.forEach(c => c.checked = false); valorFreteBase = 0; calcularTotal();
-                fecharCheckout(); modalPagamento.classList.add('active');
-            } catch(e) { alert("Erro ao criar pedido."); } finally {
-                btnSub.innerHTML = 'Confirmar e Pagar Via PIX <i class="fa-brands fa-pix"></i>'; btnSub.disabled = false;
-            }
-        });
-
-        document.getElementById('close-pagamento').addEventListener('click', () => modalPagamento.classList.remove('active'));
-        document.getElementById('btn-copy-pix').addEventListener('click', function() {
-            document.getElementById('pix-payload-input').select(); document.execCommand("copy");
-            this.innerHTML = '<i class="fa-solid fa-check"></i> Copiado!'; setTimeout(() => this.innerHTML = '<i class="fa-regular fa-copy"></i> Copiar', 2000);
-        });
-
-        // LÓGICA DE ANIMAÇÃO DOS NÚMEROS (STATS)
-        const statsSection = document.getElementById('animated-stats-section');
-        const statNumbers = document.querySelectorAll('.stat-number');
-        let animated = false;
-
-        const animateNumbers = () => {
-            statNumbers.forEach(num => {
-                const updateCount = () => {
-                    const target = +num.getAttribute('data-target');
-                    const count = +num.innerText;
-                    const speed = 80; 
-                    const inc = target / speed;
-                    if(count < target) {
-                        num.innerText = Math.ceil(count + inc);
-                        setTimeout(updateCount, 25);
+                catalogCards.forEach(card => {
+                    if (filterValue === 'todos' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'flex';
+                        card.style.animation = 'fadeIn 0.5s ease forwards';
                     } else {
-                        num.innerText = target + num.getAttribute('data-plus');
+                        card.style.display = 'none';
                     }
-                };
-                updateCount();
+                });
             });
-        };
+        });
 
-        const observer = new IntersectionObserver((entries) => {
-            if(entries[0].isIntersecting && !animated) {
-                animated = true;
-                animateNumbers();
-            }
-        }, { threshold: 0.5 }); 
+        // Add Keyframe for filter animation dynamically
+        const style = document.createElement('style');
+        style.innerHTML = `@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }`;
+        document.head.appendChild(style);
 
-        if(statsSection) {
-            observer.observe(statsSection);
+        // FAQ Accordion Toggle
+        const faqTriggers = document.querySelectorAll('.faq-trigger');
+
+        faqTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const parent = trigger.parentElement;
+                const isActive = parent.classList.contains('active');
+                
+                document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('active'));
+                
+                if (!isActive) {
+                    parent.classList.add('active');
+                }
+            });
+        });
+
+        // Modal Logic & WhatsApp Automation
+        const bookingModal = document.getElementById('bookingModal');
+        const closeModal = document.getElementById('closeModal');
+        const bookingForm = document.getElementById('bookingForm');
+        const toyNameInput = document.getElementById('toyName');
+
+        function openBooking(toyName) {
+            toyNameInput.value = toyName;
+            bookingModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
+        closeModal.addEventListener('click', () => {
+            bookingModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        bookingModal.addEventListener('click', (e) => {
+            if (e.target === bookingModal) {
+                bookingModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const toy = toyNameInput.value;
+            const name = document.getElementById('clientName').value;
+            const rawDate = document.getElementById('eventDate').value;
+            const location = document.getElementById('eventLocation').value;
+
+            const dateObj = new Date(rawDate);
+            const formattedDate = dateObj.toLocaleDateString('pt-BR', {timeZone: 'UTC'});
+
+            const baseMessage = `Olá, Oxe Brinquedos! Gostaria de consultar a disponibilidade de locação:\n\n` +
+                                `• Brinquedo: *${toy}*\n` +
+                                `• Meu Nome: *${name}*\n` +
+                                `• Data da Festa: *${formattedDate}*\n` +
+                                `• Local: *${location}*\n\n` +
+                                `Confirmado: Estou ciente de que a supervisão das crianças é por minha conta e aceito os termos do Oxe.`;
+
+            const encodedMessage = encodeURIComponent(baseMessage);
+            const phoneNumber = "5581999999999"; 
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+
+            window.open(whatsappUrl, '_blank');
+            
+            bookingModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            bookingForm.reset();
+        });
     </script>
 </body>
 </html>
