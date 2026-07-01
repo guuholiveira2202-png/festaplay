@@ -3,278 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Admin | Val Brinquedos</title>
-    
+    <title>Painel Admin OXE - Gestão de Aluguéis</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
         :root {
-            --bg-admin: #09090b;
-            --surface-admin: #18181b;
-            --surface-card: #27272a;
-            --border-admin: rgba(255, 255, 255, 0.08);
-            --text-light: #f4f4f5;
-            --text-muted: #a1a1aa;
-            --primary: #6366f1;
-            
-            /* Status Colors */
-            --status-pending-bg: rgba(245, 158, 11, 0.15);
-            --status-pending-text: #fbbf24;
-            --status-done-bg: rgba(16, 185, 129, 0.15);
-            --status-done-text: #34d399;
-            --status-cancel-bg: rgba(239, 68, 68, 0.15);
-            --status-cancel-text: #f87171;
-            
-            --radius-md: 12px;
-            --radius-lg: 16px;
-            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            --bg-adm: #090D16;
+            --card-adm: #121824;
+            --border-adm: rgba(255, 255, 255, 0.05);
+            --brand: #FF4500;
+            --text-light: #F8FAFC;
+            --text-gray: #94A3B8;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
         }
 
-        body {
-            background-color: var(--bg-admin);
-            color: var(--text-light);
-            display: flex;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* SIDEBAR NAVIGATION */
-        aside {
-            width: 280px;
-            background-color: var(--surface-admin);
-            border-right: 1px solid var(--border-admin);
-            padding: 32px 24px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: fixed;
-            height: 100vh;
-        }
-
-        .brand {
-            font-size: 20px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #fff;
-        }
-        .brand span { color: #f43f5e; }
-
-        .menu-nav {
-            margin-top: 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            flex-grow: 1;
-        }
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 16px;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14.5px;
-            border-radius: var(--radius-md);
-            transition: var(--transition);
-        }
-        .nav-item.active, .nav-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff;
-        }
-
-        /* MAIN CONTENT HOLDER */
-        main {
-            margin-left: 280px;
-            flex-grow: 1;
-            padding: 40px 4%;
-            max-width: 1400px;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-        header h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
-        header p { color: var(--text-muted); font-size: 14px; margin-top: 4px; }
-
-        /* METRICS GRID */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-bottom: 40px;
-        }
-        .metric-card {
-            background: var(--surface-admin);
-            border: 1px solid var(--border-admin);
-            padding: 24px;
-            border-radius: var(--radius-lg);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .metric-info h3 { font-size: 13px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px; }
-        .metric-info p { font-size: 32px; font-weight: 800; margin-top: 8px; color: #fff; }
-        .metric-icon {
-            width: 48px; height: 48px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: var(--radius-md);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 20px; color: var(--primary);
-        }
-
-        /* ORDERS CONTAINER */
-        .section-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-adm); color: var(--text-light); padding: 2rem; min-height: 100vh; }
         
-        .orders-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
+        .admin-container { max-width: 1400px; margin: 0 auto; }
+        
+        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-adm); }
+        .admin-header h1 { font-size: 2rem; font-weight: 800; }
+        .admin-header h1 span { color: var(--brand); }
+        .live-badge { display: flex; align-items: center; gap: 0.5rem; background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 0.5rem 1rem; border-radius: 9999px; font-weight: 700; font-size: 0.85rem; }
+        .live-dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
 
-        .order-card {
-            background: var(--surface-admin);
-            border: 1px solid var(--border-admin);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1.2fr 1fr 1fr;
-            align-items: center;
-            gap: 20px;
-            transition: var(--transition);
-        }
-        .order-card:hover {
-            border-color: rgba(255, 255, 255, 0.15);
-            background: #1e1e22;
-        }
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .metric-card { background: var(--card-adm); border: 1px solid var(--border-adm); padding: 1.5rem; border-radius: 16px; }
+        .metric-card p { color: var(--text-gray); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; }
+        .metric-card .value { font-size: 2.2rem; font-weight: 800; margin-top: 0.5rem; }
 
-        .client-info h4 { font-size: 16px; font-weight: 700; color: #fff; }
-        .client-info p { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+        .board-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem; }
+        .orders-table-wrapper { background: var(--card-adm); border: 1px solid var(--border-adm); border-radius: 16px; overflow-x: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        table { width: 100%; border-collapse: collapse; text-align: left; min-width: 1000px; }
+        th { padding: 1.2rem 1.5rem; background: rgba(255,255,255,0.02); color: var(--text-gray); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; border-bottom: 1px solid var(--border-adm); }
+        td { padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--border-adm); font-size: 0.95rem; vertical-align: middle; }
+        tr:hover td { background: rgba(255,255,255,0.01); }
 
-        .order-details p { font-size: 14px; color: var(--text-light); }
-        .order-details span { font-size: 12px; color: var(--text-muted); display: block; margin-top: 2px; }
+        .badge { display: inline-block; padding: 0.35rem 0.8rem; border-radius: 6px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; }
+        .badge.pendente { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+        .badge.aprovado { background: rgba(16, 185, 129, 0.1); color: var(--success); }
 
-        .items-list { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
-
-        /* STATUS BADGE & SELECTOR */
-        .status-box select {
-            background: var(--surface-card);
-            color: #fff;
-            border: 1px solid var(--border-admin);
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            outline: none;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        /* ACTION BUTTONS */
-        .actions-box { text-align: right; }
-        .btn-action-whatsapp {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #10b981;
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 16px;
-            border-radius: var(--radius-md);
-            font-size: 13px;
-            font-weight: 700;
-            transition: var(--transition);
-        }
-        .btn-action-whatsapp:hover { background: #0ca673; transform: translateY(-1px); }
-
-        /* LOADING AND EMPTY STATES */
-        .empty-state {
-            text-align: center; padding: 60px; color: var(--text-muted);
-            border: 2px dashed var(--border-admin); border-radius: var(--radius-lg);
-        }
-
-        @media (max-width: 1100px) {
-            .order-card { grid-template-columns: 1fr; gap: 16px; padding: 20px; }
-            .actions-box { text-align: left; }
-            .metrics-grid { grid-template-columns: 1fr; }
-            aside { display: none; }
-            main { margin-left: 0; }
-        }
+        .actions-flex { display: flex; gap: 0.5rem; }
+        .btn-action { border: none; padding: 0.5rem 0.8rem; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; color: #fff; }
+        .btn-approve { background: var(--success); }
+        .btn-delete { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+        .btn-delete:hover { background: var(--danger); color: #fff; }
+        
+        .no-data { text-align: center; padding: 4rem !important; color: var(--text-gray); font-size: 1.1rem; font-weight: 600; }
     </style>
 </head>
 <body>
 
-    <aside>
-        <div class="top-nav">
-            <div class="brand"><i class="fa-solid fa-cubes"></i> Val<span>Hub</span></div>
-            <nav class="menu-nav">
-                <a href="#" class="nav-item active"><i class="fa-solid fa-house-chimney"></i> Pedidos Recentes</a>
-                <a href="#config" class="nav-item"><i class="fa-solid fa-gear"></i> Configurações</a>
-            </nav>
-        </div>
-        <div class="user-profile" style="font-size: 12px; color: var(--text-muted);">
-            Logado como Administrador
-        </div>
-    </aside>
-
-    <main>
-        <header>
+    <div class="admin-container">
+        <header class="admin-header">
             <div>
-                <h1>Painel de Pedidos</h1>
-                <p>Gerenciamento e monitoramento de leads em tempo real.</p>
+                <h1>Painel Central <span>OXE</span></h1>
+                <p style="color: var(--text-gray); margin-top: 0.25rem;">Monitoramento interno de locações e infraestrutura</p>
+            </div>
+            <div class="live-badge">
+                <div class="live-dot"></div>
+                Sincronizado em Tempo Real
             </div>
         </header>
 
         <div class="metrics-grid">
             <div class="metric-card">
-                <div class="metric-info">
-                    <h3>Total Geral</h3>
-                    <p id="metric-total">0</p>
-                </div>
-                <div class="metric-icon"><i class="fa-solid fa-list-check"></i></div>
+                <p>Pedidos Recebidos</p>
+                <div class="value" id="countTotal">0</div>
             </div>
             <div class="metric-card">
-                <div class="metric-info">
-                    <h3>Pendentes</h3>
-                    <p id="metric-pending" style="color: var(--status-pending-text);">0</p>
-                </div>
-                <div class="metric-icon"><i class="fa-solid fa-clock"></i></div>
+                <p>Aguardando Análise</p>
+                <div class="value" id="countPendentes" style="color: var(--warning);">0</div>
             </div>
             <div class="metric-card">
-                <div class="metric-info">
-                    <h3>Atendidos</h3>
-                    <p id="metric-done" style="color: var(--status-done-text);">0</p>
-                </div>
-                <div class="metric-icon"><i class="fa-solid fa-circle-check"></i></div>
+                <p>Aprovados / Agendados</p>
+                <div class="value" id="countAprovados" style="color: var(--success);">0</div>
             </div>
         </div>
 
-        <h2 class="section-title"><i class="fa-solid fa-bolt"></i> Fluxo de Pedidos Ativos</h2>
-
-        <div class="orders-list" id="orders-container">
-            <div class="empty-state">Aguardando conexão segura com o banco de dados...</div>
+        <h2 class="board-title">📋 Solicitações Entrantes</h2>
+        <div class="orders-table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Brinquedo</th>
+                        <th>Data da Festa</th>
+                        <th>Localização</th>
+                        <th>Status</th>
+                        <th>Ações Obrigatórias</th>
+                    </tr>
+                </thead>
+                <tbody id="ordersTableBody">
+                    <tr>
+                        <td colspan="6" class="no-data">Conectando à malha de dados Firebase...</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </main>
+    </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, onSnapshot, query, orderBy, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, onSnapshot, doc, updateDoc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // Sua configuração do Firebase SDK fornecida
         const firebaseConfig = {
             apiKey: "AIzaSyDonP_YuGA49ucaTI0W0o3x6Xlav2OMmd8",
             authDomain: "loja-de-brinquedos-fd210.firebaseapp.com",
@@ -285,101 +123,106 @@
             measurementId: "G-BX030XJ8S1"
         };
 
-        // Inicializando o Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        const container = document.getElementById('orders-container');
-
-        // Escuta ativa (Real-time Snapshot) dos dados gravados na coleção "pedidos"
-        const q = query(collection(db, "pedidos"), orderBy("createdAt", "desc"));
+        const tableBody = document.getElementById('ordersTableBody');
+        const q = query(collection(db, "reservas"), orderBy("dataRegistro", "desc"));
         
+        // Sincronização em Tempo Real com tratamento de bloqueio do Firebase
         onSnapshot(q, (snapshot) => {
+            let html = '';
+            let total = 0, pendentes = 0, aprovados = 0;
+
             if (snapshot.empty) {
-                container.innerHTML = `<div class="empty-state"><i class="fa-regular fa-folder-open" style='font-size:32px;margin-bottom:10px;display:block;'></i> Nenhum pedido registrado no banco de dados até o momento.</div>`;
-                updateMetrics([], 0, 0);
+                tableBody.innerHTML = `<tr><td colspan="6" class="no-data">Nenhum pedido registrado no sistema até o momento.</td></tr>`;
+                atualizarContadores(0, 0, 0);
                 return;
             }
 
-            container.innerHTML = "";
-            let total = 0, pendentes = 0, concluidos = 0;
-
-            snapshot.forEach((docSnap) => {
-                const item = docSnap.data();
-                const id = docSnap.id;
+            snapshot.forEach((documento) => {
+                const data = documento.data();
+                const id = documento.id;
                 total++;
 
-                if(item.status === 'Pendente' || !item.status) pendentes++;
-                if(item.status === 'Atendido') concluidos++;
+                if (data.status === 'Pendente') pendentes++;
+                if (data.status === 'Aprovado') aprovados++;
 
-                // Tratamento da data de criação
-                let dataCriacao = "Data Indisponível";
-                if(item.createdAt && item.createdAt.toDate) {
-                    dataCriacao = item.createdAt.toDate().toLocaleString('pt-BR');
+                let dataFormatada = data.dataFesta;
+                if(data.dataFesta && data.dataFesta.includes('-')) {
+                    const partes = data.dataFesta.split('-');
+                    dataFormatada = `${partes[2]}/${partes[1]}/${partes[0]}`;
                 }
 
-                // Criação do elemento visual do pedido
-                const card = document.createElement('div');
-                card.className = 'order-card';
-                card.innerHTML = `
-                    <div class="client-info">
-                        <h4>${item.nome || 'Cliente Sem Nome'}</h4>
-                        <p><i class="fa-solid fa-location-dot"></i> ${item.localidade || 'Não informada'}</p>
-                    </div>
-                    <div class="order-details">
-                        <p><i class="fa-regular fa-calendar"></i> ${item.dataEvento || 'Pendente'}</p>
-                        <span>Recebido em: ${dataCriacao}</span>
-                    </div>
-                    <div class="items-list">
-                        <strong>Pedido/Interesse:</strong><br>
-                        ${item.brinquedos || 'Interesse direto via botão do catálogo.'}
-                    </div>
-                    <div class="status-box">
-                        <select onchange="window.updateOrderStatus('${id}', this.value)">
-                            <option value="Pendente" ${item.status === 'Pendente' ? 'selected' : ''}>⏳ Pendente</option>
-                            <option value="Atendido" ${item.status === 'Atendido' ? 'selected' : ''}>✅ Atendido</option>
-                            <option value="Cancelado" ${item.status === 'Cancelado' ? 'selected' : ''}>❌ Cancelado</option>
-                        </select>
-                    </div>
-                    <div class="actions-box">
-                        <a href="https://wa.me/${limparNumero(item.whatsapp)}?text=${encodeURIComponent('Olá ' + item.nome + ', sou da Val Brinquedos! Recebi seu contato sobre os brinquedos.')}" target="_blank" class="btn-action-whatsapp">
-                            <i class="fa-brands fa-whatsapp"></i> Chamar Cliente
-                        </a>
-                    </div>
+                html += `
+                    <tr>
+                        <td>
+                            <strong style="color: #fff; display:block;">${data.cliente}</strong>
+                            <span style="font-size:0.8rem; color: var(--text-gray);">ID: ${id.substring(0,8)}</span>
+                        </td>
+                        <td><span style="color: var(--brand); font-weight:700;">${data.brinquedo}</span></td>
+                        <td><strong>${dataFormatada}</strong></td>
+                        <td style="max-width: 320px; font-size: 0.85rem; line-height:1.4;">
+                            <span style="display:block; color:#fff;">${data.rua}, Nº ${data.numero}</span>
+                            <span style="color: var(--text-gray); font-size:0.8rem;">${data.bairroCidade} | CEP: ${data.cep}</span>
+                            ${data.complemento && data.complemento !== 'Nenhum informado' ? `<span style="display:block; color: #F59E0B; font-size:0.75rem; margin-top:2px;">Obs: ${data.complemento}</span>` : ''}
+                        </td>
+                        <td><span class="badge ${data.status.toLowerCase()}">${data.status}</span></td>
+                        <td>
+                            <div class="actions-flex">
+                                ${data.status === 'Pendente' ? `
+                                    <button class="btn-action btn-approve" onclick="alterarStatus('${id}', 'Aprovado')">Aprovar</button>
+                                ` : `
+                                    <button class="btn-action btn-approve" style="background:#222F4D; color:var(--text-gray); cursor:default;" disabled>✓ Atendido</button>
+                                `}
+                                <button class="btn-action btn-delete" onclick="deletarPedido('${id}')">Excluir</button>
+                            </div>
+                        </td>
+                    </tr>
                 `;
-                container.appendChild(card);
             });
 
-            updateMetrics(total, pendentes, concluidos);
+            tableBody.innerHTML = html;
+            atualizarContadores(total, pendentes, aprovados);
+        }, (error) => {
+            console.error(error);
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="6" class="no-data" style="color: var(--danger); line-height: 1.5;">
+                        <strong>❌ Acesso Negado pelo Firebase</strong><br>
+                        Detalhes: ${error.message}<br><br>
+                        <strong>Motivo:</strong> Suas regras de segurança do Firestore Database estão bloqueando a leitura.<br>
+                        Acesse o console do Firebase, entre no Firestore, clique em <strong>Rules</strong> e mude para <code style="background:rgba(255,255,255,0.1); padding:2px 5px;">allow read, write: if true;</code>
+                    </td>
+                </tr>
+            `;
         });
 
-        // Função para atualizar os cards de métricas no topo do painel
-        function updateMetrics(t, p, c) {
-            document.getElementById('metric-total').innerText = t;
-            document.getElementById('metric-pending').innerText = p;
-            document.getElementById('metric-done').innerText = c;
+        function atualizarContadores(t, p, a) {
+            document.getElementById('countTotal').innerText = t;
+            document.getElementById('countPendentes').innerText = p;
+            document.getElementById('countAprovados').innerText = a;
         }
 
-        // Função global para atualizar o status do pedido direto no Firebase
-        window.updateOrderStatus = async function(id, novoStatus) {
+        window.alterarStatus = async (id, novoStatus) => {
             try {
-                const docRef = doc(db, "pedidos", id);
-                await updateDoc(docRef, { status: novoStatus });
+                await updateDoc(doc(db, "reservas", id), { status: novoStatus });
             } catch (error) {
-                console.error("Erro ao atualizar status: ", error);
-                alert("Falha ao salvar modificação de status.");
+                console.error(error);
+                alert("Erro ao atualizar registro: " + error.message);
             }
         };
 
-        // Função auxiliar para sanitizar o número do WhatsApp recebido
-        function limparNumero(num) {
-            if(!num) return "";
-            let limpo = num.replace(/\D/g, "");
-            if(limpo.length === 11 && !limpo.startsWith("55")) {
-                limpo = "55" + limpo;
+        window.deletarPedido = async (id) => {
+            if(confirm("Deseja apagar permanentemente este registro?")) {
+                try {
+                    await deleteDoc(doc(db, "reservas", id));
+                } catch (error) {
+                    console.error(error);
+                    alert("Erro ao deletar registro: " + error.message);
+                }
             }
-            return limpo;
-        }
+        };
     </script>
 </body>
 </html>
