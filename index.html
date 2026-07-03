@@ -15,267 +15,414 @@
             --brand-primary: #FF4500;
             --brand-secondary: #FF1493;
             --brand-gradient: linear-gradient(135deg, #FF4500 0%, #FF1493 100%);
-            --brand-gradient-hover: linear-gradient(135deg, #E03E00 0%, #D8117E 100%);
-            --brand-glow: rgba(255, 69, 0, 0.12);
+            --brand-gradient-hover: linear-gradient(135deg, #FF5714 0%, #FF269D 100%);
+            --brand-glow: rgba(255, 69, 0, 0.15);
+            --brand-glow-strong: rgba(255, 69, 0, 0.35);
             
-            /* Tons Escuros e Claros */
-            --dark-900: #0B0F19;
-            --dark-800: #161F33;
-            --dark-700: #222F4D;
+            /* Tons Escuros e Claros Premium */
+            --dark-900: #07090E;
+            --dark-800: #111726;
+            --dark-700: #1D283E;
             --light-50: #F8FAFC;
             --light-100: #F1F5F9;
             --light-200: #E2E8F0;
             --light-300: #CBD5E1;
             --white: #FFFFFF;
             
-            /* Texto */
-            --text-main: #1E293B;
+            /* Tipografia */
+            --text-main: #0F172A;
             --text-muted: #64748B;
             
             /* Feedback */
             --success: #10B981;
-            --success-glow: rgba(16, 185, 129, 0.12);
+            --success-glow: rgba(16, 185, 129, 0.15);
             --warning: #F59E0B;
-            --warning-glow: rgba(245, 158, 11, 0.12);
+            --warning-glow: rgba(245, 158, 11, 0.15);
             --danger: #EF4444;
-            --danger-glow: rgba(239, 68, 68, 0.12);
+            --danger-glow: rgba(239, 68, 68, 0.15);
             
             /* Bordas e Raio */
             --radius-sm: 8px;
             --radius-md: 16px;
             --radius-lg: 24px;
-            --radius-xl: 40px;
+            --radius-xl: 36px;
             --radius-pill: 9999px;
             
-            /* Sombras Premium (Multi-layered) */
-            --shadow-sm: 0 1px 2px rgba(11, 15, 25, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(11, 15, 25, 0.05), 0 2px 4px -1px rgba(11, 15, 25, 0.03);
-            --shadow-lg: 0 10px 15px -3px rgba(11, 15, 25, 0.05), 0 4px 6px -2px rgba(11, 15, 25, 0.03);
-            --shadow-xl: 0 20px 25px -5px rgba(11, 15, 25, 0.08), 0 10px 10px -5px rgba(11, 15, 25, 0.03);
-            --shadow-brand: 0 10px 25px -5px rgba(255, 69, 0, 0.3);
+            /* Sombras Camadas (Layered Shadows) */
+            --shadow-sm: 0 2px 4px rgba(7, 9, 14, 0.03), 0 1px 2px rgba(7, 9, 14, 0.04);
+            --shadow-md: 0 10px 15px -3px rgba(7, 9, 14, 0.05), 0 4px 6px -2px rgba(7, 9, 14, 0.03);
+            --shadow-lg: 0 20px 25px -5px rgba(7, 9, 14, 0.06), 0 10px 10px -5px rgba(7, 9, 14, 0.02);
+            --shadow-xl: 0 25px 50px -12px rgba(7, 9, 14, 0.12);
+            --shadow-brand: 0 12px 25px -5px var(--brand-glow-strong);
             
-            /* Animações */
+            /* Animações e Curvas de Resposta (Spring & Ease) */
             --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
             --transition-fast: all 0.2s var(--ease-out);
             --transition-smooth: all 0.4s var(--ease-out);
         }
 
         /* RESET E BASE */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-font-smoothing: antialiased; }
         
-        /* Acessibilidade - Focus Visível */
-        *:focus-visible { outline: 3px solid var(--brand-primary); outline-offset: 3px; border-radius: 4px; }
-        button:focus-visible, a:focus-visible { border-radius: var(--radius-pill); }
-        input:focus-visible { border-radius: var(--radius-md); }
+        *:focus-visible { 
+            outline: 2px solid var(--brand-primary); 
+            outline-offset: 4px; 
+        }
 
-        /* Scrollbar Premium */
-        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--light-50); }
-        ::-webkit-scrollbar-thumb { background: var(--light-300); border-radius: var(--radius-pill); border: 3px solid var(--light-50); }
-        ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+        ::-webkit-scrollbar-thumb { background: var(--light-300); border-radius: var(--radius-pill); border: 2px solid var(--light-50); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
         html { scroll-behavior: smooth; scroll-padding-top: 100px; background-color: var(--light-50); }
-        body { color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+        body { color: var(--text-main); line-height: 1.6; overflow-x: hidden; selection-background-color: var(--brand-primary); selection-color: var(--white); }
+        
+        ::selection { background: var(--brand-primary); color: var(--white); }
         
         .container { max-width: 1240px; margin-inline: auto; padding-inline: 1.5rem; }
-        section { padding-block: clamp(5rem, 8vw, 8rem); }
+        section { padding-block: clamp(5rem, 8vw, 8rem); position: relative; }
         
         /* CABEÇALHOS DE SEÇÃO */
-        .section-header { text-align: center; margin-bottom: clamp(3rem, 5vw, 4.5rem); max-width: 700px; margin-inline: auto; }
-        .section-header .tag-top { display: inline-block; background: var(--brand-glow); color: var(--brand-primary); padding: 0.5rem 1.25rem; border-radius: var(--radius-pill); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1.25rem; }
-        .section-header h2 { font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 900; color: var(--dark-900); letter-spacing: -0.03em; line-height: 1.15; }
-        .section-header h2 span { background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .section-header { text-align: center; margin-bottom: clamp(3.5rem, 6vw, 5rem); max-width: 720px; margin-inline: auto; }
+        .section-header .tag-top { 
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: var(--brand-glow); color: var(--brand-primary); 
+            padding: 0.5rem 1.25rem; border-radius: var(--radius-pill); 
+            font-size: 0.75rem; font-weight: 800; text-transform: uppercase; 
+            letter-spacing: 1.5px; margin-bottom: 1.25rem; border: 1px solid rgba(255, 69, 0, 0.2);
+        }
+        .section-header h2 { font-size: clamp(2.4rem, 4.5vw, 3.2rem); font-weight: 900; color: var(--dark-900); letter-spacing: -0.04em; line-height: 1.15; }
+        .section-header h2 span { background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
         .section-header p { font-size: 1.15rem; color: var(--text-muted); margin-top: 1rem; font-weight: 500; }
 
-        /* ANIMAÇÃO DE REVELAÇÃO */
-        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out); will-change: opacity, transform; }
+        .reveal { opacity: 0; transform: translateY(35px); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out); will-change: opacity, transform; }
         .reveal.active { opacity: 1; transform: translateY(0); }
         .delay-1 { transition-delay: 0.15s; }
         .delay-2 { transition-delay: 0.3s; }
 
-        /* BOTÕES */
-        .btn-primary { background: var(--brand-gradient); color: var(--white); text-decoration: none; padding: 1rem 2.2rem; border-radius: var(--radius-pill); font-weight: 700; font-size: 1rem; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; box-shadow: var(--shadow-brand); transition: var(--transition-smooth); gap: 0.5rem; }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(255, 69, 0, 0.4); background: var(--brand-gradient-hover); }
-        .btn-primary:active { transform: translateY(0) scale(0.98); box-shadow: var(--shadow-sm); }
+        /* BOTÕES PREMIUM */
+        .btn-primary { 
+            background: var(--brand-gradient); color: var(--white); text-decoration: none; 
+            padding: 1rem 2.4rem; border-radius: var(--radius-pill); font-weight: 700; font-size: 1rem; 
+            border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; 
+            box-shadow: var(--shadow-brand); transition: var(--transition-smooth); gap: 0.6rem;
+            position: relative; overflow: hidden; z-index: 1;
+        }
+        .btn-primary::after {
+            content: ''; position: absolute; inset: 0; background: var(--brand-gradient-hover);
+            opacity: 0; transition: opacity 0.3s ease; z-index: -1;
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 18px 35px -5px var(--brand-glow-strong); }
+        .btn-primary:hover::after { opacity: 1; }
+        .btn-primary:active { transform: translateY(0) scale(0.96); box-shadow: var(--shadow-sm); }
         
-        .btn-secondary { background: var(--white); color: var(--dark-900); text-decoration: none; padding: 1rem 2.2rem; border-radius: var(--radius-pill); font-weight: 700; font-size: 1rem; border: 1px solid var(--light-200); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: var(--transition-smooth); box-shadow: var(--shadow-sm); }
-        .btn-secondary:hover { background: var(--light-50); border-color: var(--light-300); transform: translateY(-3px); box-shadow: var(--shadow-md); }
-        .btn-secondary:active { transform: translateY(0) scale(0.98); }
+        .btn-secondary { 
+            background: var(--white); color: var(--dark-900); text-decoration: none; 
+            padding: 1rem 2.4rem; border-radius: var(--radius-pill); font-weight: 700; font-size: 1rem; 
+            border: 1px solid var(--light-200); cursor: pointer; display: inline-flex; align-items: center; 
+            justify-content: center; transition: var(--transition-smooth); box-shadow: var(--shadow-sm); gap: 0.6rem;
+        }
+        .btn-secondary:hover { background: var(--light-50); border-color: var(--light-300); transform: translateY(-3px); box-shadow: var(--shadow-md); color: var(--brand-primary); }
+        .btn-secondary:active { transform: translateY(0) scale(0.96); }
 
-        .btn-outline { background: transparent; color: var(--dark-900); text-decoration: none; padding: 0.7rem 1.6rem; border-radius: var(--radius-pill); font-weight: 700; font-size: 0.9rem; border: 2px solid var(--light-200); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: var(--transition-fast); }
-        .btn-outline:hover { background: var(--light-100); border-color: var(--dark-900); }
-        .btn-outline:active { transform: scale(0.96); }
+        .btn-outline { 
+            background: transparent; color: var(--dark-900); text-decoration: none; 
+            padding: 0.7rem 1.6rem; border-radius: var(--radius-pill); font-weight: 700; font-size: 0.9rem; 
+            border: 2px solid var(--light-200); cursor: pointer; display: inline-flex; align-items: center; 
+            justify-content: center; transition: var(--transition-fast); 
+        }
+        .btn-outline:hover { background: var(--dark-900); color: var(--white); border-color: var(--dark-900); }
 
-        /* NAVBAR (Glassmorphism Aprimorado) */
-        .navbar-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 1.5rem; transition: var(--transition-smooth); }
-        .navbar-wrapper.scrolled { padding: 0.75rem 1.5rem; }
-        .navbar { background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: var(--shadow-md); padding: 0.6rem 0.8rem 0.6rem 2.5rem; border-radius: var(--radius-pill); display: flex; align-items: center; justify-content: space-between; max-width: 1240px; margin: 0 auto; transition: var(--transition-smooth); }
-        .navbar-wrapper.scrolled .navbar { background: rgba(255, 255, 255, 0.9); }
-        .brand-name { font-size: 1.8rem; font-weight: 900; color: var(--dark-900); letter-spacing: -0.05em; text-decoration: none; }
+        /* NAVBAR GLASSMORPHISM */
+        .navbar-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 1.5rem; transition: var(--transition-smooth); pointer-events: none; }
+        .navbar-wrapper.scrolled { padding: 0.8rem 1.5rem; }
+        .navbar { 
+            background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); 
+            border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: var(--shadow-md); 
+            padding: 0.6rem 0.8rem 0.6rem 2.5rem; border-radius: var(--radius-pill); display: flex; 
+            align-items: center; justify-content: space-between; max-width: 1240px; margin: 0 auto; 
+            transition: var(--transition-smooth); pointer-events: auto;
+        }
+        .navbar-wrapper.scrolled .navbar { background: rgba(255, 255, 255, 0.9); box-shadow: var(--shadow-lg); border-color: rgba(226, 232, 240, 0.8); }
+        .brand-name { font-size: 1.8rem; font-weight: 900; color: var(--dark-900); letter-spacing: -0.05em; text-decoration: none; display: flex; align-items: center; }
         .brand-name span { color: var(--brand-primary); }
         .menu-links { display: flex; align-items: center; gap: 2.5rem; }
         .menu-links a { text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 0.95rem; transition: var(--transition-fast); position: relative; }
         .menu-links a:hover { color: var(--brand-primary); }
+        .menu-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--brand-gradient); transition: width 0.3s var(--ease-out); border-radius: 2px; }
+        .menu-links a:hover::after { width: 100%; }
         .nav-actions { display: flex; gap: 1rem; align-items: center; }
 
         /* HERO */
-        .hero-section { padding-top: 11rem; padding-bottom: 5rem; position: relative; }
+        .hero-section { padding-top: 11rem; padding-bottom: 6rem; position: relative; }
         .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center; }
-        .badge-trust { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--white); border: 1px solid var(--light-200); padding: 0.6rem 1.4rem; border-radius: var(--radius-pill); font-size: 0.85rem; font-weight: 700; color: var(--dark-900); margin-bottom: 1.75rem; box-shadow: var(--shadow-sm); }
-        .hero-content h1 { color: var(--dark-900); font-size: clamp(2.8rem, 5vw, 4.8rem); font-weight: 900; margin-bottom: 1.5rem; letter-spacing: -0.04em; line-height: 1.1; }
+        .badge-trust { 
+            display: inline-flex; align-items: center; gap: 0.6rem; background: var(--white); 
+            border: 1px solid var(--light-200); padding: 0.6rem 1.4rem; border-radius: var(--radius-pill); 
+            font-size: 0.85rem; font-weight: 700; color: var(--dark-900); margin-bottom: 1.75rem; 
+            box-shadow: var(--shadow-sm); transition: var(--transition-fast);
+        }
+        .badge-trust:hover { border-color: var(--brand-primary); transform: translateY(-1px); }
+        .hero-content h1 { color: var(--dark-900); font-size: clamp(2.8rem, 5.5vw, 5rem); font-weight: 900; margin-bottom: 1.5rem; letter-spacing: -0.04em; line-height: 1.08; }
         .hero-content h1 span { background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .hero-content p { color: var(--text-muted); font-size: 1.25rem; max-width: 560px; margin-bottom: 3rem; font-weight: 500; line-height: 1.7; }
         .hero-actions { display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap; }
         
         .hero-images-layout { position: relative; }
-        .hero-img-wrapper { border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-xl); background: var(--light-200); aspect-ratio: 4/3; border: 4px solid var(--white); transform: rotate(1deg); transition: var(--transition-smooth); }
-        .hero-img-wrapper:hover { transform: rotate(0deg) scale(1.02); }
+        .hero-img-wrapper { 
+            border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-xl); 
+            background: var(--light-200); aspect-ratio: 4/3; border: 6px solid var(--white); 
+            transform: rotate(1deg); transition: var(--transition-smooth); position: relative;
+        }
+        .hero-img-wrapper::after { content: ''; position: absolute; inset: 0; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05); border-radius: calc(var(--radius-xl) - 6px); pointer-events: none; }
+        .hero-img-wrapper:hover { transform: rotate(0deg) scale(1.02); box-shadow: 0 30px 60px -15px rgba(255, 69, 0, 0.25); }
         .hero-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
         
-        /* Animação Contínua (Flutuando) */
-        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-12px); } 100% { transform: translateY(0px); } }
-        .floating-card { position: absolute; bottom: -2rem; left: -2rem; background: var(--white); padding: 1.25rem 1.5rem; border-radius: var(--radius-md); box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 1.2rem; border: 1px solid var(--light-100); animation: float 6s var(--ease-in-out) infinite; }
-        .floating-card-icon { width: 48px; height: 48px; border-radius: 50%; background: var(--success-glow); color: var(--success); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: bold; }
+        @keyframes float { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-10px) rotate(-1deg); } 100% { transform: translateY(0px) rotate(0deg); } }
+        .floating-card { 
+            position: absolute; bottom: -2rem; left: -2rem; background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(12px); padding: 1.25rem 1.5rem; border-radius: var(--radius-md); 
+            box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 1.2rem; 
+            border: 1px solid rgba(255,255,255,0.8); animation: float 6s var(--ease-out) infinite; z-index: 2;
+        }
+        .floating-card-icon { width: 48px; height: 48px; border-radius: 50%; background: var(--success-glow); color: var(--success); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: bold; flex-shrink: 0; }
 
         /* COMO FUNCIONA */
         .process-bg { background: var(--white); border-top: 1px solid var(--light-100); border-bottom: 1px solid var(--light-100); }
         .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; }
-        .process-card { background: var(--light-50); padding: 3rem 2.5rem; border-radius: var(--radius-lg); border: 1px solid var(--light-100); transition: var(--transition-smooth); position: relative; overflow: hidden; }
+        .process-card { 
+            background: var(--light-50); padding: 3.5rem 2.5rem; border-radius: var(--radius-lg); 
+            border: 1px solid var(--light-200); transition: var(--transition-smooth); position: relative; overflow: hidden; 
+        }
         .process-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--brand-gradient); opacity: 0; transition: var(--transition-smooth); }
-        .process-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: transparent; background: var(--white); }
+        .process-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); border-color: rgba(255, 69, 0, 0.2); background: var(--white); }
         .process-card:hover::before { opacity: 1; }
-        .process-number { font-size: 4rem; font-weight: 900; color: var(--light-300); line-height: 1; margin-bottom: 1.25rem; transition: var(--transition-smooth); }
-        .process-card:hover .process-number { background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .process-card h3 { font-size: 1.35rem; font-weight: 800; color: var(--dark-900); margin-bottom: 0.75rem; }
+        .process-number { font-size: 4.5rem; font-weight: 900; color: var(--light-300); line-height: 1; margin-bottom: 1.5rem; transition: var(--transition-smooth); letter-spacing: -0.05em; }
+        .process-card:hover .process-number { background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; transform: translateX(5px); }
+        .process-card h3 { font-size: 1.4rem; font-weight: 800; color: var(--dark-900); margin-bottom: 0.75rem; }
         .process-card p { color: var(--text-muted); font-size: 1.05rem; font-weight: 500; }
 
         /* BANNER ESTATÍSTICAS */
-        .stats-section { background: var(--dark-900); color: var(--white); padding-block: 5rem; position: relative; overflow: hidden; }
-        .stats-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(255, 69, 0, 0.15) 0%, transparent 70%); }
+        .stats-section { background: var(--dark-900); color: var(--white); padding-block: 5.5rem; position: relative; overflow: hidden; }
+        .stats-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(255, 69, 0, 0.18) 0%, transparent 70%); pointer-events: none; }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; text-align: center; position: relative; z-index: 1; }
-        .stat-item h3 { font-size: 3.5rem; font-weight: 900; background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; margin-bottom: 0.5rem; }
+        .stat-item h3 { font-size: 3.8rem; font-weight: 900; background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; margin-bottom: 0.5rem; letter-spacing: -0.03em; }
         .stat-item p { font-size: 1.1rem; font-weight: 600; color: var(--light-300); letter-spacing: 0.5px; }
 
         /* CATÁLOGO */
         .catalog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 3rem; }
-        .card { background: var(--white); border: 1px solid var(--light-200); border-radius: var(--radius-lg); padding: 1.25rem; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); transition: var(--transition-smooth); cursor: pointer; height: 100%; }
+        .card { 
+            background: var(--white); border: 1px solid var(--light-200); border-radius: var(--radius-lg); 
+            padding: 1.25rem; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); 
+            transition: var(--transition-smooth); cursor: pointer; height: 100%; position: relative;
+        }
+        .card::after {
+            content: ''; position: absolute; inset: -1px; border-radius: var(--radius-lg);
+            background: var(--brand-gradient); opacity: 0; transition: opacity 0.4s ease; z-index: -1;
+        }
         .card:hover { transform: translateY(-10px); box-shadow: var(--shadow-xl); border-color: transparent; }
-        .card-img-wrapper { height: 280px; border-radius: var(--radius-md); overflow: hidden; position: relative; background: var(--light-100); }
+        .card:hover::after { opacity: 1; }
+        
+        .card-img-wrapper { height: 300px; border-radius: var(--radius-md); overflow: hidden; position: relative; background: var(--light-100); }
         .card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease-out); }
-        .card:hover .card-img-wrapper img { transform: scale(1.05); }
-        .card-badge { position: absolute; top: 1.25rem; right: 1.25rem; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: var(--dark-900); padding: 0.5rem 1.1rem; border-radius: var(--radius-pill); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.7px; box-shadow: var(--shadow-sm); }
-        .card-info { padding: 1.75rem 0.5rem 0.5rem; display: flex; flex-direction: column; flex-grow: 1; }
-        .card-info h3 { font-size: 1.4rem; font-weight: 800; color: var(--dark-900); margin-bottom: 1.25rem; }
+        .card:hover .card-img-wrapper img { transform: scale(1.06); }
+        .card-badge { 
+            position: absolute; top: 1.25rem; right: 1.25rem; background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(8px); color: var(--dark-900); padding: 0.5rem 1.1rem; border-radius: var(--radius-pill); 
+            font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.7px; box-shadow: var(--shadow-md); 
+        }
+        .card-info { padding: 1.75rem 0.75rem 0.75rem; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-info h3 { font-size: 1.5rem; font-weight: 800; color: var(--dark-900); margin-bottom: 1.25rem; letter-spacing: -0.02em; }
         .card-specs { display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 2.25rem; flex-grow: 1; }
         .spec-row { display: flex; align-items: center; gap: 0.85rem; color: var(--text-muted); font-size: 0.95rem; font-weight: 600; }
-        .spec-row svg { width: 20px; height: 20px; color: var(--brand-primary); flex-shrink: 0; }
+        .spec-row svg { width: 22px; height: 22px; color: var(--brand-primary); flex-shrink: 0; }
         .card-btn { width: 100%; padding: 1.1rem; border-radius: var(--radius-md); font-weight: 800; font-size: 1rem; margin-top: auto; }
         .card:hover .card-btn { background: var(--brand-gradient); color: var(--white); border-color: transparent; box-shadow: var(--shadow-brand); }
 
         /* DEPOIMENTOS */
-        .testimonials-bg { background: var(--white); }
-        .testim-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .testim-card { background: var(--light-50); border: 1px solid var(--light-100); padding: 2.5rem; border-radius: var(--radius-lg); transition: var(--transition-smooth); }
-        .testim-card:hover { transform: translateY(-5px); background: var(--white); box-shadow: var(--shadow-lg); }
-        .stars { color: #F59E0B; display: flex; gap: 4px; margin-bottom: 1rem; }
-        .stars svg { width: 20px; height: 20px; fill: currentColor; }
-        .testim-text { font-size: 1.05rem; color: var(--text-main); font-style: italic; margin-bottom: 1.5rem; line-height: 1.7; }
-        .testim-author { display: flex; align-items: center; gap: 1rem; }
-        .author-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--brand-gradient); display: flex; align-items: center; justify-content: center; color: var(--white); font-weight: 800; font-size: 1.2rem; box-shadow: var(--shadow-md); }
+        .testimonials-bg { background: var(--white); position: relative; overflow: hidden; border-top: 1px solid var(--light-100); }
+        .google-summary-badge { 
+            display: flex; align-items: center; justify-content: center; gap: 0.75rem; 
+            background: var(--light-50); border: 1px solid var(--light-200); padding: 0.8rem 1.75rem; 
+            border-radius: var(--radius-pill); width: fit-content; margin: 0 auto 4rem; 
+            box-shadow: var(--shadow-sm); font-weight: 700; font-size: 0.95rem; color: var(--dark-900);
+            transition: var(--transition-fast);
+        }
+        .google-summary-badge:hover { border-color: var(--light-300); box-shadow: var(--shadow-md); }
+        .google-summary-badge svg { width: 24px; height: 24px; }
+        
+        .testim-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
+        .testim-card { 
+            background: var(--light-50); border: 1px solid var(--light-200); padding: 2.5rem; 
+            border-radius: var(--radius-lg); transition: var(--transition-smooth); display: flex; 
+            flex-direction: column; justify-content: space-between; position: relative; 
+        }
+        .testim-card:hover { transform: translateY(-6px); background: var(--white); box-shadow: var(--shadow-xl); border-color: rgba(255, 69, 0, 0.3); }
+        
+        .testim-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
+        .stars { color: #F59E0B; display: flex; gap: 4px; }
+        .stars svg { width: 18px; height: 18px; fill: currentColor; }
+        .verified-badge { display: flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; font-weight: 800; color: var(--success); background: var(--success-glow); padding: 0.4rem 0.8rem; border-radius: var(--radius-pill); text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid rgba(16, 185, 129, 0.2); }
+        
+        .testim-text { font-size: 1.05rem; color: var(--text-main); font-style: italic; margin-bottom: 2rem; line-height: 1.7; position: relative; z-index: 1; }
+        .testim-text::before { content: '“'; font-size: 6rem; font-family: serif; color: var(--light-200); position: absolute; top: -2rem; left: -1.5rem; z-index: -1; line-height: 1; opacity: 0.6; }
+        
+        .rented-toy-pill { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; font-weight: 700; color: var(--brand-primary); background: var(--brand-glow); padding: 0.5rem 1rem; border-radius: var(--radius-pill); margin-bottom: 1.75rem; width: fit-content; border: 1px solid rgba(255, 69, 0, 0.15); }
+        
+        .testim-author { display: flex; align-items: center; gap: 1rem; border-top: 1px solid var(--light-200); padding-top: 1.5rem; }
+        .author-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--brand-gradient); display: flex; align-items: center; justify-content: center; color: var(--white); font-weight: 800; font-size: 1.2rem; box-shadow: var(--shadow-sm); flex-shrink: 0; }
         .author-info h4 { font-size: 1rem; font-weight: 800; color: var(--dark-900); }
         .author-info p { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
 
-        /* FAQ */
-        .faq-grid { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
-        details { background: var(--white); border: 1px solid var(--light-200); border-radius: var(--radius-md); overflow: hidden; transition: var(--transition-smooth); box-shadow: var(--shadow-sm); }
-        details[open] { box-shadow: var(--shadow-md); border-color: var(--brand-primary); }
-        summary { padding: 1.5rem; font-size: 1.1rem; font-weight: 700; color: var(--dark-900); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s ease; }
-        summary:hover { background: var(--light-50); }
+        /* FAQ (PERGUNTAS FREQUENTES) */
+        .faq-section { background: var(--light-50); border-top: 1px solid var(--light-200); }
+        .faq-grid { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.25rem; }
+        details { 
+            background: var(--white); border: 1px solid var(--light-200); border-radius: var(--radius-md); 
+            overflow: hidden; transition: var(--transition-smooth); box-shadow: var(--shadow-sm); 
+        }
+        details:hover { border-color: var(--light-300); box-shadow: var(--shadow-md); }
+        details[open] { box-shadow: var(--shadow-lg); border-color: var(--brand-primary); background: var(--white); }
+        
+        summary { 
+            padding: 1.5rem 1.75rem; font-size: 1.1rem; font-weight: 800; color: var(--dark-900); 
+            cursor: pointer; list-style: none; display: flex; justify-content: space-between; 
+            align-items: center; gap: 1rem; transition: background 0.2s ease; user-select: none; 
+        }
+        summary:hover { background: var(--light-50); color: var(--brand-primary); }
         summary::-webkit-details-marker { display: none; }
-        summary::after { content: '+'; font-size: 1.5rem; color: var(--brand-primary); transition: transform 0.3s ease; font-weight: 400; }
-        details[open] summary::after { transform: rotate(45deg); }
-        .faq-content { padding: 0 1.5rem 1.5rem; color: var(--text-muted); font-size: 1rem; font-weight: 500; line-height: 1.7; border-top: 1px solid var(--light-100); margin-top: 0.5rem; padding-top: 1.5rem; }
+        
+        .faq-icon-wrapper { display: flex; align-items: center; gap: 1rem; }
+        .faq-bullet { width: 8px; height: 8px; border-radius: 50%; background: var(--brand-primary); flex-shrink: 0; transition: transform 0.3s ease; }
+        details[open] .faq-bullet { transform: scale(1.5); background: var(--brand-gradient); }
+        
+        summary::after { content: '+'; font-size: 1.75rem; color: var(--brand-primary); transition: transform 0.3s var(--ease-spring); font-weight: 400; line-height: 1; flex-shrink: 0; }
+        details[open] summary::after { transform: rotate(45deg); color: var(--danger); }
+        
+        .faq-content { padding: 0 1.75rem 1.75rem 3.25rem; color: var(--text-muted); font-size: 1rem; font-weight: 500; line-height: 1.8; border-top: 1px solid var(--light-100); margin-top: 0.5rem; padding-top: 1.5rem; }
+        .faq-content strong { color: var(--dark-900); font-weight: 700; }
+        
+        .faq-cta-box { 
+            background: var(--white); border: 2px dashed var(--light-300); border-radius: var(--radius-lg); 
+            padding: 3rem 2rem; text-align: center; max-width: 860px; margin: 4rem auto 0; 
+            display: flex; flex-direction: column; align-items: center; gap: 1.2rem; box-shadow: var(--shadow-sm);
+        }
+        .faq-cta-box h4 { font-size: 1.4rem; font-weight: 800; color: var(--dark-900); }
+        .faq-cta-box p { color: var(--text-muted); font-size: 1.05rem; max-width: 500px; }
 
-        /* MODAIS GERAIS */
-        .modal-overlay { position: fixed; inset: 0; background: rgba(11, 15, 25, 0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: var(--transition-smooth); z-index: 2000; padding: 1.5rem; }
+        /* MODAIS COM ANIMAÇÃO SPRING */
+        .modal-overlay { 
+            position: fixed; inset: 0; background: rgba(7, 9, 14, 0.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
+            display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; 
+            transition: opacity 0.3s var(--ease-out); z-index: 2000; padding: 1.5rem; 
+        }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
-        .modal-card { background: var(--white); padding: 3rem; border-radius: var(--radius-lg); width: 100%; max-width: 600px; transform: scale(0.95) translateY(20px); transition: var(--transition-smooth); box-shadow: var(--shadow-xl); max-height: 90vh; overflow-y: auto; position: relative; }
+        .modal-card { 
+            background: var(--white); padding: 3rem; border-radius: var(--radius-lg); width: 100%; max-width: 600px; 
+            transform: scale(0.9) translateY(20px); transition: transform 0.4s var(--ease-spring), opacity 0.3s ease; 
+            box-shadow: var(--shadow-xl); max-height: 90vh; overflow-y: auto; position: relative; border: 1px solid rgba(255,255,255,0.2);
+        }
         .modal-overlay.active .modal-card { transform: scale(1) translateY(0); }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
-        .modal-header h3 { font-size: 1.65rem; font-weight: 900; color: var(--dark-900); }
-        .close-btn { background: var(--light-50); border: 1px solid var(--light-200); width: 44px; height: 44px; border-radius: 50%; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-muted); transition: var(--transition-fast); }
-        .close-btn:hover { background: var(--danger-glow); color: var(--danger); border-color: transparent; }
-        .close-btn:active { transform: scale(0.9); }
+        .modal-header h3 { font-size: 1.65rem; font-weight: 900; color: var(--dark-900); letter-spacing: -0.02em; }
+        .close-btn { 
+            background: var(--light-50); border: 1px solid var(--light-200); width: 44px; height: 44px; 
+            border-radius: 50%; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; 
+            justify-content: center; color: var(--text-muted); transition: var(--transition-fast); 
+        }
+        .close-btn:hover { background: var(--danger-glow); color: var(--danger); border-color: transparent; transform: rotate(90deg); }
         
-        /* FORMS APRIMORADOS */
+        /* FORMS PREMIUM */
         .form-row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-        .form-group { margin-bottom: 1.5rem; position: relative; }
+        .form-group { margin-bottom: 1.5rem; position: relative; text-align: left; }
         .form-label { display: block; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 0.5rem; color: var(--dark-700); }
-        .form-input { width: 100%; padding: 1rem 1.25rem; border: 2px solid var(--light-200); border-radius: var(--radius-md); font-size: 1rem; font-weight: 600; outline: none; background: var(--light-50); transition: var(--transition-fast); color: var(--dark-900); }
+        .form-input { 
+            width: 100%; padding: 1rem 1.25rem; border: 2px solid var(--light-200); border-radius: var(--radius-md); 
+            font-size: 1rem; font-weight: 600; outline: none; background: var(--light-50); 
+            transition: var(--transition-fast); color: var(--dark-900); 
+        }
         .form-input::placeholder { color: var(--light-300); font-weight: 500; }
-        .form-input:hover { border-color: var(--light-300); }
         .form-input:focus { border-color: var(--brand-primary); background: var(--white); box-shadow: 0 0 0 4px var(--brand-glow); }
         
-        .cep-loading-text { position: absolute; right: 1.25rem; top: 2.5rem; font-size: 0.8rem; font-weight: 800; color: var(--brand-primary); display: none; }
+        .toys-selection { display: flex; flex-direction: column; gap: 0.75rem; background: var(--light-50); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--light-200); }
+        .toy-checkbox-label { display: flex; align-items: center; gap: 0.75rem; font-weight: 700; color: var(--dark-900); font-size: 0.95rem; cursor: pointer; transition: color 0.2s; }
+        .toy-checkbox-label:hover { color: var(--brand-primary); }
+        .toy-checkbox-label input { width: 1.3rem; height: 1.3rem; accent-color: var(--brand-primary); cursor: pointer; flex-shrink: 0; border-radius: 4px; }
+
+        .cep-loading-text { position: absolute; right: 1.25rem; top: 2.4rem; font-size: 0.8rem; font-weight: 800; color: var(--brand-primary); display: none; }
         .diagnostic-error-box { display: none; background: var(--danger-glow); border: 1px solid rgba(239, 68, 68, 0.3); color: var(--danger); padding: 1.25rem; border-radius: var(--radius-md); font-size: 0.9rem; font-weight: 600; margin-bottom: 1.5rem; line-height: 1.4; }
         
-        .btn-submit-form { background: var(--brand-gradient); color: white; border: none; width: 100%; padding: 1.25rem; border-radius: var(--radius-md); font-weight: 800; font-size: 1.1rem; cursor: pointer; box-shadow: var(--shadow-md); transition: var(--transition-smooth); margin-top: 1rem; }
-        .btn-submit-form:hover { transform: translateY(-3px); box-shadow: var(--shadow-brand); background: var(--brand-gradient-hover); }
-        .btn-submit-form:active { transform: translateY(0) scale(0.98); }
+        .btn-submit-form { 
+            background: var(--brand-gradient); color: white; border: none; width: 100%; 
+            padding: 1.25rem; border-radius: var(--radius-md); font-weight: 800; font-size: 1.1rem; 
+            cursor: pointer; box-shadow: var(--shadow-brand); transition: var(--transition-smooth); margin-top: 1rem; 
+        }
+        .btn-submit-form:hover { transform: translateY(-3px); box-shadow: 0 15px 30px -5px var(--brand-glow-strong); }
+        .btn-submit-form:active { transform: scale(0.98); }
 
         .success-screen { display: none; text-align: center; padding: 2.5rem 1rem; }
         .success-screen.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .success-icon { width: 80px; height: 80px; background: var(--success-glow); color: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: bold; margin-bottom: 1.5rem; box-shadow: 0 0 30px var(--success-glow); }
+        .success-icon { width: 88px; height: 88px; background: var(--success-glow); color: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.8rem; font-weight: bold; margin-bottom: 1.5rem; box-shadow: 0 0 40px var(--success-glow); border: 2px solid rgba(16, 185, 129, 0.3); }
 
         /* PAINEL DO CLIENTE */
-        .client-order-card { border: 1px solid var(--light-200); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1rem; text-align: left; background: var(--white); transition: var(--transition-fast); }
-        .client-order-card:hover { border-color: var(--brand-primary); box-shadow: var(--shadow-sm); }
+        .client-order-card { border: 1px solid var(--light-200); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1rem; text-align: left; background: var(--white); transition: var(--transition-fast); box-shadow: var(--shadow-sm); }
+        .client-order-card:hover { border-color: var(--light-300); box-shadow: var(--shadow-md); }
         .order-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid var(--light-100); padding-bottom: 1rem; }
-        .order-toy { font-weight: 800; color: var(--dark-900); font-size: 1.1rem; }
-        .status-badge { padding: 0.4rem 0.8rem; border-radius: var(--radius-pill); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
-        .status-badge.pendente { background: var(--warning-glow); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.2); }
-        .status-badge.aprovado { background: var(--success-glow); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2); }
-        .status-badge.negado { background: var(--danger-glow); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.2); }
+        .order-toy { font-weight: 800; color: var(--dark-900); font-size: 1.1rem; line-height: 1.3; padding-right: 10px; }
+        .status-badge { padding: 0.4rem 0.9rem; border-radius: var(--radius-pill); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+        .status-badge.pendente { background: var(--warning-glow); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.3); }
+        .status-badge.aprovado { background: var(--success-glow); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .status-badge.negado { background: var(--danger-glow); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.3); }
         .order-details { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; display: flex; flex-direction: column; gap: 0.5rem; }
         #clientDashboard { display: none; }
-        .empty-orders { text-align: center; color: var(--text-muted); font-weight: 600; padding: 3rem 0; background: var(--light-50); border-radius: var(--radius-md); border: 1px dashed var(--light-300); }
+        .empty-orders { text-align: center; color: var(--text-muted); font-weight: 600; padding: 3.5rem 1rem; background: var(--light-50); border-radius: var(--radius-md); border: 2px dashed var(--light-300); }
 
         /* FOOTER */
-        footer { background: var(--dark-900); color: var(--white); padding-block: 6rem 3.5rem; border-top: 1px solid rgba(255,255,255,0.04); }
+        footer { background: var(--dark-900); color: var(--white); padding-block: 6rem 3.5rem; border-top: 1px solid rgba(255,255,255,0.05); }
         .footer-grid { display: grid; grid-template-columns: 1.6fr repeat(2, 1fr); gap: 5rem; margin-bottom: 5rem; }
-        .footer-brand h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 1.25rem; }
+        .footer-brand h2 { font-size: 2.4rem; font-weight: 900; margin-bottom: 1.25rem; letter-spacing: -0.04em; }
         .footer-brand h2 span { color: var(--brand-primary); }
-        .footer-brand p { color: #94A3B8; max-width: 340px; line-height: 1.7; }
+        .footer-brand p { color: #94A3B8; max-width: 360px; line-height: 1.7; font-size: 1.05rem; }
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; color: #64748B; font-size: 0.95rem; }
 
         /* BOTAO FLUTUANTE */
-        .btn-floating-status { position: fixed; bottom: 30px; right: 30px; z-index: 999; padding: 1rem 1.5rem; border-radius: var(--radius-pill); background: var(--dark-900); color: var(--white); border: 2px solid rgba(255,255,255,0.1); box-shadow: var(--shadow-xl); font-weight: 800; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: var(--transition-smooth); }
-        .btn-floating-status:hover { transform: translateY(-5px); background: var(--brand-gradient); border-color: transparent; box-shadow: var(--shadow-brand); }
-        .btn-floating-status:active { transform: translateY(0) scale(0.95); }
+        .btn-floating-status { 
+            position: fixed; bottom: 30px; right: 30px; z-index: 999; padding: 1rem 1.6rem; 
+            border-radius: var(--radius-pill); background: var(--dark-900); color: var(--white); 
+            border: 1px solid rgba(255,255,255,0.15); box-shadow: var(--shadow-xl); font-weight: 800; 
+            font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 10px; 
+            transition: var(--transition-smooth); 
+        }
+        .btn-floating-status:hover { transform: translateY(-5px) scale(1.03); background: var(--brand-gradient); border-color: transparent; box-shadow: var(--shadow-brand); }
+        .btn-floating-status:active { transform: scale(0.96); }
 
-        /* MEDIA QUERIES (Responsividade Refinada) */
+        /* RESPONSIVIDADE PROFISSIONAL */
         @media (max-width: 1024px) {
             .hero-grid { grid-template-columns: 1fr; gap: 4rem; text-align: center; }
             .hero-content { align-items: center; display: flex; flex-direction: column; }
             .hero-actions { justify-content: center; width: 100%; }
-            .hero-images-layout { max-width: 600px; margin: 0 auto; width: 100%; }
-            .floating-card { left: 50%; transform: translateX(-50%); bottom: -2rem; width: 90%; max-width: 350px; justify-content: center; animation: none; }
+            .hero-images-layout { max-width: 580px; margin: 0 auto; width: 100%; }
+            .floating-card { left: 50%; transform: translateX(-50%); bottom: -2rem; width: 90%; max-width: 360px; justify-content: center; animation: none; }
             .footer-grid { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
             .footer-brand p { margin: 0 auto; }
         }
         @media (max-width: 768px) {
-            section { padding-block: 4rem; }
-            .navbar-wrapper { padding: 1rem; }
+            section { padding-block: 4.5rem; }
+            .navbar-wrapper { padding: 0.8rem; }
+            .navbar { padding: 0.6rem 0.8rem 0.6rem 1.5rem; }
             .navbar .menu-links { display: none; }
             .form-row-grid { grid-template-columns: 1fr; gap: 0; }
             .footer-bottom { flex-direction: column; gap: 1.25rem; text-align: center; }
             .modal-card { padding: 2rem 1.5rem; margin: 1rem; }
             .nav-actions { display: none; }
-            .btn-floating-status { bottom: 20px; right: 20px; padding: 0.8rem 1.2rem; font-size: 0.85rem; }
-            .stat-item h3 { font-size: 2.8rem; }
-            .hero-content h1 { font-size: 2.5rem; }
+            .btn-floating-status { bottom: 20px; right: 20px; padding: 0.85rem 1.3rem; font-size: 0.85rem; }
+            .stat-item h3 { font-size: 3rem; }
+            .hero-content h1 { font-size: 2.6rem; }
             .catalog-grid { grid-template-columns: 1fr; }
+            .faq-content { padding-left: 1.75rem; }
+            .process-card { padding: 2.5rem 1.75rem; }
+            .testim-card { padding: 2rem 1.5rem; }
         }
     </style>
 </head>
@@ -312,7 +459,7 @@
             </div>
             <div class="hero-images-layout reveal delay-1">
                 <div class="hero-img-wrapper">
-                    <img src="https://scontent-gru2-2.xx.fbcdn.net/v/t1.15752-9/734732850_1715376566329521_9010072987419877279_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=102&ccb=1-7&_nc_sid=9f807c&_nc_ohc=qNouZBAM3UoQ7kNvwH5Wova&_nc_oc=Adr8M041d2Szbq-26-wHxAoAAdcXAqcmPnMSh9ZPb-LRp8_S5VjtaB-Y7_UA1naaHDk&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-gru2-2.xx&_nc_ss=7a22e&oh=03_Q7cD5wHrmRjlPkggUXi7NPA8GZqRWONLWC8K5Tp86gr6CcFxAQ&oe=6A6C29A6" alt="Tobogã inflável gigante da Oxe">
+                    <img src="https://scontent-gru2-2.xx.fbcdn.net/v/t1.15752-9/734732850_1715376566329521_9010072987419877279_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=102&ccb=1-7&_nc_sid=9f807c&_nc_ohc=PLazkvMfrUkQ7kNvwHsm_EU&_nc_oc=AdpwWTLaowhywb5KZC081oFbaCODYBPkMnH2iuKANm-FWsCNm5g3d86Z-oqXVS4Bryk&_nc_zt=23&_nc_ht=scontent-gru2-2.xx&_nc_ss=7b6a8&oh=03_Q7cD5wFoIVwUQEWce04CoNWlZkQWUWQqYaJ7su5wtKkvmBOZLA&oe=6A6E9466" alt="Tobogã inflável gigante da Oxe">
                 </div>
                 <div class="floating-card">
                     <div class="floating-card-icon">✓</div>
@@ -335,13 +482,13 @@
             <div class="process-grid">
                 <div class="process-card reveal">
                     <div class="process-number">01</div>
-                    <h3>Escolha a Atração</h3>
-                    <p>Navegue pelo catálogo e selecione o inflável gigante ideal para acomodar a energia da garotada.</p>
+                    <h3>Escolha as Atrações</h3>
+                    <p>Navegue pelo catálogo e selecione os infláveis gigantes ideais para acomodar a energia da garotada.</p>
                 </div>
                 <div class="process-card reveal delay-1">
                     <div class="process-number">02</div>
                     <h3>Preencha os Dados</h3>
-                    <p>Insira a data, seu e-mail e celular, e o CEP do evento. Tudo é salvo com segurança extrema.</p>
+                    <p>Insira a data, seu e-mail, celular e o CEP do evento. Tudo é salvo com segurança extrema.</p>
                 </div>
                 <div class="process-card reveal delay-2">
                     <div class="process-number">03</div>
@@ -378,14 +525,14 @@
     <section class="container" id="catalogo">
         <div class="section-header reveal">
             <span class="tag-top">Nosso Balaio</span>
-            <h2>Escolha Seu <span>Gigante</span></h2>
+            <h2>Escolha Seus <span>Gigantes</span></h2>
             <p>Todos os nossos infláveis acompanham motores de alta performance e passam por auditoria preventiva completa antes do envio.</p>
         </div>
         
         <div class="catalog-grid">
             <div class="card reveal" onclick="window.openBooking('Tobogã Rei do Cangaço')">
                 <div class="card-img-wrapper">
-                    <img src="https://scontent-gru1-2.xx.fbcdn.net/v/t1.15752-9/733209022_1003320639290885_1001082846957958117_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_ohc=bpjj73g1O80Q7kNvwHJ0VQY&_nc_oc=Ado1P4nYIINwKRUaMNC7V210QL9oGrVWV3SKr1Z83tT_w1UDjBsf8NFKCvH9gSKCMTQ&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-gru1-2.xx&_nc_ss=7a22e&oh=03_Q7cD5wEYTOhMmkysfHHYUJxTOZ-IH2SeEitIk8rgX72HbVKY_Q&oe=6A6C2D6B" alt="Tobogã Rei do Cangaço">
+                    <img src="https://scontent-gru1-2.xx.fbcdn.net/v/t1.15752-9/733209022_1003320639290885_1001082846957958117_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9f807c&_nc_ohc=bpjj73g1O80Q7kNvwHJ0VQY&_nc_oc=Ado1P4nYIINwKRUaMNC7V210QL9oGrVWV3SKr1Z83tT_w1UDjBsf8NFKCvH9gSKCMTQ&_nc_zt=23&_nc_ht=scontent-gru1-2.xx&_nc_ss=7b6a8&oh=03_Q7cD5wEmVgpJAmIFQpepqkwLmD-yimrQX6HsmxwUk7Lo67s73w&oe=6A6E982B" alt="Tobogã Rei do Cangaço">
                     <span class="card-badge">🔥 Sucesso Absoluto</span>
                 </div>
                 <div class="card-info">
@@ -402,7 +549,7 @@
 
             <div class="card reveal delay-1" onclick="window.openBooking('Futebol de Sabão Arrasta-Pé')">
                 <div class="card-img-wrapper">
-                    <img src="https://scontent-gru1-2.xx.fbcdn.net/v/t1.15752-9/734339198_1738138707610057_8585860654299982154_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_ohc=6ISLhp91NzMQ7kNvwEv7tRb&_nc_oc=AdqTWAnuxTtl6Mz05H9cB1Zm_lSF6piOGFJMQtLuVhP-dTXeAGJK06bHTIbd3CceEWQ&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-gru1-2.xx&_nc_ss=7a22e&oh=03_Q7cD5wHgsYaOI3eopeAVxTCNEipCQ5WWz9MIvmOmHwR7lGS_gQ&oe=6A6C1613" alt="Futebol de Sabão Arrasta-Pé">
+                    <img src="https://scontent-gru1-2.xx.fbcdn.net/v/t1.15752-9/734339198_1738138707610057_8585860654299982154_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_ohc=x6oWv3p7iTkQ7kNvwFpMwTy&_nc_oc=AdrjKUWlDPacMWEIFdhwaNK-OITxjKM_UhmFOwBwYTpieXgDFk2X1Wn4_ovNbL66c1g&_nc_zt=23&_nc_ht=scontent-gru1-2.xx&_nc_ss=7b6a8&oh=03_Q7cD5wH0dKYhVdefeL2Sv3nm53NF2X06l0jzOwz5OnOwaKsIOA&oe=6A6EB913" alt="Futebol de Sabão Arrasta-Pé">
                     <span class="card-badge">💦 O Queridinho do Calor</span>
                 </div>
                 <div class="card-info">
@@ -422,39 +569,56 @@
     <section class="testimonials-bg" id="depoimentos">
         <div class="container">
             <div class="section-header reveal">
-                <span class="tag-top">O que dizem</span>
-                <h2>Quem Aluga, <span>Recomenda!</span></h2>
-                <p>Não acredite só na gente. Veja o que os pais e empresas estão falando sobre a experiência com a OXE.</p>
+                <span class="tag-top">Prova Social</span>
+                <h2>Quem Aluga, <span>Não Troca!</span></h2>
+                <p>A pontualidade e a limpeza dos nossos brinquedos são o nosso maior orgulho. Veja relatos reais de quem confiou na OXE para o seu evento.</p>
             </div>
             
+            <div class="google-summary-badge reveal">
+                <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                <span>Classificação <strong>5.0 de 5.0</strong> no Google • Mais de 120 festas atendidas</span>
+            </div>
+
             <div class="testim-grid">
                 <div class="testim-card reveal">
-                    <div class="stars">
-                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <div>
+                        <div class="testim-top">
+                            <div class="stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            </div>
+                            <span class="verified-badge">✔ Verificado</span>
+                        </div>
+                        <p class="testim-text">O que mais me impressionou foi a pontualidade! A equipe chegou 2h antes para montar o tobogã. O material é super novo, cheiroso e sem nenhum rasgo. As crianças brincaram sem parar até o fim da festa!</p>
+                        <div class="rented-toy-pill">🎡 Alugou: Tobogã Rei do Cangaço</div>
                     </div>
-                    <p class="testim-text">"Foi o melhor investimento para o aniversário do meu filho! A equipe chegou 2h antes para montar, o tobogã é gigantesco e super seguro. As crianças piraram!"</p>
                     <div class="testim-author">
                         <div class="author-avatar">M</div>
                         <div class="author-info">
                             <h4>Mariana Silva</h4>
-                            <p>Festa Infantil - 10 anos</p>
+                            <p>Aniversário Infantil (10 anos)</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="testim-card reveal delay-1">
-                    <div class="stars">
-                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <div>
+                        <div class="testim-top">
+                            <div class="stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            </div>
+                            <span class="verified-badge">✔ Verificado</span>
+                        </div>
+                        <p class="testim-text">Alugamos o Futebol de Sabão para a confraternização do nosso condomínio. Suportou os adultos e adolescentes tranquilamente! Atendimento nota 10 desde o WhatsApp até a desmontagem. Zero dor de cabeça.</p>
+                        <div class="rented-toy-pill">⚽ Alugou: Futebol de Sabão Arrasta-Pé</div>
                     </div>
-                    <p class="testim-text">"Atendimento impecável desde o primeiro contato no site até a desmontagem. Os brinquedos estavam super limpos e pareciam novos. Recomendo de olhos fechados!"</p>
                     <div class="testim-author">
                         <div class="author-avatar">R</div>
                         <div class="author-info">
@@ -465,19 +629,25 @@
                 </div>
 
                 <div class="testim-card reveal delay-2">
-                    <div class="stars">
-                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <div>
+                        <div class="testim-top">
+                            <div class="stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            </div>
+                            <span class="verified-badge">✔ Verificado</span>
+                        </div>
+                        <p class="testim-text">Já tive problemas com empresas que atrasaram na entrega em anos anteriores. Com a OXE foi tudo transparente: me mandaram mensagem confirmando no dia anterior e cumpriram tudo com perfeição. Recomendo de olhos fechados!</p>
+                        <div class="rented-toy-pill">🚀 Alugou: Tobogã + Futebol de Sabão</div>
                     </div>
-                    <p class="testim-text">"Alugamos o Futebol de Sabão para a confraternização da empresa e foi sensacional. Suportou os adultos tranquilamente. Estrutura premium de verdade."</p>
                     <div class="testim-author">
                         <div class="author-avatar">A</div>
                         <div class="author-info">
                             <h4>Amanda Lima</h4>
-                            <p>Confraternização Corporativa</p>
+                            <p>Festa Escolar</p>
                         </div>
                     </div>
                 </div>
@@ -485,41 +655,95 @@
         </div>
     </section>
 
-    <section class="container" id="faq">
-        <div class="section-header reveal">
-            <span class="tag-top">Tira-Dúvidas</span>
-            <h2>Perguntas <span>Frequentes</span></h2>
-            <p>Tudo o que você precisa saber antes de fechar o seu gigante com a gente.</p>
-        </div>
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="tag-top">Sem Dúvidas</span>
+                <h2>Perguntas <span>Frequentes</span></h2>
+                <p>Tudo o que você precisa saber sobre segurança, logística e normas antes de receber nossos gigantes.</p>
+            </div>
 
-        <div class="faq-grid reveal">
-            <details>
-                <summary>Como funciona a montagem e desmontagem?</summary>
-                <div class="faq-content">
-                    Nossa equipe técnica chega ao local do evento com pelo menos <strong>1 hora e meia de antecedência</strong> do horário combinado. A montagem, testes de segurança e higienização final são feitos antes dos seus convidados chegarem. A desmontagem ocorre imediatamente após o término do horário contratado.
-                </div>
-            </details>
+            <div class="faq-grid reveal">
+                <details>
+                    <summary>
+                        <div class="faq-icon-wrapper">
+                            <div class="faq-bullet"></div>
+                            <span>O que acontece se chover no dia do meu evento?</span>
+                        </div>
+                    </summary>
+                    <div class="faq-content">
+                        Nossa prioridade máxima é a segurança das crianças. Em caso de previsão de chuva forte ou tempestade no dia da festa, você pode solicitar o <strong>reagendamento gratuito</strong> da locação para outra data disponível com até 5 horas de antecedência da montagem. Para chuvas leves e rápidas, os infláveis secam rapidamente após estarem desligados e podem voltar ao uso normal com segurança após a secagem.
+                    </div>
+                </details>
 
-            <details>
-                <summary>O que acontece em caso de chuva?</summary>
-                <div class="faq-content">
-                    Para infláveis que não usam água (como tobogãs secos), a operação deve ser pausada durante chuvas fortes por segurança elétrica (motores) e risco de escorregões. Caso a previsão do tempo na véspera seja de tempestade o dia todo, permitimos o reagendamento da data sem custo adicional (sujeito à disponibilidade).
-                </div>
-            </details>
+                <details>
+                    <summary>
+                        <div class="faq-icon-wrapper">
+                            <div class="faq-bullet"></div>
+                            <span>Qual é o tempo padrão de duração da locação?</span>
+                        </div>
+                    </summary>
+                    <div class="faq-content">
+                        O período padrão de locação é de <strong>4 a 5 horas de festa corrida</strong>. Se você precisar que os brinquedos fiquem disponíveis por mais tempo, informe nossa equipe no momento da confirmação pelo WhatsApp para verificarmos a disponibilidade e o valor de horas extras. O tempo gasto para montagem e desmontagem <strong>não</strong> é descontado do seu tempo de diversão!
+                    </div>
+                </details>
 
-            <details>
-                <summary>Preciso ter uma tomada específica?</summary>
-                <div class="faq-content">
-                    Sim! Nossos infláveis utilizam motores de alta potência (geralmente 1100W a 1500W). Exigimos uma tomada dedicada de <strong>220V</strong> em um raio máximo de 20 metros de onde o brinquedo será instalado. Não recomendamos o uso de benjamins (T) ou extensões muito finas. Nós levamos as extensões adequadas de uso industrial.
-                </div>
-            </details>
+                <details>
+                    <summary>
+                        <div class="faq-icon-wrapper">
+                            <div class="faq-bullet"></div>
+                            <span>Como funciona a montagem e a necessidade de energia (220V)?</span>
+                        </div>
+                    </summary>
+                    <div class="faq-content">
+                        Nossa equipe chega com cerca de <strong>1 hora e meia de antecedência</strong> do início do evento para montar e higienizar tudo. Nossos motores industriais de alta performance exigem uma tomada dedicada de <strong>220V</strong> em um raio de até 20 metros de onde ficará o brinquedo. Nós levamos todas as extensões e equipamentos adequados e seguros para a instalação.
+                    </div>
+                </details>
 
-            <details>
-                <summary>Os brinquedos suportam adultos?</summary>
-                <div class="faq-content">
-                    Depende do equipamento! O "Futebol de Sabão" e a "Guerra de Cotonetes" possuem lona de alta gramatura e suportam adultos tranquilamente. Já os tobogãs e pula-pulas menores têm restrição de idade/peso (geralmente até 12 anos ou 60kg). Consulte a especificação de cada brinquedo no momento da reserva.
-                </div>
-            </details>
+                <details>
+                    <summary>
+                        <div class="faq-icon-wrapper">
+                            <div class="faq-bullet"></div>
+                            <span>Os brinquedos acompanham monitor?</span>
+                        </div>
+                    </summary>
+                    <div class="faq-content">
+                        Trabalhamos com ambas as opções! Você pode optar pelo aluguel <strong>com ou sem monitor treinado</strong>. Caso opte por incluir um monitor, nosso profissional cuidará da organização da fila, controle do fluxo de crianças e da segurança operacional durante todo o período contratado, permitindo que você aproveite a festa com zero preocupações.
+                    </div>
+                </details>
+
+                <details>
+                    <summary>
+                        <div class="faq-icon-wrapper">
+                            <div class="faq-bullet"></div>
+                            <span>Como os brinquedos são limpos e higienizados?</span>
+                        </div>
+                    </summary>
+                    <div class="faq-content">
+                        A higiene é um dos nossos maiores diferenciais. Todos os brinquedos passam por uma desinfecção pesada em nosso galpão antes de saírem para entrega e recebem uma <strong>higienização de acabamento com álcool 70% no local da festa</strong> logo após a montagem ser finalizada. Nossos equipamentos não têm cheiro de mofo e nem sujeiras acumuladas.
+                    </div>
+                </details>
+
+                <details>
+                    <summary>
+                        <div class="faq-icon-wrapper">
+                            <div class="faq-bullet"></div>
+                            <span>Como funciona o pagamento para confirmar a reserva?</span>
+                        </div>
+                    </summary>
+                    <div class="faq-content">
+                        Após você preencher a solicitação de reserva aqui no site e confirmarmos a disponibilidade, solicitamos um sinal de <strong>30% do valor via PIX</strong> para travar a sua data na nossa agenda. O valor restante (70%) só é pago no dia do evento, após a montagem e teste dos brinquedos no local. Simples, justo e transparente.
+                    </div>
+                </details>
+            </div>
+
+            <div class="faq-cta-box reveal delay-1">
+                <h4>Ainda tem alguma dúvida específica?</h4>
+                <p>Nossa equipe de atendimento está pronta para analisar o espaço do seu evento e te ajudar a escolher a melhor estrutura.</p>
+                <a href="https://wa.me/5511999999999?text=Olá!%20Estou%20no%20site%20e%20tenho%20uma%20dúvida%20sobre%20a%20locação." target="_blank" class="btn-primary" style="margin-top: 0.5rem; background: var(--dark-900); box-shadow: none;">
+                    💬 Falar com Atendente no WhatsApp
+                </a>
+            </div>
         </div>
     </section>
 
@@ -536,8 +760,9 @@
 
                 <form id="bookingForm">
                     <div class="form-group">
-                        <label class="form-label">Equipamento Selecionado</label>
-                        <input type="text" id="toyName" class="form-input" readonly style="color: var(--brand-primary); font-weight: 800; background: var(--brand-glow); border-color: transparent;">
+                        <label class="form-label">Brinquedos Selecionados</label>
+                        <div class="toys-selection" id="toysSelectionContainer">
+                            </div>
                     </div>
                     
                     <div class="form-row-grid">
@@ -598,8 +823,8 @@
 
             <div id="successScreen" class="success-screen">
                 <div class="success-icon">✓</div>
-                <h3 style="font-size: 1.6rem; font-weight:900; margin-bottom:0.5rem; color: var(--dark-900);">Solicitação Enviada!</h3>
-                <p style="color: var(--text-muted); font-weight: 500; margin-bottom: 2rem; max-width: 380px;">Seu pedido chegou na central. Você pode acompanhar o status clicando em "Ver Status do Agendamento" no site!</p>
+                <h3 style="font-size: 1.8rem; font-weight:900; margin-bottom:0.5rem; color: var(--dark-900); letter-spacing:-0.03em;">Solicitação Enviada!</h3>
+                <p style="color: var(--text-muted); font-weight: 500; margin-bottom: 2.5rem; max-width: 380px; line-height:1.6;">Seu pedido chegou na central. Você pode acompanhar o status clicando em "Ver Status do Agendamento" no site!</p>
                 <button type="button" class="btn-secondary" onclick="window.closeModals()" style="width: 100%;">Fechar Janela</button>
             </div>
         </div>
@@ -662,7 +887,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // Credenciais Oficiais
         const firebaseConfig = {
             apiKey: "AIzaSyDonP_YuGA49ucaTI0W0o3x6Xlav2OMmd8",
             authDomain: "loja-de-brinquedos-fd210.firebaseapp.com",
@@ -675,7 +899,6 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Funções de Interface (Navbar, Scroll, Reveal)
         const navWrapper = document.getElementById('navWrapper');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) navWrapper.classList.add('scrolled');
@@ -691,9 +914,9 @@
         window.addEventListener('scroll', handleReveal);
         handleReveal();
 
-        // CONTROLE DE MODAIS E AUTO-PREENCHIMENTO
         const bookingModal = document.getElementById('bookingModal');
         const loginModal = document.getElementById('clientLoginModal');
+        const toysSelectionContainer = document.getElementById('toysSelectionContainer');
         
         window.closeModals = () => {
             bookingModal.classList.remove('active');
@@ -701,7 +924,6 @@
             document.body.style.overflow = 'auto';
         };
 
-        // Fechar modal clicando fora dele
         window.addEventListener('click', (e) => {
             if (e.target === bookingModal || e.target === loginModal) {
                 window.closeModals();
@@ -710,12 +932,24 @@
 
         window.openBooking = (toyName) => {
             window.closeModals();
+            const availableToys = Array.from(document.querySelectorAll('.card-info h3')).map(el => el.innerText);
             
+            let checkboxesHTML = '';
+            availableToys.forEach(toy => {
+                const isChecked = toy === toyName ? 'checked' : '';
+                checkboxesHTML += `
+                    <label class="toy-checkbox-label">
+                        <input type="checkbox" name="selected_toys" value="${toy}" ${isChecked}>
+                        ${toy}
+                    </label>
+                `;
+            });
+            toysSelectionContainer.innerHTML = checkboxesHTML;
+
             const savedName = localStorage.getItem('oxe_name') || '';
             const savedEmail = localStorage.getItem('oxe_email') || '';
             const savedPhone = localStorage.getItem('oxe_phone') || '';
             
-            document.getElementById('toyName').value = toyName;
             document.getElementById('clientName').value = savedName;
             document.getElementById('clientEmail').value = savedEmail;
             document.getElementById('clientPhone').value = savedPhone;
@@ -727,7 +961,6 @@
             bookingModal.classList.add('active');
             document.body.style.overflow = 'hidden';
             
-            // Foca no primeiro campo vazio ou no botão
             setTimeout(() => {
                 const inputs = ['clientName', 'eventDate', 'clientEmail', 'clientPhone', 'cepInput', 'numeroInput'];
                 for(let id of inputs) {
@@ -742,7 +975,6 @@
 
         window.openLoginModal = () => {
             window.closeModals();
-            
             loginModal.classList.add('active');
             document.body.style.overflow = 'hidden';
 
@@ -770,7 +1002,6 @@
             document.getElementById('loginForm').reset();
         };
 
-        // AUTOCOMPLETAR CEP
         const cepInput = document.getElementById('cepInput');
         cepInput.addEventListener('input', (e) => {
             let value = e.target.value.replace(/\D/g, '');
@@ -796,7 +1027,6 @@
             }
         }
 
-        // SALVAR NOVA RESERVA
         const bookingForm = document.getElementById('bookingForm');
         bookingForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -804,6 +1034,15 @@
             const btnSubmit = document.getElementById('btnSubmitBooking');
             const diagnosticBox = document.getElementById('diagnosticError');
             
+            const selectedCbs = document.querySelectorAll('input[name="selected_toys"]:checked');
+            if (selectedCbs.length === 0) {
+                diagnosticBox.innerHTML = `<strong>Aviso:</strong> Por favor, selecione pelo menos um brinquedo.`;
+                diagnosticBox.style.display = 'block';
+                return;
+            }
+            
+            const selectedToys = Array.from(selectedCbs).map(cb => cb.value).join(' + ');
+
             const clientName = document.getElementById('clientName').value;
             const clientEmail = document.getElementById('clientEmail').value.trim().toLowerCase();
             const clientPhone = document.getElementById('clientPhone').value.trim();
@@ -814,7 +1053,7 @@
 
             try {
                 await addDoc(collection(db, "reservas"), {
-                    brinquedo: document.getElementById('toyName').value,
+                    brinquedo: selectedToys, 
                     cliente: clientName,
                     email: clientEmail,
                     telefone: clientPhone,
@@ -844,7 +1083,6 @@
             }
         });
 
-        // BUSCAR RESERVAS (STATUS)
         async function fetchClientOrders(email, phone) {
             const btnSubmit = document.getElementById('btnSubmitLogin');
             const ordersList = document.getElementById('ordersList');
@@ -875,7 +1113,6 @@
                     let html = '';
                     querySnapshot.forEach((doc) => {
                         const data = doc.data();
-                        
                         if (data.cliente) localStorage.setItem('oxe_name', data.cliente);
                         
                         let dataFestaFormatada = data.dataFesta;
